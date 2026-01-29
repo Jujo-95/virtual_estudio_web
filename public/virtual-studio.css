@@ -1,0 +1,180 @@
+:root {
+  --vs-bg: #0b0c0d;
+  --vs-bg-2: #121416;
+  --vs-bg-3: #1a1c1e;
+
+  --vs-surface: rgba(255, 255, 255, 0.1);
+  --vs-surface-strong: rgba(255, 255, 255, 0.15);
+  --vs-border: rgba(255, 255, 255, 0.12);
+  --vs-shadow: rgba(0, 0, 0, 0.4);
+
+  --vs-text: #f7f7f7;
+  --vs-text-muted: rgba(247, 247, 247, 0.8);
+  --vs-icon: rgba(255, 255, 255, 0.9);
+
+  --vs-danger: #ff5f5f;
+  --vs-success: #2ee59d;
+
+  --vs-buy: #ffd54a;
+  --vs-buy-text: #0b0c0d;
+
+  --vs-radius-btn: 18px;
+  --vs-radius-card: 28px;
+  --vs-radius-chip: 30px;
+}
+
+html,
+body {
+  background: var(--vs-bg) !important;
+  color: var(--vs-text);
+  font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif !important;
+}
+
+/* Global link color alignment */
+a {
+  color: inherit;
+}
+
+/* Make common Webflow sections look like your glass UI */
+.container,
+.w-container {
+  color: var(--vs-text);
+}
+
+/* Primary CTA buttons (white pill) */
+.nbtn-primary,
+.w-button,
+button,
+input[type='button'],
+input[type='submit'] {
+  border-radius: var(--vs-radius-btn) !important;
+}
+
+.nbtn-primary {
+  background: #fff !important;
+  color: var(--vs-bg) !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+}
+
+.nbtn-primary .nbtn-primary-text {
+  font-weight: 800 !important;
+  letter-spacing: 0.4px !important;
+}
+
+/* Secondary CTA buttons (outlined glass) */
+.nbtn-primary.w-variant-9b20fec8-92fd-bc47-245f-fbfc0b375b74,
+.nbtn-primary.secondary-no-arrow,
+.nbtn-primary.secondary-no-arrow-2,
+.nbtn-primary.secondary-no-arrow-3,
+.nbtn-primary.secondary-no-arrow-4 {
+  background: transparent !important;
+  color: var(--vs-text) !important;
+  border: 1px solid var(--vs-border) !important;
+}
+
+/* Glass cards */
+.w-card,
+.nhp-slider-tag,
+.nhome-slider-slide,
+.w-nav,
+.footer,
+.footer-c,
+.footer-w {
+  color: var(--vs-text);
+}
+
+/* Generic “glass” utility */
+.vs-glass {
+  background: var(--vs-surface) !important;
+  border: 1px solid var(--vs-border) !important;
+  border-radius: var(--vs-radius-card) !important;
+  box-shadow: 0 18px 30px var(--vs-shadow) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Paywall-style buy button */
+.vs-buy {
+  background: var(--vs-buy) !important;
+  color: var(--vs-buy-text) !important;
+}
+
+.vs-buy .nbtn-primary-text {
+  font-weight: 900 !important;
+  letter-spacing: 0.4px !important;
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  border-radius: var(--vs-radius-card) !important;
+  border: 1px solid var(--vs-border) !important;
+  background: var(--vs-surface) !important;
+  color: var(--vs-text) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--vs-text-muted) !important;
+}
+
+/* Contact form layout */
+.vs-contact {
+  padding: 72px 0;
+}
+
+.vs-contact .vs-contact-card {
+  padding: 28px;
+}
+
+.vs-contact h2 {
+  margin: 0 0 10px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.vs-contact p {
+  margin: 0 0 20px;
+  color: var(--vs-text-muted);
+}
+
+.vs-contact .vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 720px) {
+  .vs-contact .vs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vs-contact label {
+  display: block;
+  font-size: 13px;
+  color: var(--vs-text-muted);
+  margin: 0 0 8px;
+}
+
+.vs-contact input {
+  width: 100%;
+  padding: 14px 16px;
+  outline: none;
+}
+
+.vs-contact .vs-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.vs-contact .vs-hint {
+  font-size: 13px;
+  color: var(--vs-text-muted);
+}
+
