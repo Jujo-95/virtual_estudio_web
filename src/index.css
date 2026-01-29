@@ -675,23 +675,7 @@ input {
 
 .vs-rail::before,
 .vs-rail::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 64px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.vs-rail::before {
-  left: 0;
-  background: linear-gradient(90deg, rgba(11, 11, 18, 0.92), transparent);
-}
-
-.vs-rail::after {
-  right: 0;
-  background: linear-gradient(270deg, rgba(11, 11, 18, 0.92), transparent);
+  content: none;
 }
 
 .vs-rail-track {
