@@ -49,7 +49,6 @@ function FeatureRail() {
             aria-label={`${item.title}: ${item.subtitle}`}
           >
             <div className="vs-rail-card" data-variant={item.variant} aria-hidden="true">
-              <div className="vs-rail-play" aria-hidden="true" />
               <div className="vs-rail-footer" aria-hidden="true">
                 <div className="vs-rail-footer-title">{item.title}</div>
                 <div className="vs-rail-footer-subtitle">{item.subtitle}</div>

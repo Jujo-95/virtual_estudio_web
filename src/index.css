@@ -411,27 +411,6 @@ input {
   gap: 12px;
 }
 
-.vs-hero-side-play {
-  width: 54px;
-  height: 54px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(0, 0, 0, 0.2);
-  display: grid;
-  place-items: center;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-}
-
-.vs-hero-side-play::before {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 12px solid rgba(255, 255, 255, 0.82);
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  transform: translateX(2px);
-}
-
 .vs-hero-side-meta {
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -770,30 +749,6 @@ input {
 .vs-rail-card[data-variant='credits']::before {
   background: radial-gradient(340px 340px at 28% 30%, rgba(34, 211, 238, 0.2), transparent 62%),
     radial-gradient(320px 320px at 72% 70%, rgba(251, 113, 133, 0.16), transparent 62%);
-}
-
-.vs-rail-play {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(0, 0, 0, 0.18);
-  display: grid;
-  place-items: center;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
-}
-
-.vs-rail-play::before {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 12px solid rgba(255, 255, 255, 0.86);
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  transform: translateX(1px);
 }
 
 .vs-rail-footer {
