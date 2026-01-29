@@ -47,6 +47,7 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
 
 function WhyScroller() {
   const sectionRef = useRef(null)
+  const stickyRef = useRef(null)
   const wheelAccumRef = useRef(0)
   const touchStartYRef = useRef(null)
   const animatingRef = useRef(false)
@@ -62,14 +63,23 @@ function WhyScroller() {
     activeIndexRef.current = activeIndex
   }, [activeIndex])
 
+  const isScrollHijackEnabled = useCallback(() => {
+    if (typeof window === 'undefined') return false
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return false
+    if (window.matchMedia?.('(max-width: 980px)')?.matches) return false
+    return true
+  }, [])
+
   const isSectionPinned = useCallback(() => {
+    if (!isScrollHijackEnabled()) return false
     const el = sectionRef.current
-    if (!el) return false
-    const rect = el.getBoundingClientRect()
+    const sticky = stickyRef.current
+    if (!el || !sticky) return false
+    const rect = sticky.getBoundingClientRect()
     const topOffset = 72
     const lowerBound = Math.min(window.innerHeight, window.visualViewport?.height || window.innerHeight) - 40
     return rect.top <= topOffset + 1 && rect.bottom >= lowerBound
-  }, [])
+  }, [isScrollHijackEnabled])
 
   const canLeave = useCallback((dir) => {
     const idx = activeIndexRef.current
@@ -177,45 +187,52 @@ function WhyScroller() {
   }, [canLeave, isSectionPinned, step])
 
   return (
-    <section className={`vs-story ${locked ? 'is-locked' : ''}`.trim()} id="diferenciales" ref={sectionRef}>
-      <div className="vs-container">
-        <div className="vs-story-grid">
-          <div className="vs-story-left">
-            <div className="vs-story-kicker">{active.kicker}</div>
-            <div
-              key={`${active.key}-copy-${direction}`}
-              className={`vs-swipe vs-swipe--${direction}`}
-            >
-              <h2 className="vs-story-title">{active.title}</h2>
-              <p className="vs-story-body">{active.body}</p>
+    <section
+      className={`vs-story ${locked ? 'is-locked' : ''}`.trim()}
+      id="diferenciales"
+      ref={sectionRef}
+      style={{ '--vs-story-steps': String(ITEMS.length + 1) }}
+    >
+      <div className="vs-story-sticky" ref={stickyRef}>
+        <div className="vs-container">
+          <div className="vs-story-grid">
+            <div className="vs-story-left">
+              <div className="vs-story-kicker">{active.kicker}</div>
+              <div
+                key={`${active.key}-copy-${direction}`}
+                className={`vs-swipe vs-swipe--${direction}`}
+              >
+                <h2 className="vs-story-title">{active.title}</h2>
+                <p className="vs-story-body">{active.body}</p>
+              </div>
+
+              <div className="vs-story-dots" aria-label="Pasos">
+                {ITEMS.map((item, idx) => (
+                  <button
+                    key={item.key}
+                    type="button"
+                    className={`vs-dot ${idx === activeIndex ? 'is-active' : ''}`.trim()}
+                    aria-label={`Ver: ${item.cardTitle}`}
+                    aria-current={idx === activeIndex}
+                    onClick={() => setActiveIndex(idx)}
+                  />
+                ))}
+              </div>
             </div>
 
-            <div className="vs-story-dots" aria-label="Pasos">
-              {ITEMS.map((item, idx) => (
-                <button
-                  key={item.key}
-                  type="button"
-                  className={`vs-dot ${idx === activeIndex ? 'is-active' : ''}`.trim()}
-                  aria-label={`Ver: ${item.cardTitle}`}
-                  aria-current={idx === activeIndex}
-                  onClick={() => setActiveIndex(idx)}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="vs-story-right">
-            <div key={`${active.key}-card-${direction}`} className={`vs-swipe vs-swipe--${direction}`}>
-              <div className="vs-story-card" data-variant={active.variant} aria-label={active.cardTitle}>
-                <div className="vs-story-mosaic" aria-hidden="true">
-                  <div className="vs-story-tile vs-story-tile--a" />
-                  <div className="vs-story-tile vs-story-tile--b" />
-                  <div className="vs-story-tile vs-story-tile--c" />
-                  <div className="vs-story-tile vs-story-tile--d" />
-                </div>
-                <div className="vs-story-footer" aria-hidden="true">
-                  <div className="vs-story-footer-title">{active.cardTitle}</div>
-                  <div className="vs-story-footer-subtitle">{active.cardSubtitle}</div>
+            <div className="vs-story-right">
+              <div key={`${active.key}-card-${direction}`} className={`vs-swipe vs-swipe--${direction}`}>
+                <div className="vs-story-card" data-variant={active.variant} aria-label={active.cardTitle}>
+                  <div className="vs-story-mosaic" aria-hidden="true">
+                    <div className="vs-story-tile vs-story-tile--a" />
+                    <div className="vs-story-tile vs-story-tile--b" />
+                    <div className="vs-story-tile vs-story-tile--c" />
+                    <div className="vs-story-tile vs-story-tile--d" />
+                  </div>
+                  <div className="vs-story-footer" aria-hidden="true">
+                    <div className="vs-story-footer-title">{active.cardTitle}</div>
+                    <div className="vs-story-footer-subtitle">{active.cardSubtitle}</div>
+                  </div>
                 </div>
               </div>
             </div>
