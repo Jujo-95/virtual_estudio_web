@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
 import FeatureRail from './components/FeatureRail.jsx'
@@ -7,131 +7,8 @@ import WhyScroller from './components/WhyScroller.jsx'
 import { SITE } from './lib/site.js'
 
 function App() {
-  const SNAP_STEP_THRESHOLD = 80
-  const snapAnimatingRef = useRef(false)
-  const snapWheelAccumRef = useRef(0)
-
   const [postsPerWeek, setPostsPerWeek] = useState(6)
   const [assetsPerPost, setAssetsPerPost] = useState(6)
-
-  useEffect(() => {
-    const isEnabled = () => {
-      if (typeof window === 'undefined') return false
-      if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return false
-      if (window.matchMedia?.('(max-width: 980px)')?.matches) return false
-      return true
-    }
-
-    const getSnapSections = () => {
-      const ids = ['top', 'servicios', 'diferenciales']
-      return ids.map((id) => document.getElementById(id)).filter(Boolean)
-    }
-
-    const getActiveSnapIndex = (sections) => {
-      const y = window.scrollY + 120
-      let idx = 0
-      for (let i = 0; i < sections.length; i += 1) {
-        const el = sections[i]
-        if (el && y >= el.offsetTop) idx = i
-      }
-      return idx
-    }
-
-    const scrollToElement = (el) => {
-      if (!el || snapAnimatingRef.current) return
-      snapAnimatingRef.current = true
-      const topOffset = 72
-      const top = Math.max(0, el.offsetTop - topOffset)
-      window.scrollTo({ top, behavior: 'smooth' })
-      window.setTimeout(() => {
-        snapAnimatingRef.current = false
-      }, 560)
-    }
-
-    const onScroll = () => {
-      snapWheelAccumRef.current = 0
-    }
-
-    const onWheel = (event) => {
-      if (!isEnabled()) return
-      if (snapAnimatingRef.current) return
-
-      const sections = getSnapSections()
-      if (sections.length < 2) return
-
-      const dir = event.deltaY > 0 ? 'down' : 'up'
-      const activeIdx = getActiveSnapIndex(sections)
-      const activeEl = sections[activeIdx]
-
-      if (!activeEl) return
-
-      // Only snap for the first 3 sections.
-      if (activeIdx > 2) return
-
-      if (activeEl.id === 'diferenciales') {
-        // WhyScroller owns the scroll steps + leaving.
-        return
-      }
-
-      snapWheelAccumRef.current += event.deltaY
-      if (Math.abs(snapWheelAccumRef.current) < SNAP_STEP_THRESHOLD) return
-      snapWheelAccumRef.current = 0
-
-      if (activeEl.id === 'top' && dir === 'down') {
-        event.preventDefault()
-        scrollToElement(sections[1])
-        return
-      }
-
-      if (activeEl.id === 'servicios') {
-        event.preventDefault()
-        scrollToElement(dir === 'down' ? sections[2] : sections[0])
-      }
-    }
-
-    const onKeyDown = (event) => {
-      if (!isEnabled()) return
-      if (snapAnimatingRef.current) return
-
-      const key = event.key
-      const dir = key === 'ArrowDown' || key === 'PageDown' ? 'down' : key === 'ArrowUp' || key === 'PageUp' ? 'up' : null
-      if (!dir) return
-
-      const sections = getSnapSections()
-      if (sections.length < 2) return
-
-      const activeIdx = getActiveSnapIndex(sections)
-      const activeEl = sections[activeIdx]
-      if (!activeEl) return
-      if (activeIdx > 2) return
-
-      if (activeEl.id === 'diferenciales') {
-        // WhyScroller owns the scroll steps + leaving.
-        return
-      }
-
-      if (activeEl.id === 'top' && dir === 'down') {
-        event.preventDefault()
-        scrollToElement(sections[1])
-        return
-      }
-
-      if (activeEl.id === 'servicios') {
-        event.preventDefault()
-        scrollToElement(dir === 'down' ? sections[2] : sections[0])
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('wheel', onWheel, { passive: false })
-    window.addEventListener('keydown', onKeyDown, { passive: false })
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('wheel', onWheel)
-      window.removeEventListener('keydown', onKeyDown)
-    }
-  }, [])
 
   const estimatedAssetsPerMonth = useMemo(() => {
     const safePosts = Number.isFinite(postsPerWeek) ? postsPerWeek : 0
@@ -143,12 +20,12 @@ function App() {
     const subject = encodeURIComponent('Contacto — Virtual Estudio')
     const body = encodeURIComponent(
       `Nombre: ${payload.name}\n` +
-        `Correo: ${payload.email}\n` +
-        `Teléfono: ${payload.phone}\n` +
-        `Publicaciones/semana: ${payload.postsPerWeek}\n` +
-        `Piezas por publicación (estimado): ${payload.assetsPerPost}\n` +
-        `Piezas/mes (estimado): ${payload.estimatedAssetsPerMonth}\n\n` +
-        `Me interesa conocer el plan recomendado de créditos y el flujo ideal (Campañas / Videos / Prendas / Modelos / Brand DNA).`,
+      `Correo: ${payload.email}\n` +
+      `Teléfono: ${payload.phone}\n` +
+      `Publicaciones/semana: ${payload.postsPerWeek}\n` +
+      `Piezas por publicación (estimado): ${payload.assetsPerPost}\n` +
+      `Piezas/mes (estimado): ${payload.estimatedAssetsPerMonth}\n\n` +
+      `Me interesa conocer el plan recomendado de créditos y el flujo ideal (Campañas / Videos / Prendas / Modelos / Brand DNA).`,
     )
     return `mailto:${SITE.contactEmail}?subject=${subject}&body=${body}`
   }

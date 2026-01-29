@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 const ITEMS = [
   {
@@ -43,232 +43,54 @@ const ITEMS = [
   },
 ]
 
-const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
-const WHEEL_STEP_THRESHOLD = 80
-const TOUCH_STEP_THRESHOLD = 88
-
 function WhyScroller() {
-  const sectionRef = useRef(null)
-  const stickyRef = useRef(null)
-  const wheelAccumRef = useRef(0)
-  const touchStartYRef = useRef(null)
-  const animatingRef = useRef(false)
-  const activeIndexRef = useRef(0)
-  const leavingRef = useRef(false)
-
   const [activeIndex, setActiveIndex] = useState(0)
   const [direction, setDirection] = useState('down')
-  const [locked, setLocked] = useState(false)
 
   const active = useMemo(() => ITEMS[activeIndex] || ITEMS[0], [activeIndex])
 
-  useEffect(() => {
-    activeIndexRef.current = activeIndex
-  }, [activeIndex])
-
-  const scrollToSection = useCallback((id) => {
-    const el = document.getElementById(id)
-    if (!el) return
-    if (leavingRef.current) return
-    leavingRef.current = true
-    const topOffset = 72
-    const top = Math.max(0, el.offsetTop - topOffset)
-    window.scrollTo({ top, behavior: 'smooth' })
-    window.setTimeout(() => {
-      leavingRef.current = false
-    }, 560)
-  }, [])
-
-  const leave = useCallback(
-    (dir) => {
-      if (dir === 'up') {
-        scrollToSection('servicios')
-      } else {
-        scrollToSection('como-funciona')
-      }
-    },
-    [scrollToSection],
-  )
-
-  const isScrollHijackEnabled = useCallback(() => {
-    if (typeof window === 'undefined') return false
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return false
-    if (window.matchMedia?.('(max-width: 980px)')?.matches) return false
-    return true
-  }, [])
-
-  const isSectionPinned = useCallback(() => {
-    if (!isScrollHijackEnabled()) return false
-    const el = sectionRef.current
-    const sticky = stickyRef.current
-    if (!el || !sticky) return false
-    const rect = sticky.getBoundingClientRect()
-    const topOffset = 72
-    const lowerBound = Math.min(window.innerHeight, window.visualViewport?.height || window.innerHeight) - 40
-    return rect.top <= topOffset + 1 && rect.bottom >= lowerBound
-  }, [isScrollHijackEnabled])
-
-  const canLeave = useCallback((dir) => {
-    const idx = activeIndexRef.current
-    if (dir === 'up') return idx === 0
-    return idx === ITEMS.length - 1
-  }, [])
-
-  const step = useCallback((dir) => {
-    if (animatingRef.current) return
-    animatingRef.current = true
-    setDirection(dir)
-    setActiveIndex((prev) => {
-      const next = clamp(prev + (dir === 'down' ? 1 : -1), 0, ITEMS.length - 1)
-      activeIndexRef.current = next
-      return next
-    })
-    window.setTimeout(() => {
-      animatingRef.current = false
-    }, 420)
-  }, [])
-
-  useEffect(() => {
-    const onScroll = () => {
-      const pinned = isSectionPinned()
-      const idx = activeIndexRef.current
-      const shouldLock = pinned && !(idx === 0 || idx === ITEMS.length - 1)
-      setLocked(shouldLock)
-      wheelAccumRef.current = 0
-    }
-
-    const onWheel = (event) => {
-      if (!isSectionPinned()) return
-
-      const dir = event.deltaY > 0 ? 'down' : 'up'
-      if (canLeave(dir)) {
-        event.preventDefault()
-        leave(dir)
-        return
-      }
-
-      event.preventDefault()
-      wheelAccumRef.current += event.deltaY
-
-      if (Math.abs(wheelAccumRef.current) >= WHEEL_STEP_THRESHOLD) {
-        step(wheelAccumRef.current > 0 ? 'down' : 'up')
-        wheelAccumRef.current = 0
-      }
-    }
-
-    const onKeyDown = (event) => {
-      if (!isSectionPinned()) return
-
-      const key = event.key
-      const keyDir = key === 'ArrowDown' || key === 'PageDown' ? 'down' : key === 'ArrowUp' || key === 'PageUp' ? 'up' : null
-      if (!keyDir) return
-      if (canLeave(keyDir)) {
-        event.preventDefault()
-        leave(keyDir)
-        return
-      }
-
-      event.preventDefault()
-      step(keyDir)
-    }
-
-    const onTouchStart = (event) => {
-      if (!isSectionPinned()) return
-      if (event.touches && event.touches.length > 0) {
-        touchStartYRef.current = event.touches[0].clientY
-      }
-    }
-
-    const onTouchMove = (event) => {
-      if (!isSectionPinned()) return
-      const startY = touchStartYRef.current
-      if (startY == null) return
-      const currentY = event.touches && event.touches.length > 0 ? event.touches[0].clientY : startY
-      const delta = startY - currentY
-      if (Math.abs(delta) < 8) return
-      event.preventDefault()
-    }
-
-    const onTouchEnd = (event) => {
-      if (!isSectionPinned()) return
-      const startY = touchStartYRef.current
-      touchStartYRef.current = null
-      if (startY == null) return
-      const endY = event.changedTouches && event.changedTouches.length > 0 ? event.changedTouches[0].clientY : startY
-      const delta = startY - endY
-      if (Math.abs(delta) < TOUCH_STEP_THRESHOLD) return
-      const dir = delta > 0 ? 'down' : 'up'
-      if (canLeave(dir)) {
-        leave(dir)
-      } else {
-        step(dir)
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('wheel', onWheel, { passive: false })
-    window.addEventListener('keydown', onKeyDown, { passive: false })
-    window.addEventListener('touchstart', onTouchStart, { passive: true })
-    window.addEventListener('touchmove', onTouchMove, { passive: false })
-    window.addEventListener('touchend', onTouchEnd, { passive: true })
-
-    onScroll()
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('wheel', onWheel)
-      window.removeEventListener('keydown', onKeyDown)
-      window.removeEventListener('touchstart', onTouchStart)
-      window.removeEventListener('touchmove', onTouchMove)
-      window.removeEventListener('touchend', onTouchEnd)
-    }
-  }, [canLeave, isSectionPinned, leave, step])
+  const onSelect = (nextIndex) => {
+    setDirection(nextIndex > activeIndex ? 'down' : 'up')
+    setActiveIndex(nextIndex)
+  }
 
   return (
-    <section
-      className={`vs-story ${locked ? 'is-locked' : ''}`.trim()}
-      id="diferenciales"
-      ref={sectionRef}
-    >
-      <div className="vs-story-sticky" ref={stickyRef}>
-        <div className="vs-container">
-          <div className="vs-story-grid">
-            <div className="vs-story-left">
-              <div className="vs-story-kicker">{active.kicker}</div>
-              <div
-                key={`${active.key}-copy-${direction}`}
-                className={`vs-swipe vs-swipe--${direction}`}
-              >
-                <h2 className="vs-story-title">{active.title}</h2>
-                <p className="vs-story-body">{active.body}</p>
-              </div>
-
-              <div className="vs-story-dots" aria-label="Pasos">
-                {ITEMS.map((item, idx) => (
-                  <button
-                    key={item.key}
-                    type="button"
-                    className={`vs-dot ${idx === activeIndex ? 'is-active' : ''}`.trim()}
-                    aria-label={`Ver: ${item.cardTitle}`}
-                    aria-current={idx === activeIndex}
-                    onClick={() => setActiveIndex(idx)}
-                  />
-                ))}
-              </div>
+    <section className="vs-story" id="diferenciales">
+      <div className="vs-container">
+        <div className="vs-story-grid">
+          <div className="vs-story-left">
+            <div className="vs-story-kicker">{active.kicker}</div>
+            <div key={`${active.key}-copy-${direction}`} className={`vs-swipe vs-swipe--${direction}`}>
+              <h2 className="vs-story-title">{active.title}</h2>
+              <p className="vs-story-body">{active.body}</p>
             </div>
 
-            <div className="vs-story-right">
-              <div key={`${active.key}-card-${direction}`} className={`vs-swipe vs-swipe--${direction}`}>
-                <div className="vs-story-card" data-variant={active.variant} aria-label={active.cardTitle}>
-                  <div className="vs-story-mosaic" aria-hidden="true">
-                    <div className="vs-story-tile vs-story-tile--a" />
-                    <div className="vs-story-tile vs-story-tile--b" />
-                    <div className="vs-story-tile vs-story-tile--c" />
-                    <div className="vs-story-tile vs-story-tile--d" />
-                  </div>
-                  <div className="vs-story-footer" aria-hidden="true">
-                    <div className="vs-story-footer-title">{active.cardTitle}</div>
-                    <div className="vs-story-footer-subtitle">{active.cardSubtitle}</div>
-                  </div>
+            <div className="vs-story-dots" aria-label="Pasos">
+              {ITEMS.map((item, idx) => (
+                <button
+                  key={item.key}
+                  type="button"
+                  className={`vs-dot ${idx === activeIndex ? 'is-active' : ''}`.trim()}
+                  aria-label={`Ver: ${item.cardTitle}`}
+                  aria-current={idx === activeIndex}
+                  onClick={() => onSelect(idx)}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="vs-story-right">
+            <div key={`${active.key}-card-${direction}`} className={`vs-swipe vs-swipe--${direction}`}>
+              <div className="vs-story-card" data-variant={active.variant} aria-label={active.cardTitle}>
+                <div className="vs-story-mosaic" aria-hidden="true">
+                  <div className="vs-story-tile vs-story-tile--a" />
+                  <div className="vs-story-tile vs-story-tile--b" />
+                  <div className="vs-story-tile vs-story-tile--c" />
+                  <div className="vs-story-tile vs-story-tile--d" />
+                </div>
+                <div className="vs-story-footer" aria-hidden="true">
+                  <div className="vs-story-footer-title">{active.cardTitle}</div>
+                  <div className="vs-story-footer-subtitle">{active.cardSubtitle}</div>
                 </div>
               </div>
             </div>
