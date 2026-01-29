@@ -1,27 +1,19 @@
-function Button({
-  as = 'button',
-  href,
-  onClick,
-  variant = 'primary',
-  children,
-  type = 'button',
-}) {
-  const className = `vs-btn vs-btn--${variant}`
+function Button({ href, variant = 'primary', className = '', children, ...props }) {
+  const classes = `vs-btn vs-btn--${variant} ${className}`.trim()
 
-  if (as === 'a') {
+  if (href) {
     return (
-      <a className={className} href={href} onClick={onClick}>
+      <a className={classes} href={href} {...props}>
         {children}
       </a>
     )
   }
 
   return (
-    <button className={className} type={type} onClick={onClick}>
+    <button className={classes} type="button" {...props}>
       {children}
     </button>
   )
 }
 
 export default Button
-
