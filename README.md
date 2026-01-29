@@ -1,22 +1,18 @@
-# React + Vite
+# Virtual Estudio Web (React + Vite)
 
-## Nota sobre “clonar” sitios externos
-
-Este repo es un proyecto base en React (Vite).
-
-No puedo incluir una copia exacta (HTML/CSS/JS/assets) de un sitio de terceros sin permiso del titular. Si tienes derechos/permisos sobre el contenido de `botika.com` (o te lo proporcionan como export), comparte los archivos y lo integro en componentes React manteniendo el diseño.
+Landing en React con theme inspirado en la app Flutter (paleta “glass”, radios y botones) y copy basado en los servicios de Virtual Estudio: campañas, videos, prendas, modelos, créditos y Brand DNA.
 
 ## Desarrollo
 
 - `npm install`
 - `npm run dev`
 
-## Páginas
+## Rutas (multi-page build)
 
-- Home: `/` (archivo `index.html`)
-- Pricing: `/pricing/` (archivo `pricing/index.html`)
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- `/` (home)
+- `/pricing/` (créditos y planes)
+- `/legal/terms-of-service/`
+- `/legal/privacy-policy/`
 
 Currently, two official plugins are available:
 

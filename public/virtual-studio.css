@@ -178,3 +178,53 @@ textarea::placeholder {
   color: var(--vs-text-muted);
 }
 
+/* React UI button system */
+.vs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 30px;
+  border-radius: var(--vs-radius-btn);
+  border: 1px solid transparent;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.vs-btn--primary {
+  background: #ffffff;
+  color: var(--vs-buy-text);
+}
+
+.vs-btn--secondary {
+  background: transparent;
+  color: var(--vs-text);
+  border-color: var(--vs-border);
+}
+
+.vs-btn--ghost {
+  background: transparent;
+  color: var(--vs-text-muted);
+  border-color: transparent;
+}
+
+.vs-btn--ghost:hover {
+  color: var(--vs-text);
+  border-color: var(--vs-border);
+  background: var(--vs-surface);
+}
+
+.vs-btn--buy {
+  background: var(--vs-buy);
+  color: var(--vs-buy-text);
+  font-weight: 900;
+  letter-spacing: 0.4px;
+}
+
+.vs-btn:focus-visible {
+  outline: 4px solid rgba(255, 213, 74, 0.25);
+  outline-offset: 2px;
+}

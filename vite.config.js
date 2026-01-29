@@ -10,6 +10,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         pricing: resolve(__dirname, 'pricing/index.html'),
+        terms: resolve(__dirname, 'legal/terms-of-service/index.html'),
+        privacy: resolve(__dirname, 'legal/privacy-policy/index.html'),
       },
     },
   },
