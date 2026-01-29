@@ -669,6 +669,8 @@ input {
 .vs-rail {
   position: relative;
   margin-top: 26px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
 }
 
 .vs-rail::before,
@@ -697,8 +699,10 @@ input {
   grid-auto-flow: column;
   grid-auto-columns: minmax(210px, 1fr);
   gap: 18px;
-  padding: 0 12px 10px;
-  margin: 0 -12px;
+  padding: 0 18px 10px;
+  padding-left: calc(18px + env(safe-area-inset-left));
+  padding-right: calc(18px + env(safe-area-inset-right));
+  margin: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
