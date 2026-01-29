@@ -7,6 +7,7 @@ import WhyScroller from './components/WhyScroller.jsx'
 import { SITE } from './lib/site.js'
 
 function App() {
+  const SNAP_STEP_THRESHOLD = 80
   const snapAnimatingRef = useRef(false)
   const snapWheelAccumRef = useRef(0)
 
@@ -73,7 +74,7 @@ function App() {
       }
 
       snapWheelAccumRef.current += event.deltaY
-      if (Math.abs(snapWheelAccumRef.current) < 40) return
+      if (Math.abs(snapWheelAccumRef.current) < SNAP_STEP_THRESHOLD) return
       snapWheelAccumRef.current = 0
 
       if (activeEl.id === 'top' && dir === 'down') {
