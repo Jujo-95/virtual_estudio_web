@@ -44,6 +44,8 @@ const ITEMS = [
 ]
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+const WHEEL_STEP_THRESHOLD = 80
+const TOUCH_STEP_THRESHOLD = 88
 
 function WhyScroller() {
   const sectionRef = useRef(null)
@@ -148,7 +150,7 @@ function WhyScroller() {
       event.preventDefault()
       wheelAccumRef.current += event.deltaY
 
-      if (Math.abs(wheelAccumRef.current) >= 40) {
+      if (Math.abs(wheelAccumRef.current) >= WHEEL_STEP_THRESHOLD) {
         step(wheelAccumRef.current > 0 ? 'down' : 'up')
         wheelAccumRef.current = 0
       }
@@ -194,7 +196,7 @@ function WhyScroller() {
       if (startY == null) return
       const endY = event.changedTouches && event.changedTouches.length > 0 ? event.changedTouches[0].clientY : startY
       const delta = startY - endY
-      if (Math.abs(delta) < 44) return
+      if (Math.abs(delta) < TOUCH_STEP_THRESHOLD) return
       const dir = delta > 0 ? 'down' : 'up'
       if (canLeave(dir)) {
         leave(dir)
