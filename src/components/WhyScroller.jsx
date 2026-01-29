@@ -61,6 +61,11 @@ function WhyScroller() {
 
   useEffect(() => {
     activeIndexRef.current = activeIndex
+    const el = sectionRef.current
+    if (el) {
+      el.dataset.whyIndex = String(activeIndex)
+      el.dataset.whyCount = String(ITEMS.length)
+    }
   }, [activeIndex])
 
   const isScrollHijackEnabled = useCallback(() => {
