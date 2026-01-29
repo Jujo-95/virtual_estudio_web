@@ -3,6 +3,7 @@ import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
 import FeatureRail from './components/FeatureRail.jsx'
 import NavBar from './components/NavBar.jsx'
+import WhyScroller from './components/WhyScroller.jsx'
 import { SITE } from './lib/site.js'
 
 function App() {
@@ -127,42 +128,7 @@ function App() {
           </div>
         </section>
 
-        <section className="vs-section" id="diferenciales">
-          <div className="vs-container">
-            <header className="vs-section-header">
-              <h2 className="vs-h2">Por qué Virtual Estudio</h2>
-              <p className="vs-subtitle">
-                Producción escalable, coherente y orientada a rendimiento.
-              </p>
-            </header>
-
-            <div className="vs-grid vs-grid--2">
-              <article className="vs-card vs-card--glow">
-                <h3>Enfoque en moda</h3>
-                <p>Flujo diseñado para campañas, prendas y catálogos.</p>
-              </article>
-              <article className="vs-card vs-card--glow">
-                <h3>UGC + editorial</h3>
-                <p>Cambia el estilo sin rehacer el proceso.</p>
-              </article>
-              <article className="vs-card vs-card--glow">
-                <h3>Variaciones por prenda</h3>
-                <p>Escala anuncios y lanzamientos con múltiples creatividades por SKU.</p>
-              </article>
-              <article className="vs-card vs-card--glow">
-                <h3>Consistencia de marca</h3>
-                <p>Brand DNA para repetir el look sin perder identidad.</p>
-              </article>
-            </div>
-
-            <div className="vs-format-chips" aria-label="Formatos disponibles">
-              <span className="vs-chip">1:1</span>
-              <span className="vs-chip">4:5</span>
-              <span className="vs-chip">9:16</span>
-              <span className="vs-chip">Listo para publicar</span>
-            </div>
-          </div>
-        </section>
+        <WhyScroller />
 
         <section className="vs-section" id="como-funciona">
           <div className="vs-container">
