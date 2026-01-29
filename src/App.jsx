@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
+import FeatureRail from './components/FeatureRail.jsx'
 import NavBar from './components/NavBar.jsx'
 import { SITE } from './lib/site.js'
 
@@ -111,42 +112,20 @@ function App() {
           </div>
         </section>
 
-        <section className="vs-section" id="servicios">
+        <section className="vs-section vs-section--rail" id="servicios">
           <div className="vs-container">
-            <header className="vs-section-header">
-              <h2 className="vs-h2">Qué compras</h2>
-              <p className="vs-subtitle">
-                Un flujo completo pensado para moda: de prenda (SKU) a piezas listas
-                para anuncios, redes y e‑commerce.
+            <header className="vs-section-header vs-section-header--center">
+              <h2 className="vs-section-title-xl">
+                Qué compras
+                <span className="vs-hero-caret" aria-hidden="true" />
+              </h2>
+              <p className="vs-section-lead">
+                Un flujo completo pensado para moda: de prenda (SKU) a piezas listas para anuncios,
+                redes y e‑commerce.
               </p>
             </header>
 
-            <div className="vs-grid">
-              <article className="vs-card">
-                <h3>Campañas</h3>
-                <p>Genera escenas y variaciones (UGC o editorial) listas para publicar.</p>
-              </article>
-              <article className="vs-card">
-                <h3>Prendas (SKU)</h3>
-                <p>Gestiona tu catálogo como base del flujo creativo.</p>
-              </article>
-              <article className="vs-card">
-                <h3>Modelos</h3>
-                <p>Selecciona modelos virtuales para representar tu marca con variedad.</p>
-              </article>
-              <article className="vs-card">
-                <h3>Videos</h3>
-                <p>Clips cortos a partir de imágenes para anuncios y contenido social.</p>
-              </article>
-              <article className="vs-card">
-                <h3>Brand DNA</h3>
-                <p>Define el look &amp; feel para mantener consistencia de marca.</p>
-              </article>
-              <article className="vs-card">
-                <h3>Créditos (COP)</h3>
-                <p>Compra créditos en COP y escala según tu calendario de contenido.</p>
-              </article>
-            </div>
+            <FeatureRail />
           </div>
         </section>
 

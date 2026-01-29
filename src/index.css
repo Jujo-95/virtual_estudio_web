@@ -620,8 +620,20 @@ input {
   padding: 46px 0;
 }
 
+.vs-section--rail {
+  padding: 82px 0 66px;
+  background: linear-gradient(180deg, rgba(11, 11, 18, 0.96), rgba(11, 11, 18, 0.82));
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
 .vs-section-header {
   margin-bottom: 18px;
+}
+
+.vs-section-header--center {
+  text-align: center;
+  margin-bottom: 28px;
 }
 
 .vs-h2 {
@@ -631,11 +643,196 @@ input {
   letter-spacing: -0.02em;
 }
 
+.vs-section-title-xl {
+  margin: 0;
+  font-family: var(--vs-font-display);
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+
+.vs-section-lead {
+  margin: 14px auto 0;
+  max-width: 72ch;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.6;
+}
+
 .vs-subtitle {
   margin: 0;
   color: var(--vs-muted);
   line-height: 1.6;
   max-width: 70ch;
+}
+
+/* FeatureRail */
+.vs-rail {
+  position: relative;
+  margin-top: 26px;
+}
+
+.vs-rail::before,
+.vs-rail::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 64px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.vs-rail::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(11, 11, 18, 0.92), transparent);
+}
+
+.vs-rail::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(11, 11, 18, 0.92), transparent);
+}
+
+.vs-rail-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(210px, 1fr);
+  gap: 18px;
+  padding: 0 12px 10px;
+  margin: 0 -12px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.vs-rail-track::-webkit-scrollbar {
+  display: none;
+}
+
+.vs-rail-item {
+  scroll-snap-align: start;
+}
+
+.vs-rail-card {
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: radial-gradient(520px 360px at 20% 20%, rgba(255, 255, 255, 0.14), transparent 60%),
+    radial-gradient(520px 360px at 80% 70%, rgba(255, 255, 255, 0.06), transparent 60%),
+    rgba(0, 0, 0, 0.35);
+  box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+
+.vs-rail-card::before {
+  content: '';
+  position: absolute;
+  inset: -80px;
+  filter: blur(18px);
+  opacity: 0.95;
+  transform: translate3d(0, 0, 0);
+  animation: vsHeroFloat 12s ease-in-out infinite;
+}
+
+.vs-rail-card[data-variant='campaigns']::before {
+  background: radial-gradient(340px 340px at 28% 30%, rgba(34, 211, 238, 0.22), transparent 62%),
+    radial-gradient(320px 320px at 72% 70%, rgba(251, 113, 133, 0.2), transparent 62%),
+    radial-gradient(340px 340px at 55% 22%, rgba(255, 186, 74, 0.14), transparent 62%);
+}
+
+.vs-rail-card[data-variant='products']::before {
+  background: radial-gradient(340px 340px at 28% 30%, rgba(167, 139, 250, 0.22), transparent 62%),
+    radial-gradient(320px 320px at 72% 70%, rgba(34, 211, 238, 0.16), transparent 62%);
+}
+
+.vs-rail-card[data-variant='models']::before {
+  background: radial-gradient(340px 340px at 28% 30%, rgba(251, 113, 133, 0.2), transparent 62%),
+    radial-gradient(320px 320px at 72% 70%, rgba(167, 139, 250, 0.18), transparent 62%);
+}
+
+.vs-rail-card[data-variant='video']::before {
+  background: radial-gradient(340px 340px at 28% 30%, rgba(34, 211, 238, 0.22), transparent 62%),
+    radial-gradient(320px 320px at 72% 70%, rgba(255, 186, 74, 0.14), transparent 62%);
+}
+
+.vs-rail-card[data-variant='dna']::before {
+  background: radial-gradient(340px 340px at 28% 30%, rgba(255, 186, 74, 0.16), transparent 62%),
+    radial-gradient(320px 320px at 72% 70%, rgba(167, 139, 250, 0.2), transparent 62%);
+}
+
+.vs-rail-card[data-variant='credits']::before {
+  background: radial-gradient(340px 340px at 28% 30%, rgba(34, 211, 238, 0.2), transparent 62%),
+    radial-gradient(320px 320px at 72% 70%, rgba(251, 113, 133, 0.16), transparent 62%);
+}
+
+.vs-rail-play {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.2);
+  display: grid;
+  place-items: center;
+}
+
+.vs-rail-play::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 9px solid rgba(255, 255, 255, 0.86);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  transform: translateX(1px);
+}
+
+.vs-rail-stats {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vs-rail-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.28);
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.vs-rail-meta {
+  margin-top: 10px;
+}
+
+.vs-rail-title {
+  font-family: var(--vs-font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.vs-rail-subtitle {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-rail-card::before {
+    animation: none;
+  }
 }
 
 .vs-grid {
