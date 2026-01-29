@@ -68,27 +68,7 @@ function App() {
       if (activeIdx > 2) return
 
       if (activeEl.id === 'diferenciales') {
-        const whyIndex = Number(activeEl.dataset.whyIndex || '0')
-        const whyCount = Number(activeEl.dataset.whyCount || '4')
-        const atTop = whyIndex <= 0
-        const atEnd = whyIndex >= whyCount - 1
-
-        if (dir === 'up' && atTop) {
-          event.preventDefault()
-          scrollToElement(sections[1])
-          return
-        }
-
-        if (dir === 'down' && atEnd) {
-          const next = document.getElementById('como-funciona')
-          if (next) {
-            event.preventDefault()
-            scrollToElement(next)
-          }
-          return
-        }
-
-        // Let WhyScroller consume scroll between steps.
+        // WhyScroller owns the scroll steps + leaving.
         return
       }
 
@@ -125,26 +105,7 @@ function App() {
       if (activeIdx > 2) return
 
       if (activeEl.id === 'diferenciales') {
-        const whyIndex = Number(activeEl.dataset.whyIndex || '0')
-        const whyCount = Number(activeEl.dataset.whyCount || '4')
-        const atTop = whyIndex <= 0
-        const atEnd = whyIndex >= whyCount - 1
-
-        if (dir === 'up' && atTop) {
-          event.preventDefault()
-          scrollToElement(sections[1])
-          return
-        }
-        if (dir === 'down' && atEnd) {
-          const next = document.getElementById('como-funciona')
-          if (next) {
-            event.preventDefault()
-            scrollToElement(next)
-          }
-          return
-        }
-
-        // Let WhyScroller handle intermediate steps.
+        // WhyScroller owns the scroll steps + leaving.
         return
       }
 

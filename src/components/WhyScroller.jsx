@@ -52,6 +52,7 @@ function WhyScroller() {
   const touchStartYRef = useRef(null)
   const animatingRef = useRef(false)
   const activeIndexRef = useRef(0)
+  const leavingRef = useRef(false)
 
   const [activeIndex, setActiveIndex] = useState(0)
   const [direction, setDirection] = useState('down')
@@ -61,12 +62,31 @@ function WhyScroller() {
 
   useEffect(() => {
     activeIndexRef.current = activeIndex
-    const el = sectionRef.current
-    if (el) {
-      el.dataset.whyIndex = String(activeIndex)
-      el.dataset.whyCount = String(ITEMS.length)
-    }
   }, [activeIndex])
+
+  const scrollToSection = useCallback((id) => {
+    const el = document.getElementById(id)
+    if (!el) return
+    if (leavingRef.current) return
+    leavingRef.current = true
+    const topOffset = 72
+    const top = Math.max(0, el.offsetTop - topOffset)
+    window.scrollTo({ top, behavior: 'smooth' })
+    window.setTimeout(() => {
+      leavingRef.current = false
+    }, 560)
+  }, [])
+
+  const leave = useCallback(
+    (dir) => {
+      if (dir === 'up') {
+        scrollToSection('servicios')
+      } else {
+        scrollToSection('como-funciona')
+      }
+    },
+    [scrollToSection],
+  )
 
   const isScrollHijackEnabled = useCallback(() => {
     if (typeof window === 'undefined') return false
@@ -119,7 +139,11 @@ function WhyScroller() {
       if (!isSectionPinned()) return
 
       const dir = event.deltaY > 0 ? 'down' : 'up'
-      if (canLeave(dir)) return
+      if (canLeave(dir)) {
+        event.preventDefault()
+        leave(dir)
+        return
+      }
 
       event.preventDefault()
       wheelAccumRef.current += event.deltaY
@@ -136,7 +160,11 @@ function WhyScroller() {
       const key = event.key
       const keyDir = key === 'ArrowDown' || key === 'PageDown' ? 'down' : key === 'ArrowUp' || key === 'PageUp' ? 'up' : null
       if (!keyDir) return
-      if (canLeave(keyDir)) return
+      if (canLeave(keyDir)) {
+        event.preventDefault()
+        leave(keyDir)
+        return
+      }
 
       event.preventDefault()
       step(keyDir)
@@ -155,8 +183,7 @@ function WhyScroller() {
       if (startY == null) return
       const currentY = event.touches && event.touches.length > 0 ? event.touches[0].clientY : startY
       const delta = startY - currentY
-      const dir = delta > 0 ? 'down' : 'up'
-      if (canLeave(dir)) return
+      if (Math.abs(delta) < 8) return
       event.preventDefault()
     }
 
@@ -169,8 +196,11 @@ function WhyScroller() {
       const delta = startY - endY
       if (Math.abs(delta) < 44) return
       const dir = delta > 0 ? 'down' : 'up'
-      if (canLeave(dir)) return
-      step(dir)
+      if (canLeave(dir)) {
+        leave(dir)
+      } else {
+        step(dir)
+      }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -189,14 +219,13 @@ function WhyScroller() {
       window.removeEventListener('touchmove', onTouchMove)
       window.removeEventListener('touchend', onTouchEnd)
     }
-  }, [canLeave, isSectionPinned, step])
+  }, [canLeave, isSectionPinned, leave, step])
 
   return (
     <section
       className={`vs-story ${locked ? 'is-locked' : ''}`.trim()}
       id="diferenciales"
       ref={sectionRef}
-      style={{ '--vs-story-steps': String(ITEMS.length + 1) }}
     >
       <div className="vs-story-sticky" ref={stickyRef}>
         <div className="vs-container">
