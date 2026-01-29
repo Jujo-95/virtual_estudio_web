@@ -1363,52 +1363,376 @@ position:absolute;
 <script>if(window.location.origin === 'https://botika-staging.webflow.io'){eruda.init();}</script>
 -->
 
-<!-- Update Try Now Links in mobile devices -->
+<!-- Landing enhancements (Virtual Estudio) -->
 <script>
-  function updateButtonLinks() {
-    const substring = "https://app.virtualestudio.io/"; // match this string
-    const isMobile = window.matchMedia('(max-width: 991px)').matches;
+  (function () {
+    function appendUrlParametersToLinks() {
+      const searchParams = new URLSearchParams(window.location.search);
+      if ([...searchParams.keys()].length === 0) return;
 
-    const matchingLinks = Array.from(document.querySelectorAll("a"))
-      .filter(a => a.href.includes(substring)); // keep full <a> elements
-
-    matchingLinks.forEach(link => {
-      if (isMobile) {
-        link.href = 'https://botikaio.sng.link/Docgh/g8uu?_smtype=3';
-      } else {
-        link.href = 'https://app.virtualestudio.io/';
-      }
-    });
-  }
-
-  function appendUrlParametersToLinks() {
-    const searchParams = new URLSearchParams(window.location.search);
-
-    if ([...searchParams.keys()].length > 0) {
-      document.querySelectorAll('a').forEach(link => {
+      document.querySelectorAll('a').forEach((link) => {
         try {
           const linkUrl = new URL(link.href);
-          searchParams.forEach((value, key) => {
-            linkUrl.searchParams.set(key, value);
-          });
+          searchParams.forEach((value, key) => linkUrl.searchParams.set(key, value));
           link.href = linkUrl.toString();
         } catch (e) {
-          // skip if URL is invalid
-          console.warn('Invalid URL in <a>: ', link.href);
+          // Skip invalid URLs (e.g., mailto:, tel:, anchors in older browsers)
         }
       });
     }
-  }
 
-  // Run on page load
- // updateButtonLinks();
-  appendUrlParametersToLinks();
+    function normalizeTemplateText() {
+      const attrs = ['alt', 'aria-label'];
+      const nodes = document.querySelectorAll('[alt], [aria-label]');
+      nodes.forEach((el) => {
+        attrs.forEach((attr) => {
+          const v = el.getAttribute(attr);
+          if (!v) return;
+          let next = v;
+          next = next.replace(/Botika/gi, 'Virtual Estudio');
+          next = next.replace(/AI models/gi, 'modelos virtuales');
+          next = next.replace(/generado con IA models/gi, 'modelos virtuales');
+          next = next.replace(/AI generated/gi, 'generado con IA');
+          if (next !== v) el.setAttribute(attr, next);
+        });
+      });
+    }
 
-  // Update on resize
-  window.addEventListener('resize', () => {
-   //  updateButtonLinks();
-    appendUrlParametersToLinks(); // Optional: Re-append query params if needed
-  });
+    function updateTopLinks() {
+      const learnMore = document.getElementById('homepage_carousel_learnmore');
+      if (learnMore) {
+        learnMore.href = '#servicios';
+        learnMore.setAttribute('aria-label', 'Ver servicios de Virtual Estudio');
+      }
+
+      const navRoot = document.querySelector('.nnav-s');
+      if (!navRoot) return;
+      const map = new Map([
+        ['Campañas', '#campanas'],
+        ['Videos', '#videos'],
+        ['Prendas', '#prendas'],
+        ['Modelos', '#modelos'],
+        ['Brand DNA', '#brand-dna'],
+        ['Créditos', '/pricing/'],
+        ['Contacto', '#contacto'],
+      ]);
+
+      navRoot.querySelectorAll('a').forEach((a) => {
+        const label = (a.textContent || '').trim();
+        if (!label) return;
+        const href = map.get(label);
+        if (href) a.setAttribute('href', href);
+      });
+    }
+
+    function injectServicesAndCalculator() {
+      if (document.getElementById('servicios')) return;
+      const carousel = document.querySelector('section.nhome-carousel-s');
+      if (!carousel) return;
+
+      const html = `
+        <section id="servicios" class="vs-section vs-services">
+          <div class="container vs-container">
+            <div class="vs-section-head">
+              <div class="vs-kicker">Servicios</div>
+              <h2 class="vs-h2">Todo tu flujo creativo, en un solo lugar</h2>
+              <p class="vs-subtitle">Campañas, videos y consistencia de marca (Brand DNA) para producir contenido a escala en formatos listos para publicar.</p>
+            </div>
+            <div class="vs-grid vs-grid-3">
+              <div id="campanas" class="vs-anchor"></div>
+              <a class="vs-card vs-card-link" href="https://app.virtualestudio.io/">
+                <div class="vs-card-title">Campañas</div>
+                <div class="vs-card-body">Genera campañas UGC y editoriales con variaciones por prenda, listas para anuncios y redes.</div>
+              </a>
+              <div id="videos" class="vs-anchor"></div>
+              <a class="vs-card vs-card-link" href="https://app.virtualestudio.io/">
+                <div class="vs-card-title">Videos</div>
+                <div class="vs-card-body">Convierte imágenes en clips cortos para performance y contenido social.</div>
+              </a>
+              <div id="prendas" class="vs-anchor"></div>
+              <a class="vs-card vs-card-link" href="https://app.virtualestudio.io/">
+                <div class="vs-card-title">Prendas (SKU)</div>
+                <div class="vs-card-body">Organiza tu catálogo y produce variaciones por producto sin rehacer el proceso.</div>
+              </a>
+              <div id="modelos" class="vs-anchor"></div>
+              <a class="vs-card vs-card-link" href="https://app.virtualestudio.io/">
+                <div class="vs-card-title">Modelos</div>
+                <div class="vs-card-body">Elige modelos virtuales para representar tu marca con variedad y consistencia.</div>
+              </a>
+              <div id="brand-dna" class="vs-anchor"></div>
+              <a class="vs-card vs-card-link" href="https://app.virtualestudio.io/">
+                <div class="vs-card-title">Brand DNA</div>
+                <div class="vs-card-body">Define tu estilo y asegúrate de que cada entrega mantenga el look &amp; feel de tu marca.</div>
+              </a>
+              <div id="creditos" class="vs-anchor"></div>
+              <a class="vs-card vs-card-link" href="/pricing/">
+                <div class="vs-card-title">Créditos (COP)</div>
+                <div class="vs-card-body">Compra créditos en COP y escala tu producción según tu calendario de publicaciones.</div>
+              </a>
+            </div>
+            <div class="vs-section-cta">
+              <a class="nbtn-primary w-inline-block" href="https://app.virtualestudio.io/"><div class="nbtn-primary-text">Ir a la app</div></a>
+              <a class="nbtn-primary secondary-no-arrow w-inline-block" href="/pricing/"><div class="nbtn-primary-text secondary-no-arrow-2">Ver créditos</div></a>
+            </div>
+          </div>
+        </section>
+        <section id="calculadora" class="vs-section vs-calculator">
+          <div class="container vs-container">
+            <div class="vs-calculator-card vs-glass">
+              <div class="vs-calculator-head">
+                <div class="vs-kicker">Estimador</div>
+                <h2 class="vs-h2">¿Cuántos créditos necesitas al mes?</h2>
+                <p class="vs-subtitle">Estimación rápida basada en tu frecuencia de publicaciones. Ajusta y revisa los paquetes en COP.</p>
+              </div>
+              <div class="vs-calculator-grid">
+                <div class="vs-field">
+                  <label for="vs_posts_week">Publicaciones por semana</label>
+                  <input id="vs_posts_week" type="range" min="1" max="40" step="1" value="7"/>
+                  <div class="vs-field-hint"><span id="vs_posts_week_value">7</span> publicaciones/semana</div>
+                </div>
+                <div class="vs-field">
+                  <label for="vs_videos_month">Videos al mes (opcional)</label>
+                  <input id="vs_videos_month" type="number" min="0" max="60" step="1" value="0" inputmode="numeric"/>
+                  <div class="vs-field-hint">Si haces videos, tu rango de créditos sube.</div>
+                </div>
+                <div class="vs-calculator-output">
+                  <div class="vs-output-row"><span>Publicaciones/mes (aprox.)</span><strong id="vs_posts_month">30</strong></div>
+                  <div class="vs-output-row"><span>Rango sugerido (créditos/mes)</span><strong id="vs_credits_range">30–60</strong></div>
+                  <div class="vs-output-row"><span>Recomendación</span><strong id="vs_reco">Empieza con un paquete pequeño y escala.</strong></div>
+                  <div class="vs-actions">
+                    <a class="nbtn-primary w-inline-block" href="/pricing/"><div class="nbtn-primary-text">Ver créditos</div></a>
+                    <a class="nbtn-primary secondary-no-arrow w-inline-block" href="mailto:info@virtualestudio.io?subject=Estimaci%C3%B3n%20de%20cr%C3%A9ditos%20%E2%80%94%20Virtual%20Estudio"><div class="nbtn-primary-text secondary-no-arrow-2">Pedir recomendación</div></a>
+                  </div>
+                </div>
+              </div>
+              <div class="vs-calculator-note">Nota: la estimación es orientativa y puede variar según el tipo de contenido (imagen/video) y el flujo creativo.</div>
+            </div>
+          </div>
+        </section>
+      `;
+
+      const slider = document.querySelector('section.nhome-slider-s');
+      if (slider) slider.insertAdjacentHTML('beforebegin', html);
+      else carousel.insertAdjacentHTML('afterend', html);
+    }
+
+    function setupEstimator() {
+      const postsWeek = document.getElementById('vs_posts_week');
+      const postsWeekValue = document.getElementById('vs_posts_week_value');
+      const videosMonth = document.getElementById('vs_videos_month');
+      const postsMonth = document.getElementById('vs_posts_month');
+      const creditsRange = document.getElementById('vs_credits_range');
+      const reco = document.getElementById('vs_reco');
+      if (!postsWeek || !postsWeekValue || !videosMonth || !postsMonth || !creditsRange || !reco) return;
+
+      function clampInt(v, min, max) {
+        const n = Number.parseInt(String(v || ''), 10);
+        if (Number.isNaN(n)) return min;
+        return Math.max(min, Math.min(max, n));
+      }
+
+      function update() {
+        const perWeek = clampInt(postsWeek.value, 1, 40);
+        const vids = clampInt(videosMonth.value, 0, 60);
+        postsWeekValue.textContent = String(perWeek);
+
+        const perMonth = Math.max(1, Math.round(perWeek * 4.3));
+        postsMonth.textContent = String(perMonth);
+
+        const low = perMonth * 1 + vids * 4;
+        const high = perMonth * 2 + vids * 10;
+        creditsRange.textContent = `${low}–${high}`;
+
+        if (perWeek <= 5) reco.textContent = 'Empieza con un paquete pequeño y valida tu flujo.';
+        else if (perWeek <= 12) reco.textContent = 'Un paquete medio te da espacio para variaciones por prenda.';
+        else reco.textContent = 'Considera un plan/volumen para escalar campañas y pruebas.';
+      }
+
+      postsWeek.addEventListener('input', update);
+      videosMonth.addEventListener('input', update);
+      update();
+    }
+
+    function injectBottomSections() {
+      if (document.getElementById('contacto')) return;
+      const footer = document.querySelector('footer');
+      if (!footer) return;
+
+      const html = `
+        <section id="como-funciona" class="vs-section vs-how">
+          <div class="container vs-container">
+            <div class="vs-section-head">
+              <div class="vs-kicker">Cómo funciona</div>
+              <h2 class="vs-h2">De prenda a campaña en 3 pasos</h2>
+              <p class="vs-subtitle">Un flujo simple para producir contenido consistente y escalable.</p>
+            </div>
+            <div class="vs-grid vs-grid-3">
+              <div class="vs-card">
+                <div class="vs-step">1</div>
+                <div class="vs-card-title">Sube tu prenda</div>
+                <div class="vs-card-body">Crea tu SKU y organiza tus productos para producir variaciones.</div>
+              </div>
+              <div class="vs-card">
+                <div class="vs-step">2</div>
+                <div class="vs-card-title">Define el estilo</div>
+                <div class="vs-card-body">Elige UGC o editorial, modelo y tu Brand DNA para mantener consistencia.</div>
+              </div>
+              <div class="vs-card">
+                <div class="vs-step">3</div>
+                <div class="vs-card-title">Genera y publica</div>
+                <div class="vs-card-body">Exporta en formatos listos para redes y anuncios, y repite el proceso a escala.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing" class="vs-section vs-pricing">
+          <div class="container vs-container">
+            <div class="vs-pricing-card vs-glass">
+              <div>
+                <div class="vs-kicker">Créditos (COP)</div>
+                <h2 class="vs-h2">Compra créditos y escala según tu calendario</h2>
+                <p class="vs-subtitle">Ideal para campañas, variaciones por prenda y videos. Revisa paquetes y elige el que se adapte a tu ritmo.</p>
+              </div>
+              <div class="vs-actions">
+                <a class="nbtn-primary w-inline-block" href="/pricing/"><div class="nbtn-primary-text">Ver créditos</div></a>
+                <a class="nbtn-primary secondary-no-arrow w-inline-block" href="https://app.virtualestudio.io/"><div class="nbtn-primary-text secondary-no-arrow-2">Ir a la app</div></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="vs-section vs-faq">
+          <div class="container vs-container">
+            <div class="vs-section-head">
+              <div class="vs-kicker">FAQ</div>
+              <h2 class="vs-h2">Preguntas frecuentes</h2>
+              <p class="vs-subtitle">Respuestas rápidas a las objeciones más comunes antes de empezar.</p>
+            </div>
+            <div class="vs-faq-list">
+              <details class="vs-faq-item">
+                <summary>¿Qué puedo crear con Virtual Estudio?</summary>
+                <div class="vs-faq-content">Campañas UGC y editoriales, variaciones por prenda (SKU) y videos cortos para anuncios y redes.</div>
+              </details>
+              <details class="vs-faq-item">
+                <summary>¿Cómo mantengo consistencia de marca?</summary>
+                <div class="vs-faq-content">Define tu Brand DNA (estilo visual) y repite el flujo para producir contenido coherente en todas tus piezas.</div>
+              </details>
+              <details class="vs-faq-item">
+                <summary>¿Cómo funcionan los créditos?</summary>
+                <div class="vs-faq-content">Compras créditos en COP y los usas para generar contenido. El consumo varía según el tipo de contenido (imagen/video).</div>
+              </details>
+              <details class="vs-faq-item">
+                <summary>¿Qué pasa si necesito ajustes?</summary>
+                <div class="vs-faq-content">Si una imagen necesita cambios, puedes solicitar una revisión desde la app o hablar con el equipo.</div>
+              </details>
+              <details class="vs-faq-item">
+                <summary>¿Puedo hablar con alguien antes de comprar?</summary>
+                <div class="vs-faq-content">Sí. Escríbenos a <a href="mailto:info@virtualestudio.io?subject=Contacto%20%E2%80%94%20Virtual%20Estudio">info@virtualestudio.io</a>.</div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section id="contacto" class="vs-section vs-contact">
+          <div class="container vs-container">
+            <div class="vs-contact-card vs-glass">
+              <div class="vs-section-head">
+                <div class="vs-kicker">Contacto</div>
+                <h2 class="vs-h2">Cuéntanos tu objetivo y te recomendamos el mejor camino</h2>
+                <p class="vs-subtitle">Recibe una recomendación de créditos y un plan de producción acorde a tu calendario de publicaciones.</p>
+              </div>
+              <form id="vs_contact_form" class="vs-form">
+                <div class="vs-grid vs-grid-2">
+                  <div class="vs-field">
+                    <label for="vs_name">Nombre</label>
+                    <input id="vs_name" name="name" type="text" autocomplete="name" required />
+                  </div>
+                  <div class="vs-field">
+                    <label for="vs_email">Correo</label>
+                    <input id="vs_email" name="email" type="email" autocomplete="email" required />
+                  </div>
+                  <div class="vs-field">
+                    <label for="vs_phone">Teléfono</label>
+                    <input id="vs_phone" name="phone" type="tel" autocomplete="tel" />
+                  </div>
+                  <div class="vs-field">
+                    <label for="vs_ppw">Publicaciones por semana</label>
+                    <input id="vs_ppw" name="ppw" type="number" min="0" step="1" inputmode="numeric" required />
+                  </div>
+                </div>
+                <div class="vs-actions">
+                  <button type="submit" class="nbtn-primary"><span class="nbtn-primary-text">Enviar</span></button>
+                  <a class="nbtn-primary secondary-no-arrow w-inline-block" href="mailto:info@virtualestudio.io?subject=Contacto%20%E2%80%94%20Virtual%20Estudio"><div class="nbtn-primary-text secondary-no-arrow-2">Hablar con ventas</div></a>
+                  <div id="vs_contact_status" class="vs-hint" aria-live="polite"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      `;
+
+      footer.insertAdjacentHTML('beforebegin', html);
+    }
+
+    function setupContactForm() {
+      const form = document.getElementById('vs_contact_form');
+      const status = document.getElementById('vs_contact_status');
+      if (!form || !status) return;
+
+      function isValidEmail(email) {
+        return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(String(email || '').trim());
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('vs_name')?.value?.trim() || '';
+        const email = document.getElementById('vs_email')?.value?.trim() || '';
+        const phone = document.getElementById('vs_phone')?.value?.trim() || '';
+        const ppw = document.getElementById('vs_ppw')?.value?.trim() || '';
+
+        if (!name || !email || !ppw) {
+          status.textContent = 'Completa nombre, correo y publicaciones por semana.';
+          return;
+        }
+        if (!isValidEmail(email)) {
+          status.textContent = 'Escribe un correo válido.';
+          return;
+        }
+
+        const subject = 'Contacto — Virtual Estudio';
+        const body = [
+          'Hola equipo Virtual Estudio,',
+          '',
+          'Quiero una recomendación para mi producción:',
+          `- Nombre: ${name}`,
+          `- Correo: ${email}`,
+          phone ? `- Teléfono: ${phone}` : '- Teléfono: (no enviado)',
+          `- Publicaciones por semana: ${ppw}`,
+          '',
+          'Gracias,',
+          name,
+        ].join('\\n');
+
+        const mailto = `mailto:info@virtualestudio.io?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+        status.textContent = 'Listo: se abrió tu correo para enviar el mensaje.';
+      });
+    }
+
+    function init() {
+      appendUrlParametersToLinks();
+      normalizeTemplateText();
+      updateTopLinks();
+      injectServicesAndCalculator();
+      setupEstimator();
+      injectBottomSections();
+      setupContactForm();
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
 </script>
 
 <script>

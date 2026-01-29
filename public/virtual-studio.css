@@ -335,3 +335,289 @@ textarea::placeholder {
   outline: 4px solid rgba(255, 213, 74, 0.25);
   outline-offset: 2px;
 }
+
+/* Landing sections (runbook) */
+.vs-container {
+  max-width: 1100px;
+}
+
+.vs-section {
+  padding: clamp(56px, 6vw, 96px) 0;
+}
+
+.vs-section-head {
+  margin-bottom: 22px;
+}
+
+.vs-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--vs-radius-chip);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--vs-border);
+  color: var(--vs-text-muted);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-bottom: 12px;
+}
+
+.vs-h2 {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  font-size: clamp(26px, 3.2vw, 40px);
+  line-height: 1.08;
+}
+
+.vs-subtitle {
+  margin: 10px 0 0;
+  color: var(--vs-text-muted);
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.5;
+  max-width: 64ch;
+}
+
+.vs-anchor {
+  position: relative;
+  top: -90px; /* offset for sticky nav */
+  height: 1px;
+  width: 1px;
+}
+
+.vs-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.vs-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.vs-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 960px) {
+  .vs-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .vs-grid-3,
+  .vs-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .vs-anchor {
+    top: -76px;
+  }
+}
+
+.vs-card {
+  background: var(--vs-surface) !important;
+  border: 1px solid var(--vs-border) !important;
+  border-radius: var(--vs-radius-card) !important;
+  box-shadow: 0 18px 30px var(--vs-shadow) !important;
+  backdrop-filter: blur(10px);
+  padding: 18px 18px;
+  min-height: 130px;
+}
+
+.vs-card-link {
+  display: block;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease,
+    background 160ms ease;
+}
+
+.vs-card-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  background: var(--vs-surface-strong) !important;
+}
+
+.vs-card-title {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.vs-card-body {
+  color: var(--vs-text-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.vs-section-cta {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Calculator */
+.vs-calculator-card {
+  padding: 22px;
+}
+
+.vs-calculator-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .vs-calculator-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vs-field label {
+  display: block;
+  font-size: 12px;
+  color: var(--vs-text-muted);
+  margin: 0 0 8px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vs-field input[type='range'] {
+  width: 100%;
+  accent-color: var(--vs-buy);
+}
+
+.vs-field input[type='number'] {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--vs-radius-card) !important;
+}
+
+.vs-field-hint {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--vs-text-muted);
+}
+
+.vs-calculator-output {
+  padding: 18px;
+  border-radius: var(--vs-radius-card);
+  border: 1px solid var(--vs-border);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.vs-output-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vs-output-row:last-child {
+  border-bottom: 0;
+}
+
+.vs-output-row span {
+  color: var(--vs-text-muted);
+  font-size: 13px;
+}
+
+.vs-output-row strong {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.vs-calculator-note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--vs-text-muted);
+}
+
+/* Pricing card */
+.vs-pricing-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+}
+
+@media (max-width: 860px) {
+  .vs-pricing-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* FAQ */
+.vs-faq-list {
+  display: grid;
+  gap: 12px;
+}
+
+.vs-faq-item {
+  background: var(--vs-surface);
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius-card);
+  padding: 14px 16px;
+}
+
+.vs-faq-item summary {
+  cursor: pointer;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  list-style: none;
+}
+
+.vs-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.vs-faq-item summary::after {
+  content: '+';
+  float: right;
+  color: var(--vs-text-muted);
+}
+
+.vs-faq-item[open] summary::after {
+  content: '–';
+}
+
+.vs-faq-content {
+  margin-top: 10px;
+  color: var(--vs-text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* How it works */
+.vs-step {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--vs-border);
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+/* Contact form */
+.vs-form input {
+  width: 100%;
+  padding: 14px 16px;
+}
+
+.vs-hint {
+  font-size: 13px;
+  color: var(--vs-text-muted);
+}
