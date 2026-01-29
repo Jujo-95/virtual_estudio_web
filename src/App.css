@@ -1,0 +1,58 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card {
+  width: min(880px, 100%);
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  text-align: left;
+}
+
+.card h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card p,
+.card ol {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.card p + .divider,
+.card p + p {
+  margin-top: 16px;
+}
+
+.card ol {
+  margin-top: 8px;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.divider {
+  height: 1px;
+  margin: 16px 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hint {
+  margin-top: 16px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
