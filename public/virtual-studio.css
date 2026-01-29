@@ -31,15 +31,48 @@ body {
     sans-serif !important;
 }
 
-/* Global link color alignment */
+/* Keep links readable on dark UI */
 a {
   color: inherit;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+}
+
+/* Brand text logo (replace template SVG logo visually) */
+.nnav-logo-c,
+.nnav-logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  color: var(--vs-text) !important;
+}
+
+.nnav-logo-c svg,
+.nnav-logo svg {
+  display: none !important;
+}
+
+.nnav-logo-c::before,
+.nnav-logo::before {
+  content: 'Virtual Estudio';
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: 18px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .nnav-logo-c::before,
+  .nnav-logo::before {
+    font-size: 16px;
+  }
 }
 
 /* Make common Webflow sections look like your glass UI */
 .container,
 .w-container {
-  color: var(--vs-text);
+  color: inherit;
 }
 
 /* Primary CTA buttons (white pill) */
@@ -65,13 +98,41 @@ input[type='submit'] {
 
 /* Secondary CTA buttons (outlined glass) */
 .nbtn-primary.w-variant-9b20fec8-92fd-bc47-245f-fbfc0b375b74,
-.nbtn-primary.secondary-no-arrow,
-.nbtn-primary.secondary-no-arrow-2,
-.nbtn-primary.secondary-no-arrow-3,
-.nbtn-primary.secondary-no-arrow-4 {
-  background: transparent !important;
+.nbtn-primary.secondary-no-arrow {
+  background: var(--vs-surface) !important;
   color: var(--vs-text) !important;
   border: 1px solid var(--vs-border) !important;
+}
+
+/* Ensure hover states keep contrast */
+.nbtn-primary:hover {
+  color: var(--vs-bg) !important;
+}
+
+.nbtn-primary.w-variant-9b20fec8-92fd-bc47-245f-fbfc0b375b74:hover,
+.nbtn-primary.secondary-no-arrow:hover {
+  background: var(--vs-surface-strong) !important;
+  color: var(--vs-text) !important;
+}
+
+.nnav-links-w.scrolled .nbtn-primary:hover {
+  color: var(--vs-bg) !important;
+}
+
+/* Mobile menu + dropdown surfaces (fix white-on-white / black-on-black issues) */
+[data-nav-menu-open],
+.w-nav-menu,
+.w-nav-overlay,
+.w-dropdown-list {
+  background: var(--vs-bg) !important;
+  color: var(--vs-text) !important;
+}
+
+.w-dropdown-link,
+.w-nav-link,
+.nnav-link,
+.nnav-dropdown-link {
+  color: var(--vs-text) !important;
 }
 
 /* Glass cards */
@@ -83,6 +144,52 @@ input[type='submit'] {
 .footer-c,
 .footer-w {
   color: var(--vs-text);
+}
+
+/* Sections: keep background dark + text readable */
+.nhp-hero-s,
+.ntrusted-by-s,
+.nhome-carousel-s,
+.nhome-slider-s,
+.nhome-benefits-s,
+.nhome-quality-s,
+.nhome-creator-s,
+.ncta-s,
+.prp-hero,
+.prp-features-s,
+.prp-cta-s,
+.faq-s,
+.features-s,
+.img-s {
+  background: transparent !important;
+  color: var(--vs-text) !important;
+}
+
+/* Card surfaces used across the templates */
+.nhome-benefits-item,
+.nhome-slider-slide,
+.prp-hero-card,
+.prp-cta-container,
+.faq,
+.prp-tab,
+.prp-hero-tabs-menu,
+.prp-slider-tooltip {
+  background: var(--vs-surface) !important;
+  border: 1px solid var(--vs-border) !important;
+  border-radius: var(--vs-radius-card) !important;
+  box-shadow: 0 18px 30px var(--vs-shadow) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Keep pricing slider track readable on dark */
+.prp-slider {
+  background: linear-gradient(
+      to right,
+      var(--vs-buy) 0%,
+      var(--vs-buy) 7.69231%,
+      rgba(255, 255, 255, 0.25) 7.69231%,
+      rgba(255, 255, 255, 0.25) 100%
+    ) !important;
 }
 
 /* Generic “glass” utility */
