@@ -1709,6 +1709,7 @@ input {
   box-shadow: var(--vs-shadow);
   padding: 22px;
   --vs-card-bg: none;
+  background-image: none;
 }
 
 .vs-calc {
@@ -1752,6 +1753,7 @@ input {
   background: rgba(255, 255, 255, 0.06);
   padding: 16px;
   --vs-card-bg: none;
+  background-image: none;
 }
 
 .vs-calc-kpi-label {
@@ -1793,6 +1795,7 @@ input {
   background: rgba(255, 255, 255, 0.06);
   padding: 14px 16px;
   --vs-card-bg: none;
+  background-image: none;
 }
 
 .vs-card,
