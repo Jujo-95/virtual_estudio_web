@@ -39,20 +39,22 @@ function HowItWorks() {
           </div>
         </div>
 
-        <div className="vs-how-cards" aria-label="Pasos del flujo">
-          {STEPS.map((item, idx) => (
-            <article key={item.title} className="vs-how-card">
-              <p>{item.description}</p>
-              <div className="vs-how-card-meta">
-                <div className="vs-how-card-person">
-                  <span className="vs-how-card-name">{item.title}</span>
-                  <span className="vs-how-card-role">
-                    Paso {idx + 1} · {item.subtitle}
-                  </span>
+        <div className="vs-how-rail" aria-label="Pasos del flujo">
+          <div className="vs-how-cards" role="list">
+            {STEPS.map((item, idx) => (
+              <article key={item.title} className="vs-how-card" role="listitem">
+                <p className="vs-how-card-text">{item.description}</p>
+                <div className="vs-how-card-meta">
+                  <div className="vs-how-card-person">
+                    <span className="vs-how-card-name">{item.title}</span>
+                    <span className="vs-how-card-role">
+                      Paso {idx + 1} · {item.subtitle}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

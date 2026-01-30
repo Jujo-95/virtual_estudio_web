@@ -620,11 +620,14 @@ input {
   display: grid;
   grid-template-columns: 1fr minmax(300px, 420px);
   gap: 48px;
-  align-items: center;
+  align-items: stretch;
 }
 
 .vs-how-copy {
   max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .vs-how-title {
@@ -657,6 +660,35 @@ input {
   gap: 12px;
 }
 
+.vs-how-rail {
+  position: relative;
+  height: 100%;
+  display: grid;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.vs-how-rail::before,
+.vs-how-rail::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 90px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.vs-how-rail::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(248, 245, 238, 1), rgba(248, 245, 238, 0));
+}
+
+.vs-how-rail::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(248, 245, 238, 1), rgba(248, 245, 238, 0));
+}
+
 .vs-how-cards {
   display: grid;
   grid-auto-flow: column;
@@ -665,9 +697,11 @@ input {
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  padding: 6px 6px 14px;
-  margin: -6px -6px 0;
+  padding: 6px 18px 14px;
+  margin: 0;
   scrollbar-width: none;
+  align-items: stretch;
+  height: 100%;
 }
 
 .vs-how-cards::-webkit-scrollbar {
@@ -682,12 +716,17 @@ input {
   box-shadow: 0 28px 60px rgba(17, 17, 17, 0.08);
   transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
   color: #0c0c0c;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .vs-how-card:hover {
   background: #0c0c0c;
   box-shadow: 0 34px 90px rgba(0, 0, 0, 0.22);
   transform: translateY(-6px);
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .vs-how-card-title,
@@ -695,10 +734,10 @@ input {
   color: inherit;
 }
 
-.vs-how-card p {
+.vs-how-card-text {
   margin: 0;
   line-height: 1.6;
-  color: inherit;
+  color: rgba(12, 12, 12, 0.86);
 }
 
 .vs-how-card-meta {
@@ -718,6 +757,14 @@ input {
   color: rgba(12, 12, 12, 0.7);
 }
 
+.vs-how-card:hover .vs-how-card-text {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.vs-how-card:hover .vs-how-card-meta {
+  color: rgba(255, 255, 255, 0.86);
+}
+
 .vs-how-card:hover .vs-how-card-name {
   color: rgba(255, 255, 255, 0.92);
 }
@@ -729,6 +776,15 @@ input {
 @media (max-width: 980px) {
   .vs-how-grid {
     grid-template-columns: 1fr;
+  }
+
+  .vs-how-rail {
+    overflow: visible;
+  }
+
+  .vs-how-rail::before,
+  .vs-how-rail::after {
+    display: none;
   }
 
   .vs-how-cards {
