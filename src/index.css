@@ -76,10 +76,12 @@ body::after {
 }
 
 @keyframes vsFloat {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
+
   50% {
     transform: translate3d(12px, -10px, 0);
   }
@@ -188,7 +190,7 @@ input {
   border-radius: 999px;
 }
 
-.vs-nav-toggle span + span {
+.vs-nav-toggle span+span {
   margin-top: 5px;
 }
 
@@ -328,13 +330,11 @@ input {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: repeating-linear-gradient(
-      0deg,
+  background: repeating-linear-gradient(0deg,
       rgba(255, 255, 255, 0.045),
       rgba(255, 255, 255, 0.045) 1px,
       transparent 1px,
-      transparent 3px
-    ),
+      transparent 3px),
     radial-gradient(1200px 800px at 50% 30%, rgba(0, 0, 0, 0.12), transparent 60%);
   mix-blend-mode: overlay;
   opacity: 0.18;
@@ -393,10 +393,12 @@ input {
 }
 
 @keyframes vsHeroFloat {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
+
   50% {
     transform: translate3d(10px, -8px, 0);
   }
@@ -456,10 +458,12 @@ input {
 }
 
 @keyframes vsCaretBlink {
+
   0%,
   55% {
     opacity: 1;
   }
+
   56%,
   100% {
     opacity: 0;
@@ -668,6 +672,7 @@ input {
   overflow: hidden;
   margin-right: calc(50% - 50vw);
   padding-right: calc(50vw - 50%);
+  background: #f8f5ee;
 }
 
 .vs-how-rail::before,
@@ -676,7 +681,7 @@ input {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 90px;
+  width: 48px;
   pointer-events: none;
   z-index: 2;
 }
@@ -998,6 +1003,7 @@ input {
     transform: translateY(18px);
     filter: blur(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1011,6 +1017,7 @@ input {
     transform: translateY(-18px);
     filter: blur(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1267,7 +1274,7 @@ input {
   opacity: 0.9;
 }
 
-.vs-card--glow > * {
+.vs-card--glow>* {
   position: relative;
 }
 
@@ -1636,10 +1643,12 @@ input {
 }
 
 @keyframes vsTileFloat {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
+
   50% {
     transform: translate3d(10px, -8px, 0);
   }
