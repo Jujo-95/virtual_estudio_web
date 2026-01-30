@@ -732,15 +732,15 @@ input {
 }
 
 .vs-how-people-card[data-variant='sku'] {
-  --vs-card-bg: url('../web_images/garment_top.jpg');
+  --vs-card-bg: url('/web_images/garment_top.jpg');
 }
 
 .vs-how-people-card[data-variant='style'] {
-  --vs-card-bg: url('../web_images/editorial_campania_96_asset_174.jpg');
+  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
 }
 
 .vs-how-people-card[data-variant='export'] {
-  --vs-card-bg: url('../web_images/campania_107_asset_192.jpg');
+  --vs-card-bg: url('/web_images/campania_107_asset_192.jpg');
 }
 
 .vs-how-people-card:hover {
@@ -1156,19 +1156,19 @@ input {
 }
 
 .vs-story-card--howto[data-variant='fashion'] {
-  --vs-card-bg: url('../web_images/garment_top.jpg');
+  --vs-card-bg: url('/web_images/garment_top.jpg');
 }
 
 .vs-story-card--howto[data-variant='modes'] {
-  --vs-card-bg: url('../web_images/editorial_campania_96_asset_174.jpg');
+  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
 }
 
 .vs-story-card--howto[data-variant='dna'] {
-  --vs-card-bg: url("../web_images/campania_111_asset_225.jpg");
+  --vs-card-bg: url('/web_images/campania_111_asset_225.jpg');
 }
 
 .vs-story-card--howto[data-variant='scale'] {
-  --vs-card-bg: url('../web_images/campania_107_asset_192.jpg');
+  --vs-card-bg: url('/web_images/campania_107_asset_192.jpg');
 }
 
 .vs-story-card--howto::before {
@@ -1482,27 +1482,27 @@ input {
 }
 
 .vs-rail-card[data-variant='campaigns'] {
-  --vs-card-bg: url('../web_images/campania_101_asset_179.jpg');
+  --vs-card-bg: url('/web_images/campania_101_asset_179.jpg');
 }
 
 .vs-rail-card[data-variant='products'] {
-  --vs-card-bg: url('../web_images/garment_bottom.jpg');
+  --vs-card-bg: url('/web_images/garment_bottom.jpg');
 }
 
 .vs-rail-card[data-variant='models'] {
-  --vs-card-bg: url('../web_images/editorial_campania_96_asset_174.jpg');
+  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
 }
 
 .vs-rail-card[data-variant='video'] {
-  --vs-card-bg: url('../web_images/campania_85_asset_146.jpg');
+  --vs-card-bg: url('/web_images/campania_85_asset_146.jpg');
 }
 
 .vs-rail-card[data-variant='dna'] {
-  --vs-card-bg: url('../web_images/campania_111_asset_208.jpg');
+  --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
 }
 
 .vs-rail-card[data-variant='credits'] {
-  --vs-card-bg: url("../web_images/campania_138_asset_308 (1).jpg");
+  --vs-card-bg: url('/web_images/campania_138_asset_308 (1).jpg');
 }
 
 .vs-rail-card[data-variant='campaigns']::before {
@@ -1801,7 +1801,7 @@ input {
 .vs-demo-copy,
 .vs-demo-preview,
 .vs-calc-result {
-  --vs-card-bg: url('../web_images/campania_111_asset_208.jpg');
+  --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
   --vs-card-overlay-a: 0.62;
   --vs-card-overlay-b: 0.88;
   background-color: rgba(0, 0, 0, 0.35);
