@@ -726,7 +726,7 @@ input {
   background: #0c0c0c;
   box-shadow: 0 34px 90px rgba(0, 0, 0, 0.22);
   transform: translateY(-6px);
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.96);
 }
 
 .vs-how-card-title,
@@ -758,19 +758,19 @@ input {
 }
 
 .vs-how-card:hover .vs-how-card-text {
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.vs-how-card:hover .vs-how-card-meta {
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.vs-how-card:hover .vs-how-card-name {
   color: rgba(255, 255, 255, 0.92);
 }
 
+.vs-how-card:hover .vs-how-card-meta {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.vs-how-card:hover .vs-how-card-name {
+  color: rgba(255, 255, 255, 0.96);
+}
+
 .vs-how-card:hover .vs-how-card-role {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.84);
 }
 
 @media (max-width: 980px) {
