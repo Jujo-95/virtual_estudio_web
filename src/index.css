@@ -606,6 +606,98 @@ input {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.vs-section--how {
+  padding: 88px 0 100px;
+  background: #f8f5ee;
+}
+
+.vs-how-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 420px);
+  gap: 48px;
+  align-items: center;
+}
+
+.vs-how-copy {
+  max-width: 520px;
+}
+
+.vs-how-title {
+  margin: 12px 0 0;
+  font-size: clamp(42px, 5vw, 72px);
+  font-family: 'Space Grotesk', 'Cormorant Garamond', serif;
+  line-height: 1.1;
+}
+
+.vs-how-subtitle {
+  color: rgba(12, 12, 12, 0.7);
+  line-height: 1.6;
+}
+
+.vs-how-cta {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.vs-how-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.vs-how-card {
+  border-radius: 32px;
+  padding: 32px;
+  background: #fff;
+  box-shadow: 0 28px 60px rgba(17, 17, 17, 0.08);
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.vs-how-card:hover {
+  background: linear-gradient(180deg, rgba(255, 134, 60, 0.08), rgba(255, 134, 60, 0.18));
+  box-shadow: 0 30px 70px rgba(17, 17, 17, 0.18);
+  transform: translateY(-6px);
+}
+
+.vs-how-card:hover p {
+  color: #0c0c0c;
+}
+
+.vs-how-card-title,
+.vs-how-card-role {
+  color: inherit;
+}
+
+.vs-how-card p {
+  margin: 0;
+  line-height: 1.6;
+  color: rgba(12, 12, 12, 0.8);
+}
+
+.vs-how-card-meta {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vs-how-card-name {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.vs-how-card-role {
+  font-size: 14px;
+  color: rgba(12, 12, 12, 0.6);
+}
+
+@media (max-width: 980px) {
+  .vs-how-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .vs-story {
   padding: 82px 0 66px;
   min-height: 100svh;

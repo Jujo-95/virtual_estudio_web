@@ -4,6 +4,7 @@ import Footer from './components/Footer.jsx'
 import FeatureRail from './components/FeatureRail.jsx'
 import NavBar from './components/NavBar.jsx'
 import WhyScroller from './components/WhyScroller.jsx'
+import HowItWorks from './components/HowItWorks.jsx'
 import { SITE } from './lib/site.js'
 
 function App() {
@@ -130,78 +131,7 @@ function App() {
 
         <WhyScroller />
 
-        <section className="vs-section" id="como-funciona">
-          <div className="vs-container">
-            <header className="vs-section-header">
-              <h2 className="vs-h2">Cómo funciona</h2>
-              <p className="vs-subtitle">Un flujo simple para producir con consistencia.</p>
-            </header>
-
-            <div className="vs-steps">
-              <article className="vs-step">
-                <div className="vs-step-num">1</div>
-                <div>
-                  <h3>Sube tu prenda</h3>
-                  <p>Parte de tu SKU: una buena foto de prenda es suficiente.</p>
-                </div>
-              </article>
-              <article className="vs-step">
-                <div className="vs-step-num">2</div>
-                <div>
-                  <h3>Elige modelo + estilo</h3>
-                  <p>UGC o editorial, y tu Brand DNA para mantener el look.</p>
-                </div>
-              </article>
-              <article className="vs-step">
-                <div className="vs-step-num">3</div>
-                <div>
-                  <h3>Genera y exporta</h3>
-                  <p>Variaciones y formatos listos para anuncios y redes.</p>
-                </div>
-              </article>
-            </div>
-
-            <div className="vs-cta-row">
-              <Button href={SITE.appUrl} variant="primary">
-                Crear mi primera campaña
-              </Button>
-              <Button href="#contacto" variant="ghost">
-                Quiero una recomendación
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        <section className="vs-section" id="para-quien">
-          <div className="vs-container">
-            <header className="vs-section-header">
-              <h2 className="vs-h2">Para quién es</h2>
-              <p className="vs-subtitle">
-                Marcas de moda (DTC, retail, emprendimientos) que necesitan contenido
-                constante para publicidad, social y catálogo.
-              </p>
-            </header>
-
-            <div className="vs-grid vs-grid--2">
-              <article className="vs-card">
-                <h3>Fundador/a</h3>
-                <p>Más contenido con menos costo y más velocidad.</p>
-              </article>
-              <article className="vs-card">
-                <h3>Marketing / Performance</h3>
-                <p>Variaciones rápidas para pruebas creativas y rotación de anuncios.</p>
-              </article>
-              <article className="vs-card">
-                <h3>Dirección creativa</h3>
-                <p>Control de estilo y consistencia visual con Brand DNA.</p>
-              </article>
-              <article className="vs-card">
-                <h3>E‑commerce</h3>
-                <p>Imágenes consistentes por SKU, listas para publicar.</p>
-              </article>
-            </div>
-          </div>
-        </section>
+        <HowItWorks />
 
         <section className="vs-section" id="creditos">
           <div className="vs-container">
