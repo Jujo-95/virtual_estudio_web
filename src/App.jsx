@@ -4,7 +4,7 @@ import Footer from './components/Footer.jsx'
 import FeatureRail from './components/FeatureRail.jsx'
 import NavBar from './components/NavBar.jsx'
 import WhyScroller from './components/WhyScroller.jsx'
-import HowItWorks from './components/HowItWorks.jsx'
+import HowScroller from './components/HowScroller.jsx'
 import { SITE } from './lib/site.js'
 
 function App() {
@@ -131,7 +131,7 @@ function App() {
 
         <WhyScroller />
 
-        <HowItWorks />
+        <HowScroller />
 
         <section className="vs-section" id="creditos">
           <div className="vs-container">
