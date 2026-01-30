@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 const ITEMS = [
   {
@@ -43,19 +43,122 @@ const ITEMS = [
   },
 ]
 
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+
+const WHEEL_STEP_THRESHOLD = 80
+const TOUCH_STEP_THRESHOLD = 88
+
 function WhyScroller() {
+  const sectionRef = useRef(null)
+  const wheelAccumRef = useRef(0)
+  const touchStartRef = useRef(null)
+  const animatingRef = useRef(false)
+
   const [activeIndex, setActiveIndex] = useState(0)
   const [direction, setDirection] = useState('down')
 
   const active = useMemo(() => ITEMS[activeIndex] || ITEMS[0], [activeIndex])
 
+  const clampIndex = useCallback(
+    (dir) => clamp(activeIndex + (dir === 'down' ? 1 : -1), 0, ITEMS.length - 1),
+    [activeIndex],
+  )
+
+  const step = useCallback(
+    (dir) => {
+      if (animatingRef.current) return
+      const nextIdx = clampIndex(dir)
+      if (nextIdx === activeIndex) return
+      animatingRef.current = true
+      setDirection(dir)
+      setActiveIndex(nextIdx)
+      window.setTimeout(() => {
+        animatingRef.current = false
+      }, 320)
+    },
+    [activeIndex, clampIndex],
+  )
+
+  const isSectionPinned = useCallback(() => {
+    const el = sectionRef.current
+    if (!el) return false
+    const rect = el.getBoundingClientRect()
+    if (rect.height === 0) return false
+    const windowHeight = Math.min(window.innerHeight, window.visualViewport?.height || window.innerHeight)
+    return rect.top <= 72 && rect.bottom >= windowHeight - 40
+  }, [])
+
+  useEffect(() => {
+    const handleWheel = (event) => {
+      if (!isSectionPinned()) return
+      const dir = event.deltaY > 0 ? 'down' : 'up'
+      if (dir === 'down' && activeIndex === ITEMS.length - 1) return
+      if (dir === 'up' && activeIndex === 0) return
+      event.preventDefault()
+      wheelAccumRef.current += event.deltaY
+      if (Math.abs(wheelAccumRef.current) >= WHEEL_STEP_THRESHOLD) {
+        step(dir)
+        wheelAccumRef.current = 0
+      }
+    }
+
+    const handleKey = (event) => {
+      if (!isSectionPinned()) return
+      const keyDir =
+        event.key === 'ArrowDown' || event.key === 'PageDown'
+          ? 'down'
+          : event.key === 'ArrowUp' || event.key === 'PageUp'
+          ? 'up'
+          : null
+      if (!keyDir) return
+      if (keyDir === 'down' && activeIndex === ITEMS.length - 1) return
+      if (keyDir === 'up' && activeIndex === 0) return
+      event.preventDefault()
+      step(keyDir)
+    }
+
+    const handleTouchStart = (event) => {
+      if (!isSectionPinned()) return
+      if (event.touches && event.touches.length) {
+        touchStartRef.current = event.touches[0].clientY
+      }
+    }
+
+    const handleTouchEnd = (event) => {
+      if (!isSectionPinned()) return
+      const startY = touchStartRef.current
+      touchStartRef.current = null
+      if (startY == null) return
+      const endY = event.changedTouches && event.changedTouches.length ? event.changedTouches[0].clientY : startY
+      const delta = startY - endY
+      if (Math.abs(delta) < TOUCH_STEP_THRESHOLD) return
+      const dir = delta > 0 ? 'down' : 'up'
+      if (dir === 'down' && activeIndex === ITEMS.length - 1) return
+      if (dir === 'up' && activeIndex === 0) return
+      step(dir)
+    }
+
+    window.addEventListener('wheel', handleWheel, { passive: false })
+    window.addEventListener('keydown', handleKey, { passive: false })
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    window.addEventListener('touchend', handleTouchEnd, { passive: true })
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('keydown', handleKey)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchend', handleTouchEnd)
+    }
+  }, [activeIndex, isSectionPinned, step])
+
   const onSelect = (nextIndex) => {
+    if (nextIndex === activeIndex) return
     setDirection(nextIndex > activeIndex ? 'down' : 'up')
     setActiveIndex(nextIndex)
   }
 
   return (
-    <section className="vs-story" id="diferenciales">
+    <section className="vs-story" id="diferenciales" ref={sectionRef}>
       <div className="vs-container">
         <div className="vs-story-grid">
           <div className="vs-story-left">
