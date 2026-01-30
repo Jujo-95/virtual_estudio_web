@@ -184,16 +184,17 @@ function WhyScroller() {
 
           <div className="vs-story-right">
             <div key={`${active.key}-card-${direction}`} className={`vs-swipe vs-swipe--${direction}`}>
-              <div className="vs-story-card" data-variant={active.variant} aria-label={active.cardTitle}>
-                <div className="vs-story-mosaic" aria-hidden="true">
-                  <div className="vs-story-tile vs-story-tile--a" />
-                  <div className="vs-story-tile vs-story-tile--b" />
-                  <div className="vs-story-tile vs-story-tile--c" />
-                  <div className="vs-story-tile vs-story-tile--d" />
-                </div>
-                <div className="vs-story-footer" aria-hidden="true">
-                  <div className="vs-story-footer-title">{active.cardTitle}</div>
-                  <div className="vs-story-footer-subtitle">{active.cardSubtitle}</div>
+              <div
+                className="vs-story-card vs-story-card--howto"
+                data-variant={active.variant}
+                aria-label={active.cardTitle}
+              >
+                <div className="vs-story-footer vs-story-footer--howto" aria-hidden="true">
+                  <div className="vs-story-step">{activeIndex + 1}</div>
+                  <div className="vs-story-footer-person">
+                    <div className="vs-story-footer-title">{active.cardTitle}</div>
+                    <div className="vs-story-footer-subtitle">{active.cardSubtitle}</div>
+                  </div>
                 </div>
               </div>
             </div>

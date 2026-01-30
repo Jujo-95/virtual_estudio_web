@@ -1102,6 +1102,22 @@ input {
   aspect-ratio: 16 / 11;
 }
 
+.vs-story-card--howto {
+  border: none;
+  background: #dfddd7;
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.32);
+  color: rgba(12, 12, 12, 0.92);
+}
+
+.vs-story-card--howto::before {
+  display: none;
+}
+
+.vs-story-card--howto:hover {
+  background: #0c0c0c;
+  color: rgba(255, 255, 255, 0.96);
+}
+
 .vs-story-card::before {
   content: '';
   position: absolute;
@@ -1181,17 +1197,52 @@ input {
   backdrop-filter: blur(10px);
 }
 
+.vs-story-footer--howto {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.vs-story-footer-person {
+  min-width: 0;
+}
+
+.vs-story-step {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.62);
+  color: rgba(12, 12, 12, 0.9);
+  flex: none;
+}
+
+.vs-story-card--howto:hover .vs-story-step {
+  background: rgba(255, 255, 255, 0.92);
+}
+
 .vs-story-footer-title {
   font-family: var(--vs-font-display);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
+  font-size: 20px;
 }
 
 .vs-story-footer-subtitle {
   margin-top: 4px;
-  color: rgba(255, 255, 255, 0.64);
-  font-size: 13px;
+  color: rgba(12, 12, 12, 0.64);
+  font-size: 14px;
   line-height: 1.4;
+}
+
+.vs-story-card--howto:hover .vs-story-footer-subtitle {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 /* Swipe animation */
