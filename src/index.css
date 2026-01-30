@@ -712,8 +712,8 @@ input {
   border-radius: 28px;
   padding: 28px 28px 22px;
   --vs-card-bg: none;
-  --vs-card-overlay-a: 0.0;
-  --vs-card-overlay-b: 0.0;
+  --vs-card-overlay-a: 0.28;
+  --vs-card-overlay-b: 0.86;
   background-color: rgba(0, 0, 0, 0.35);
   background-image: linear-gradient(180deg,
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
@@ -744,8 +744,6 @@ input {
 }
 
 .vs-how-people-card:hover {
-  --vs-card-overlay-a: 0.28;
-  --vs-card-overlay-b: 0.86;
   color: rgba(255, 255, 255, 0.96);
   transform: translateY(-4px);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
@@ -1141,8 +1139,8 @@ input {
 .vs-story-card--howto {
   border: 1px solid rgba(255, 255, 255, 0.12);
   --vs-card-bg: none;
-  --vs-card-overlay-a: 0.0;
-  --vs-card-overlay-b: 0.0;
+  --vs-card-overlay-a: 0.24;
+  --vs-card-overlay-b: 0.88;
   background-color: rgba(0, 0, 0, 0.35);
   background-image: linear-gradient(180deg,
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
@@ -1176,8 +1174,6 @@ input {
 }
 
 .vs-story-card--howto:hover {
-  --vs-card-overlay-a: 0.24;
-  --vs-card-overlay-b: 0.88;
   color: rgba(255, 255, 255, 0.96);
 }
 
@@ -1800,11 +1796,8 @@ input {
 }
 
 .vs-card,
-.vs-panel,
-.vs-faq-item,
 .vs-demo-copy,
-.vs-demo-preview,
-.vs-calc-result {
+.vs-demo-preview {
   --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
   --vs-card-overlay-a: 0.0;
   --vs-card-overlay-b: 0.0;
