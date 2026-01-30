@@ -658,12 +658,24 @@ input {
 }
 
 .vs-how-cards {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(320px, 1fr);
   gap: 22px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding: 6px 6px 14px;
+  margin: -6px -6px 0;
+  scrollbar-width: none;
+}
+
+.vs-how-cards::-webkit-scrollbar {
+  display: none;
 }
 
 .vs-how-card {
+  scroll-snap-align: start;
   border-radius: 32px;
   padding: 32px;
   background: #fff;
@@ -673,13 +685,9 @@ input {
 }
 
 .vs-how-card:hover {
-  background: linear-gradient(180deg, rgba(255, 134, 60, 0.12), rgba(255, 134, 60, 0.26));
-  box-shadow: 0 30px 70px rgba(17, 17, 17, 0.18);
+  background: #0c0c0c;
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.22);
   transform: translateY(-6px);
-}
-
-.vs-how-card:hover p {
-  color: #0c0c0c;
 }
 
 .vs-how-card-title,
@@ -690,7 +698,7 @@ input {
 .vs-how-card p {
   margin: 0;
   line-height: 1.6;
-  color: rgba(12, 12, 12, 0.86);
+  color: inherit;
 }
 
 .vs-how-card-meta {
@@ -710,9 +718,21 @@ input {
   color: rgba(12, 12, 12, 0.7);
 }
 
+.vs-how-card:hover .vs-how-card-name {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.vs-how-card:hover .vs-how-card-role {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 @media (max-width: 980px) {
   .vs-how-grid {
     grid-template-columns: 1fr;
+  }
+
+  .vs-how-cards {
+    grid-auto-columns: minmax(280px, 88vw);
   }
 }
 
