@@ -312,7 +312,7 @@ input {
   background: radial-gradient(1200px 760px at 12% 22%, rgba(var(--vs-accent-1-rgb), 0.22), transparent 62%),
     radial-gradient(1000px 760px at 50% 32%, rgba(var(--vs-accent-2-rgb), 0.18), transparent 62%),
     radial-gradient(980px 740px at 86% 52%, rgba(var(--vs-accent-3-rgb), 0.14), transparent 64%),
-    linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.45), rgba(var(--vs-bg-rgb), 0.98));
+    linear-gradient(180deg, rgb(var(--vs-bg-rgb) / 0.45), rgb(var(--vs-bg-rgb) / 0.98));
 }
 
 .vs-hero--ref::after {
@@ -596,7 +596,7 @@ input {
 
 .vs-section--rail {
   padding: 82px 0 66px;
-  background: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.96), rgba(var(--vs-bg-rgb), 0.82));
+  background: linear-gradient(180deg, rgb(var(--vs-bg-rgb) / 0.96), rgb(var(--vs-bg-rgb) / 0.82));
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -680,12 +680,12 @@ input {
 
 .vs-how-people-rail::before {
   left: 0;
-  background: linear-gradient(90deg, rgba(var(--vs-bg-rgb), 1), rgba(var(--vs-bg-rgb), 0));
+  background: linear-gradient(90deg, rgb(var(--vs-bg-rgb) / 1), rgb(var(--vs-bg-rgb) / 0));
 }
 
 .vs-how-people-rail::after {
   right: 0;
-  background: linear-gradient(270deg, rgba(var(--vs-bg-rgb), 1), rgba(var(--vs-bg-rgb), 0));
+  background: linear-gradient(270deg, rgb(var(--vs-bg-rgb) / 1), rgb(var(--vs-bg-rgb) / 0));
 }
 
 .vs-how-people-cards {
@@ -712,12 +712,12 @@ input {
   border-radius: 28px;
   padding: 28px 28px 22px;
   --vs-card-bg: none;
-  --vs-card-overlay-a: 0.18;
-  --vs-card-overlay-b: 0.72;
+  --vs-card-overlay-a: 0.0;
+  --vs-card-overlay-b: 0.0;
   background-color: rgba(0, 0, 0, 0.35);
   background-image: linear-gradient(180deg,
-      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-a)),
-      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-b))),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
   background-position: center;
@@ -896,12 +896,12 @@ input {
 
 .vs-how-rail::before {
   left: 0;
-  background: linear-gradient(90deg, rgba(var(--vs-bg-rgb), 1), rgba(var(--vs-bg-rgb), 0));
+  background: linear-gradient(90deg, rgb(var(--vs-bg-rgb) / 1), rgb(var(--vs-bg-rgb) / 0));
 }
 
 .vs-how-rail::after {
   right: 0;
-  background: linear-gradient(270deg, rgba(var(--vs-bg-rgb), 1), rgba(var(--vs-bg-rgb), 0));
+  background: linear-gradient(270deg, rgb(var(--vs-bg-rgb) / 1), rgb(var(--vs-bg-rgb) / 0));
 }
 
 .vs-how-cards {
@@ -1141,12 +1141,12 @@ input {
 .vs-story-card--howto {
   border: 1px solid rgba(255, 255, 255, 0.12);
   --vs-card-bg: none;
-  --vs-card-overlay-a: 0.16;
-  --vs-card-overlay-b: 0.78;
+  --vs-card-overlay-a: 0.0;
+  --vs-card-overlay-b: 0.0;
   background-color: rgba(0, 0, 0, 0.35);
   background-image: linear-gradient(180deg,
-      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-a)),
-      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-b))),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
   background-position: center;
@@ -1440,14 +1440,14 @@ input {
 .vs-rail-card {
   position: relative;
   --vs-card-bg: none;
-  --vs-card-overlay-a: 0.16;
-  --vs-card-overlay-b: 0.78;
+  --vs-card-overlay-a: 0.0;
+  --vs-card-overlay-b: 0.0;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background-color: rgba(0, 0, 0, 0.35);
   background-image: linear-gradient(180deg,
-      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-a)),
-      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-b))),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
   background-position: center;
@@ -1605,6 +1605,7 @@ input {
   padding: 18px;
   position: relative;
   overflow: hidden;
+  --vs-card-bg: none;
 }
 
 .vs-card h3 {
@@ -1711,6 +1712,7 @@ input {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
   box-shadow: var(--vs-shadow);
   padding: 22px;
+  --vs-card-bg: none;
 }
 
 .vs-calc {
@@ -1753,6 +1755,7 @@ input {
   border-radius: var(--vs-radius);
   background: rgba(255, 255, 255, 0.06);
   padding: 16px;
+  --vs-card-bg: none;
 }
 
 .vs-calc-kpi-label {
@@ -1793,6 +1796,7 @@ input {
   border-radius: var(--vs-radius);
   background: rgba(255, 255, 255, 0.06);
   padding: 14px 16px;
+  --vs-card-bg: none;
 }
 
 .vs-card,
@@ -1802,12 +1806,12 @@ input {
 .vs-demo-preview,
 .vs-calc-result {
   --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
-  --vs-card-overlay-a: 0.62;
-  --vs-card-overlay-b: 0.88;
+  --vs-card-overlay-a: 0.0;
+  --vs-card-overlay-b: 0.0;
   background-color: rgba(0, 0, 0, 0.35);
   background-image: linear-gradient(180deg,
-      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-a)),
-      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-b))),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
   background-position: center;
