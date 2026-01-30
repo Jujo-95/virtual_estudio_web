@@ -712,8 +712,12 @@ input {
   border-radius: 28px;
   padding: 28px 28px 22px;
   --vs-card-bg: none;
+  --vs-card-overlay-a: 0.18;
+  --vs-card-overlay-b: 0.72;
   background-color: rgba(0, 0, 0, 0.35);
-  background-image: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.35), rgba(var(--vs-bg-rgb), 0.88)),
+  background-image: linear-gradient(180deg,
+      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-a)),
+      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
   background-position: center;
@@ -728,19 +732,20 @@ input {
 }
 
 .vs-how-people-card[data-variant='sku'] {
-  --vs-card-bg: url('/web_images/garment_top.jpg');
+  --vs-card-bg: url('../web_images/garment_top.jpg');
 }
 
 .vs-how-people-card[data-variant='style'] {
-  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
+  --vs-card-bg: url('../web_images/editorial_campania_96_asset_174.jpg');
 }
 
 .vs-how-people-card[data-variant='export'] {
-  --vs-card-bg: url('/web_images/campania_107_asset_192.jpg');
+  --vs-card-bg: url('../web_images/campania_107_asset_192.jpg');
 }
 
 .vs-how-people-card:hover {
-  background: rgba(0, 0, 0, 0.35);
+  --vs-card-overlay-a: 0.28;
+  --vs-card-overlay-b: 0.86;
   color: rgba(255, 255, 255, 0.96);
   transform: translateY(-4px);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
@@ -1136,8 +1141,12 @@ input {
 .vs-story-card--howto {
   border: 1px solid rgba(255, 255, 255, 0.12);
   --vs-card-bg: none;
+  --vs-card-overlay-a: 0.16;
+  --vs-card-overlay-b: 0.78;
   background-color: rgba(0, 0, 0, 0.35);
-  background-image: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.25), rgba(var(--vs-bg-rgb), 0.86)),
+  background-image: linear-gradient(180deg,
+      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-a)),
+      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
   background-position: center;
@@ -1147,19 +1156,19 @@ input {
 }
 
 .vs-story-card--howto[data-variant='fashion'] {
-  --vs-card-bg: url('/web_images/garment_top.jpg');
+  --vs-card-bg: url('../web_images/garment_top.jpg');
 }
 
 .vs-story-card--howto[data-variant='modes'] {
-  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
+  --vs-card-bg: url('../web_images/editorial_campania_96_asset_174.jpg');
 }
 
 .vs-story-card--howto[data-variant='dna'] {
-  --vs-card-bg: url('/web_images/campania_111_asset_225.jpg');
+  --vs-card-bg: url("../web_images/campania_111_asset_225.jpg");
 }
 
 .vs-story-card--howto[data-variant='scale'] {
-  --vs-card-bg: url('/web_images/campania_107_asset_192.jpg');
+  --vs-card-bg: url('../web_images/campania_107_asset_192.jpg');
 }
 
 .vs-story-card--howto::before {
@@ -1167,7 +1176,8 @@ input {
 }
 
 .vs-story-card--howto:hover {
-  background: rgba(0, 0, 0, 0.35);
+  --vs-card-overlay-a: 0.24;
+  --vs-card-overlay-b: 0.88;
   color: rgba(255, 255, 255, 0.96);
 }
 
@@ -1430,10 +1440,14 @@ input {
 .vs-rail-card {
   position: relative;
   --vs-card-bg: none;
+  --vs-card-overlay-a: 0.16;
+  --vs-card-overlay-b: 0.78;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background-color: rgba(0, 0, 0, 0.35);
-  background-image: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.25), rgba(var(--vs-bg-rgb), 0.86)),
+  background-image: linear-gradient(180deg,
+      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-a)),
+      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
   background-position: center;
@@ -1446,6 +1460,8 @@ input {
 }
 
 .vs-rail-card:hover {
+  --vs-card-overlay-a: 0.24;
+  --vs-card-overlay-b: 0.88;
   transform: translateY(-2px) scale(1.01);
   border-color: rgba(255, 255, 255, 0.22);
 }
@@ -1462,37 +1478,31 @@ input {
 }
 
 .vs-rail-card::before {
-  content: '';
-  position: absolute;
-  inset: -80px;
-  filter: blur(18px);
-  opacity: 0.95;
-  transform: translate3d(0, 0, 0);
-  animation: vsHeroFloat 12s ease-in-out infinite;
+  display: none;
 }
 
 .vs-rail-card[data-variant='campaigns'] {
-  --vs-card-bg: url('/web_images/campania_101_asset_179.jpg');
+  --vs-card-bg: url('../web_images/campania_101_asset_179.jpg');
 }
 
 .vs-rail-card[data-variant='products'] {
-  --vs-card-bg: url('/web_images/garment_bottom.jpg');
+  --vs-card-bg: url('../web_images/garment_bottom.jpg');
 }
 
 .vs-rail-card[data-variant='models'] {
-  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
+  --vs-card-bg: url('../web_images/editorial_campania_96_asset_174.jpg');
 }
 
 .vs-rail-card[data-variant='video'] {
-  --vs-card-bg: url('/web_images/campania_85_asset_146.jpg');
+  --vs-card-bg: url('../web_images/campania_85_asset_146.jpg');
 }
 
 .vs-rail-card[data-variant='dna'] {
-  --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
+  --vs-card-bg: url('../web_images/campania_111_asset_208.jpg');
 }
 
 .vs-rail-card[data-variant='credits'] {
-  --vs-card-bg: url('/web_images/campania_138_asset_308 (1).jpg');
+  --vs-card-bg: url("../web_images/campania_138_asset_308 (1).jpg");
 }
 
 .vs-rail-card[data-variant='campaigns']::before {
@@ -1791,9 +1801,13 @@ input {
 .vs-demo-copy,
 .vs-demo-preview,
 .vs-calc-result {
-  --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
+  --vs-card-bg: url('../web_images/campania_111_asset_208.jpg');
+  --vs-card-overlay-a: 0.62;
+  --vs-card-overlay-b: 0.88;
   background-color: rgba(0, 0, 0, 0.35);
-  background-image: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.78), rgba(var(--vs-bg-rgb), 0.92)),
+  background-image: linear-gradient(180deg,
+      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-a)),
+      rgba(var(--vs-bg-rgb), var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
   background-position: center;
