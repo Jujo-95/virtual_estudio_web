@@ -4,18 +4,21 @@ const STEPS = [
     subtitle: 'SKU como punto de partida',
     description:
       'Parte de tus fotos de prenda. Sube tu SKU y úsalo como base para generar campañas y variaciones sin coordinar un photoshoot.',
+    variant: 'sku',
   },
   {
     title: 'Elige modelo + estilo',
     subtitle: 'UGC o editorial + Brand DNA',
     description:
       'Selecciona un modelo virtual, define el estilo (UGC/editorial) y aplica tu Brand DNA para mantener consistencia de marca.',
+    variant: 'style',
   },
   {
     title: 'Genera y exporta',
     subtitle: 'Listo para publicar',
     description:
       'Genera variaciones y exporta formatos 1:1, 4:5 y 9:16. Crea también videos cortos para anuncios y contenido social.',
+    variant: 'export',
   },
 ]
 
@@ -34,7 +37,12 @@ function HowScroller() {
         <div className="vs-how-people-rail" aria-label="Pasos del flujo">
           <div className="vs-how-people-cards" role="list">
             {STEPS.map((step, idx) => (
-              <article key={step.title} className="vs-how-people-card" role="listitem">
+              <article
+                key={step.title}
+                className="vs-how-people-card"
+                data-variant={step.variant}
+                role="listitem"
+              >
                 <p className="vs-how-people-card-text">{step.description}</p>
                 <footer className="vs-how-people-card-footer">
                   <div className="vs-how-people-step">{idx + 1}</div>
@@ -53,4 +61,3 @@ function HowScroller() {
 }
 
 export default HowScroller
-

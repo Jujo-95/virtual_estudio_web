@@ -711,7 +711,13 @@ input {
   scroll-snap-align: center;
   border-radius: 28px;
   padding: 28px 28px 22px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  --vs-card-bg: none;
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.35), rgba(var(--vs-bg-rgb), 0.88)),
+    var(--vs-card-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.9);
   min-height: 430px;
@@ -719,6 +725,18 @@ input {
   flex-direction: column;
   justify-content: space-between;
   transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease, color 180ms ease;
+}
+
+.vs-how-people-card[data-variant='sku'] {
+  --vs-card-bg: url('/web_images/garment_top.jpg');
+}
+
+.vs-how-people-card[data-variant='style'] {
+  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
+}
+
+.vs-how-people-card[data-variant='export'] {
+  --vs-card-bg: url('/web_images/campania_107_asset_192.jpg');
 }
 
 .vs-how-people-card:hover {
@@ -1117,9 +1135,31 @@ input {
 
 .vs-story-card--howto {
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  --vs-card-bg: none;
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.25), rgba(var(--vs-bg-rgb), 0.86)),
+    var(--vs-card-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   box-shadow: 0 26px 80px rgba(0, 0, 0, 0.32);
   color: rgba(255, 255, 255, 0.92);
+}
+
+.vs-story-card--howto[data-variant='fashion'] {
+  --vs-card-bg: url('/web_images/garment_top.jpg');
+}
+
+.vs-story-card--howto[data-variant='modes'] {
+  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
+}
+
+.vs-story-card--howto[data-variant='dna'] {
+  --vs-card-bg: url('/web_images/campania_111_asset_225.jpg');
+}
+
+.vs-story-card--howto[data-variant='scale'] {
+  --vs-card-bg: url('/web_images/campania_107_asset_192.jpg');
 }
 
 .vs-story-card--howto::before {
@@ -1389,11 +1429,15 @@ input {
 
 .vs-rail-card {
   position: relative;
+  --vs-card-bg: none;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  background: radial-gradient(520px 360px at 20% 20%, rgba(255, 255, 255, 0.14), transparent 60%),
-    radial-gradient(520px 360px at 80% 70%, rgba(255, 255, 255, 0.06), transparent 60%),
-    rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.25), rgba(var(--vs-bg-rgb), 0.86)),
+    var(--vs-card-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
   overflow: hidden;
   aspect-ratio: 3 / 4;
@@ -1425,6 +1469,30 @@ input {
   opacity: 0.95;
   transform: translate3d(0, 0, 0);
   animation: vsHeroFloat 12s ease-in-out infinite;
+}
+
+.vs-rail-card[data-variant='campaigns'] {
+  --vs-card-bg: url('/web_images/campania_101_asset_179.jpg');
+}
+
+.vs-rail-card[data-variant='products'] {
+  --vs-card-bg: url('/web_images/garment_bottom.jpg');
+}
+
+.vs-rail-card[data-variant='models'] {
+  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
+}
+
+.vs-rail-card[data-variant='video'] {
+  --vs-card-bg: url('/web_images/campania_85_asset_146.jpg');
+}
+
+.vs-rail-card[data-variant='dna'] {
+  --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
+}
+
+.vs-rail-card[data-variant='credits'] {
+  --vs-card-bg: url('/web_images/campania_138_asset_308 (1).jpg');
 }
 
 .vs-rail-card[data-variant='campaigns']::before {
@@ -1715,6 +1783,21 @@ input {
   border-radius: var(--vs-radius);
   background: rgba(255, 255, 255, 0.06);
   padding: 14px 16px;
+}
+
+.vs-card,
+.vs-panel,
+.vs-faq-item,
+.vs-demo-copy,
+.vs-demo-preview,
+.vs-calc-result {
+  --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: linear-gradient(180deg, rgba(var(--vs-bg-rgb), 0.78), rgba(var(--vs-bg-rgb), 0.92)),
+    var(--vs-card-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .vs-faq-item summary {
