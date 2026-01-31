@@ -6,16 +6,15 @@ import NavBar from './components/NavBar.jsx'
 import WhyScroller from './components/WhyScroller.jsx'
 import HowScroller from './components/HowScroller.jsx'
 import { SITE } from './lib/site.js'
+import CalculatorRail from './components/CalculatorRail.jsx'
 
 function App() {
   const [postsPerWeek, setPostsPerWeek] = useState(6)
-  const [assetsPerPost, setAssetsPerPost] = useState(6)
 
   const estimatedAssetsPerMonth = useMemo(() => {
     const safePosts = Number.isFinite(postsPerWeek) ? postsPerWeek : 0
-    const safeAssets = Number.isFinite(assetsPerPost) ? assetsPerPost : 0
-    return Math.max(0, Math.round(safePosts * 4.3 * safeAssets))
-  }, [assetsPerPost, postsPerWeek])
+    return Math.max(0, safePosts)
+  }, [postsPerWeek])
 
   const buildMailto = (payload) => {
     const subject = encodeURIComponent('Contacto — Virtual Estudio')
@@ -24,7 +23,6 @@ function App() {
       `Correo: ${payload.email}\n` +
       `Teléfono: ${payload.phone}\n` +
       `Publicaciones/semana: ${payload.postsPerWeek}\n` +
-      `Piezas por publicación (estimado): ${payload.assetsPerPost}\n` +
       `Piezas/mes (estimado): ${payload.estimatedAssetsPerMonth}\n\n` +
       `Me interesa conocer el plan recomendado de créditos y el flujo ideal (Campañas / Videos / Prendas / Modelos / Brand DNA).`,
     )
@@ -38,26 +36,24 @@ function App() {
     const email = String(formData.get('email') || '').trim()
     const phone = String(formData.get('phone') || '').trim()
     const postsPerWeekStr = String(formData.get('posts_per_week') || '').trim()
-    const assetsPerPostStr = String(formData.get('assets_per_post') || '').trim()
 
-    if (!name || !email || !phone || postsPerWeekStr === '' || assetsPerPostStr === '') {
+    if (!name || !email || !phone || postsPerWeekStr === '') {
       alert('Completa todos los campos.')
       return
     }
 
     const parsedPosts = Number(postsPerWeekStr)
-    const parsedAssets = Number(assetsPerPostStr)
 
-    const estimated = Math.max(0, Math.round(parsedPosts * 4.3 * parsedAssets))
+    const estimated = Math.max(0, parsedPosts)
     window.location.href = buildMailto({
       name,
       email,
       phone,
       postsPerWeek: parsedPosts,
-      assetsPerPost: parsedAssets,
       estimatedAssetsPerMonth: estimated,
     })
   }
+
 
   return (
     <div className="vs-app">
@@ -135,60 +131,42 @@ function App() {
 
         <section className="vs-section" id="creditos">
           <div className="vs-container">
-            <div className="vs-panel">
-              <header className="vs-section-header">
-                <h2 className="vs-h2">Calculadora rápida</h2>
+            <header className="vs-section-header vs-section-header--center">
+              <h2 className="vs-section-title-xl">
+                Calcula el mejor plan para tu negocio
+                <span className="vs-hero-caret" aria-hidden="true" />
+              </h2>
+              <p className="vs-section-lead">
+                {/* Subtitle removed as per new requirements */}
+              </p>
+            </header>
+            <div className="vs-calc-grid-container"> {/* New container for two columns */}
+              <div className="vs-calc-column-left"> {/* Column 1: Subtitle and Slider */}
                 <p className="vs-subtitle">
-                  Estima cuántas piezas podrías producir al mes. Luego te recomendamos
-                  un plan de créditos en COP.
+                  Selecciona el número de campañas semanales para estimar tu plan ideal.
                 </p>
-              </header>
+                <div className="vs-calc-field vs-calc-slider-outside"> {/* Slider field */}
 
-              <div className="vs-calc">
-                <div className="vs-calc-field">
-                  <label htmlFor="postsPerWeek">Publicaciones por semana</label>
                   <input
                     id="postsPerWeek"
                     type="range"
-                    min="0"
-                    max="30"
+                    min="1"
+                    max="20"
                     step="1"
                     value={postsPerWeek}
                     onChange={(e) => setPostsPerWeek(Number(e.target.value))}
                   />
                   <div className="vs-calc-meta">
                     <span>{postsPerWeek}</span>
-                    <span>0–30</span>
+                    <span>1–20</span>
                   </div>
                 </div>
-
-                <div className="vs-calc-field">
-                  <label htmlFor="assetsPerPost">Piezas por publicación</label>
-                  <input
-                    id="assetsPerPost"
-                    type="range"
-                    min="1"
-                    max="12"
-                    step="1"
-                    value={assetsPerPost}
-                    onChange={(e) => setAssetsPerPost(Number(e.target.value))}
-                  />
-                  <div className="vs-calc-meta">
-                    <span>{assetsPerPost}</span>
-                    <span>1–12</span>
-                  </div>
-                </div>
-
-                <div className="vs-calc-result">
-                  <div className="vs-calc-kpi">
-                    <div className="vs-calc-kpi-label">Estimación</div>
-                    <div className="vs-calc-kpi-value">{estimatedAssetsPerMonth}</div>
-                    <div className="vs-calc-kpi-sub">piezas/mes</div>
-                  </div>
-                  <div className="vs-calc-note">
-                    La estimación usa ~4.3 semanas/mes y sirve solo como referencia.
-                  </div>
-                </div>
+              </div>
+              <div className="vs-calc-column-right"> {/* Column 2: Plans Card */}
+                <CalculatorRail
+                  postsPerWeek={postsPerWeek}
+                  estimatedAssetsPerMonth={estimatedAssetsPerMonth}
+                />
               </div>
             </div>
           </div>
@@ -272,18 +250,7 @@ function App() {
                       required
                     />
                   </div>
-                  <div className="vs-field">
-                    <label htmlFor="assets_per_post">Piezas por publicación</label>
-                    <input
-                      id="assets_per_post"
-                      name="assets_per_post"
-                      type="number"
-                      min="1"
-                      step="1"
-                      defaultValue={assetsPerPost}
-                      required
-                    />
-                  </div>
+
                 </div>
 
                 <div className="vs-form-actions">

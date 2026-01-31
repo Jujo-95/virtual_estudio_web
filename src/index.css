@@ -2,6 +2,10 @@
   --vs-font-sans: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial,
     sans-serif;
   --vs-font-display: 'Space Grotesk', var(--vs-font-sans);
+  --vs-font-montreal: var(--vs-font-sans);
+  /* Mapping to existing sans-serif */
+  --vs-font-editorial: 'Cormorant Garamond', serif;
+  /* Using an existing serif from other components */
 
   --vs-bg-rgb: 9 13 24;
   --vs-bg: rgb(var(--vs-bg-rgb));
@@ -1790,19 +1794,9 @@ input {
   line-height: 1.5;
 }
 
-.vs-faq {
-  display: grid;
-  gap: 10px;
-}
 
-.vs-faq-item {
-  border: 1px solid var(--vs-border);
-  border-radius: var(--vs-radius);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 14px 16px;
-  --vs-card-bg: none;
-  background-image: none;
-}
+
+
 
 .vs-card,
 .vs-demo-copy,
@@ -1822,22 +1816,11 @@ input {
   background-clip: border-box;
 }
 
-.vs-faq-item summary {
-  cursor: pointer;
-  font-weight: 900;
-  font-size: 14px;
-  list-style: none;
-}
 
-.vs-faq-item summary::-webkit-details-marker {
-  display: none;
-}
 
-.vs-faq-item p {
-  margin: 10px 0 0;
-  color: var(--vs-muted);
-  line-height: 1.6;
-}
+
+
+
 
 .vs-form {
   margin-top: 14px;
@@ -2041,6 +2024,196 @@ input {
   .vs-preview-grid .vs-preview-tile::before {
     animation: none;
   }
+}
+
+.vs-faq-grid {
+  display: grid;
+  gap: 10px;
+  /* Equivalent to mb-10 pb-10 from Suno.html */
+}
+
+.vs-faq-item-new {
+  margin-bottom: 40px;
+  /* mb-10 */
+  padding-bottom: 40px;
+  /* pb-10 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* border-b border-solid border-black/10 */
+  cursor: pointer;
+  position: relative;
+}
+
+.vs-faq-item-new:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.vs-faq-item-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* grid-cols-1 */
+  gap: 8px;
+  /* gap-2 */
+  align-items: center;
+  margin-bottom: 8px;
+  /* mb-2 */
+}
+
+@media (min-width: 1280px) {
+
+  /* xl:grid-cols-2 */
+  .vs-faq-item-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.vs-faq-question {
+  font-family: var(--vs-font-editorial);
+  /* font-editorial */
+  font-size: clamp(2rem, 2.5vw, 3rem);
+  /* text-display-sm md:text-display */
+  font-weight: 300;
+  /* font-light */
+  line-height: 1;
+  /* leading-none */
+  transition: color 700ms ease;
+  /* transition-colors duration-700 */
+}
+
+.vs-faq-item-new:hover .vs-faq-question {
+  color: var(--vs-accent-2);
+  /* group-hover:text-[#e87722] - using vs-accent-2 as a close match */
+}
+
+.vs-faq-answer {
+  font-family: var(--vs-font-montreal);
+  /* font-montreal */
+  font-size: 1rem;
+  /* text-base */
+  line-height: 1.5;
+  /* leading-6 */
+  color: var(--vs-muted);
+  /* text-[#7d7c83] - using vs-muted as a close match */
+  max-width: 376px;
+  /* max-w-[376px] */
+  margin-top: 8px;
+  /* mt-2 */
+}
+
+@media (min-width: 768px) {
+
+  /* md:text-lg leading-7 md:leading-8 mt-4 */
+  .vs-faq-answer {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    margin-top: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  /* xl:ml-auto */
+  .vs-faq-answer {
+    margin-left: auto;
+  }
+}
+
+.vs-faq-item-image {
+  border-radius: 20px;
+  /* rounded-[20px] */
+  overflow: hidden;
+  display: none;
+  /* hidden */
+}
+
+@media (min-width: 768px) {
+
+  /* md:block */
+  .vs-faq-item-image {
+    display: block;
+  }
+}
+
+.vs-faq-item-image img {
+  width: 100%;
+  /* w-full */
+  height: 100%;
+  /* h-full */
+  object-fit: cover;
+  /* object-cover */
+}
+
+.vs-calc-card {
+  /* Inherits most styles from .vs-how-people-card */
+  min-height: auto;
+  /* Override min-height from .vs-how-people-card */
+  display: block;
+  /* Override display: flex */
+  padding: 28px 28px 22px;
+  /* Add padding back to the card */
+}
+
+.vs-calc-slider-outside {
+  margin-bottom: 20px;
+  /* Add some spacing between slider and card */
+  padding: 16px;
+
+}
+
+.vs-calc-card .vs-calc-result {
+  /* Adjust styles for the result card within the calculator rail */
+  border: none;
+  background: none;
+  padding: 0;
+  --vs-card-bg: none;
+  background-image: none;
+}
+
+.vs-calc-card .vs-calc-kpi-label {
+  font-size: 14px;
+  color: var(--vs-muted);
+}
+
+.vs-calc-card .vs-calc-kpi-value {
+  font-size: 36px;
+}
+
+.vs-calc-card .vs-calc-kpi-sub {
+  font-size: 14px;
+  color: var(--vs-muted);
+}
+
+.vs-calc-card .vs-calc-note {
+  font-size: 13px;
+  color: var(--vs-muted);
+}
+
+.vs-plan-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+.vs-calc-grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .vs-calc-grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.vs-calc-column-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vs-calc-column-right {
+  /* No specific styles needed for now, just acts as a container */
 }
 
 .vs-preview-caption {
