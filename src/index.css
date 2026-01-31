@@ -2216,6 +2216,33 @@ input {
   /* No specific styles needed for now, just acts as a container */
 }
 
+.vs-plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+
+.vs-plan-feature-item {
+  margin-bottom: 10px;
+  color: var(--vs-text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.vs-plan-feature-item::before {
+  content: '✓';
+  /* Checkmark icon */
+  color: var(--vs-success);
+  margin-right: 8px;
+}
+
+.vs-calc-cta {
+  margin-top: 20px;
+  text-align: center;
+  width: 100vw;
+  display: block;
+}
+
 .vs-preview-caption {
   position: absolute;
   left: 10px;
