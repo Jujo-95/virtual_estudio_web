@@ -132,18 +132,18 @@ function App() {
         <section className="vs-section" id="creditos">
           <div className="vs-container">
             <header className="vs-section-header vs-section-header--center">
-              <h2 className="vs-section-title-xl">
-                Calcula el mejor plan para tu negocio
-                <span className="vs-hero-caret" aria-hidden="true" />
-              </h2>
               <p className="vs-section-lead">
                 {/* Subtitle removed as per new requirements */}
               </p>
             </header>
             <div className="vs-calc-grid-container"> {/* New container for two columns */}
               <div className="vs-calc-column-left"> {/* Column 1: Subtitle and Slider */}
+                <h2 className="vs-section-title-xl">
+                  Calcula el mejor plan para tu negocio
+                  <span className="vs-hero-caret" aria-hidden="true" />
+                </h2>
                 <p className="vs-subtitle">
-                  Selecciona el número de campañas semanales para estimar tu plan ideal.
+                  Selecciona el número de publicaciones semanales para estimar tu plan ideal.
                 </p>
                 <div className="vs-calc-field vs-calc-slider-outside"> {/* Slider field */}
 
