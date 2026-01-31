@@ -7,7 +7,7 @@ const ITEMS = [
   },
   {
     key: 'products',
-    title: 'Prendas (SKU)',
+    title: 'Prendas',
     subtitle: 'Tu catálogo como base del flujo',
     variant: 'products',
   },

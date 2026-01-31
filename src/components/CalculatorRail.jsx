@@ -48,6 +48,15 @@ function CalculatorRail({ postsPerWeek }) {
             {currentPlan.price}
           </div>
         </div>
+        <div className="vs-calc-cta">
+          <Button
+            href={currentPlan.ctaLink}
+            variant="primary"
+            className="vs-calc-cta__btn"
+          >
+            Comienza ahora
+          </Button>
+        </div>
         <ul className="vs-plan-features"> {/* New ul for features */}
           {currentPlan.features.map((feature, index) => (
             <li key={index} className="vs-plan-feature-item">
@@ -57,11 +66,6 @@ function CalculatorRail({ postsPerWeek }) {
         </ul>
         <div className="vs-calc-note">
           La estimación usa ~4.3 semanas/mes y sirve solo como referencia.
-        </div>
-        <div className="vs-calc-cta"> {/* New div for the button */}
-          <Button href={currentPlan.ctaLink} variant="primary">
-            Comienza ahora
-          </Button>
         </div>
       </div>
     </div>

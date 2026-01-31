@@ -6,9 +6,9 @@ const ITEMS = [
     kicker: 'Por qué Virtual Estudio',
     title: 'Enfoque en moda,\nno genérico.',
     body:
-      'Flujo diseñado para prendas (SKU) y campañas: produce contenido constante para anuncios, redes y e‑commerce con menos fricción.',
+      'Flujo diseñado para prendas y campañas: produce contenido constante para anuncios, redes y e‑commerce con menos fricción.',
     cardTitle: 'Moda-first',
-    cardSubtitle: 'Campañas por SKU',
+    cardSubtitle: 'Campañas por prenda',
     variant: 'fashion',
   },
   {
@@ -108,8 +108,8 @@ function WhyScroller() {
         event.key === 'ArrowDown' || event.key === 'PageDown'
           ? 'down'
           : event.key === 'ArrowUp' || event.key === 'PageUp'
-          ? 'up'
-          : null
+            ? 'up'
+            : null
       if (!keyDir) return
       if (keyDir === 'down' && activeIndex === ITEMS.length - 1) return
       if (keyDir === 'up' && activeIndex === 0) return

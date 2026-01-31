@@ -3,9 +3,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 const STEPS = [
   {
     title: 'Sube tu prenda',
-    subtitle: 'SKU como punto de partida',
+    subtitle: 'Tu prenda como punto de partida',
     description:
-      'Parte de tus fotos de prenda. Sube tu SKU y úsalo como base para generar campañas y variaciones sin coordinar un photoshoot.',
+      'Parte de tus fotos de prenda. Sube una imagen de tu prenda y úsala como base para generar campañas y variaciones sin coordinar un photoshoot.',
   },
   {
     title: 'Elige modelo + estilo',

@@ -11,7 +11,7 @@ const MODES = [
     id: 'editorial',
     label: 'Editorial',
     title: 'Look premium de campaña.',
-    bullets: ['Hero shots para colección.', 'Consistencia por SKU.', 'Visual más “brand”.'],
+    bullets: ['Hero shots para colección.', 'Consistencia por prenda.', 'Visual más “brand”.'],
   },
   {
     id: 'video',

@@ -92,18 +92,12 @@ function App() {
               </p>
 
               <div className="vs-hero-cta">
-                <Button href={SITE.appUrl} variant="primary" className="vs-hero-cta-btn">
-                  Get Started
+                <Button href={SITE.appUrl} variant="primary" className="vs-calc-cta">
+                  Comienza ahora
                 </Button>
               </div>
 
-              <div className="vs-hero-trust" aria-label="Módulos principales">
-                <span className="vs-hero-trust-item">Campañas</span>
-                <span className="vs-hero-trust-item">Prendas (SKU)</span>
-                <span className="vs-hero-trust-item">Modelos</span>
-                <span className="vs-hero-trust-item">Videos</span>
-                <span className="vs-hero-trust-item">Brand DNA</span>
-              </div>
+
             </div>
           </div>
         </section>
@@ -116,7 +110,7 @@ function App() {
                 <span className="vs-hero-caret" aria-hidden="true" />
               </h2>
               <p className="vs-section-lead">
-                Un flujo completo pensado para moda: de prenda (SKU) a piezas listas para anuncios,
+                Un flujo completo pensado para moda: de prenda a piezas listas para anuncios,
                 redes y e‑commerce.
               </p>
             </header>
@@ -139,11 +133,11 @@ function App() {
             <div className="vs-calc-grid-container"> {/* New container for two columns */}
               <div className="vs-calc-column-left"> {/* Column 1: Subtitle and Slider */}
                 <h2 className="vs-section-title-xl">
-                  Calcula el mejor plan para tu negocio
+                  Calcula el plan ideal para tu marca
                   <span className="vs-hero-caret" aria-hidden="true" />
                 </h2>
                 <p className="vs-subtitle">
-                  Selecciona el número de publicaciones semanales para estimar tu plan ideal.
+                  Selecciona el número de campañas semanales para estimar tu plan ideal.
                 </p>
                 <div className="vs-calc-field vs-calc-slider-outside"> {/* Slider field */}
 

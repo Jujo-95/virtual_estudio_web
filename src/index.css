@@ -1746,6 +1746,49 @@ input {
 
 .vs-calc-field input[type='range'] {
   width: 100%;
+  -webkit-appearance: none;
+  /* Remove default styling */
+  appearance: none;
+  background: transparent;
+  /* Make the track transparent initially */
+  cursor: pointer;
+}
+
+/* Track styling */
+.vs-calc-field input[type='range']::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.3);
+  /* Light grey track */
+  border-radius: 5px;
+  height: 8px;
+}
+
+.vs-calc-field input[type='range']::-moz-range-track {
+  background: rgba(255, 255, 255, 0.3);
+  /* Light grey track */
+  border-radius: 5px;
+  height: 8px;
+}
+
+/* Thumb styling */
+.vs-calc-field input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /* Remove default styling */
+  appearance: none;
+  background-color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin-top: -6px;
+  /* Center the thumb vertically */
+}
+
+.vs-calc-field input[type='range']::-moz-range-thumb {
+  background-color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
 }
 
 .vs-calc-meta {
@@ -2157,7 +2200,11 @@ input {
 .vs-calc-slider-outside {
   margin-bottom: 20px;
   /* Add some spacing between slider and card */
-  padding: 16px;
+
+
+  padding-left: 0px;
+  padding-right: 0px;
+
 
 }
 
@@ -2237,10 +2284,34 @@ input {
 }
 
 .vs-calc-cta {
+  width: 30vw;
   margin-top: 20px;
   text-align: center;
-  width: 100vw;
-  display: block;
+  background: #fff;
+  color: #000;
+  margin: 20px 0px 20px 0px;
+}
+
+.vs-calc-cta__btn {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+
+/* hover */
+.vs-calc-cta__btn:hover {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* focus */
+.vs-calc-cta__btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 .vs-preview-caption {
