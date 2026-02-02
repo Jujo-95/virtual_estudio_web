@@ -43,6 +43,16 @@ function HowScroller() {
                 data-variant={step.variant}
                 role="listitem"
               >
+                {step.variant === 'export' && (
+                  <video
+                    className="vs-how-people-card-video"
+                    src="/web_images/campania_106_asset_310.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                )}
                 <p className="vs-how-people-card-text">{step.description}</p>
                 <footer className="vs-how-people-card-footer">
                   <div className="vs-how-people-step">{idx + 1}</div>

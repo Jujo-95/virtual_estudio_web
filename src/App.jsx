@@ -61,24 +61,7 @@ function App() {
 
       <main>
         <section className="vs-hero vs-hero--ref" id="top">
-          <div className="vs-hero-ambient" aria-hidden="true">
-            <div className="vs-hero-side vs-hero-side--left">
-              <div className="vs-hero-side-inner">
-                <div className="vs-hero-side-meta">
-                  <div className="vs-hero-side-title">UGC</div>
-                  <div className="vs-hero-side-sub">Variaciones rápidas</div>
-                </div>
-              </div>
-            </div>
-            <div className="vs-hero-side vs-hero-side--right">
-              <div className="vs-hero-side-inner">
-                <div className="vs-hero-side-meta">
-                  <div className="vs-hero-side-title">Editorial</div>
-                  <div className="vs-hero-side-sub">Look premium</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* hero ambient decorations removed */}
 
           <div className="vs-container">
             <div className="vs-hero-center">
