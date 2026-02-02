@@ -1093,6 +1093,16 @@ input {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* Make these sections match the height/centering of the story section */
+.vs-section#creditos,
+.vs-section#faq,
+.vs-section#contacto {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 82px 0 66px;
+}
+
 .vs-story-grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
