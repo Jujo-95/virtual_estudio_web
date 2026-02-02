@@ -27,10 +27,10 @@ function NavBar() {
             </nav>
             <div className="vs-nav-actions">
               <Button href={SITE.appUrl} variant="ghost">
-                Sign In
+                Registrarme
               </Button>
               <Button href={SITE.appUrl} variant="primary">
-                Sign Up
+                Iniciar sesión
               </Button>
             </div>
           </div>

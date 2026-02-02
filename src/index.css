@@ -1,7 +1,7 @@
 :root {
   --vs-font-sans: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial,
     sans-serif;
-  --vs-font-display: 'Space Grotesk', var(--vs-font-sans);
+  --vs-font-display: 'Playfair Display', var(--vs-font-sans);
   --vs-font-montreal: var(--vs-font-sans);
   /* Mapping to existing sans-serif */
   --vs-font-editorial: 'Cormorant Garamond', serif;
@@ -649,7 +649,7 @@ input {
 
 .vs-how-people-title {
   margin: 14px 0 0;
-  font-family: 'Space Grotesk', 'Cormorant Garamond', serif;
+  font-family: var(--vs-font-display);
   font-size: clamp(44px, 4.6vw, 76px);
   line-height: 1.02;
   letter-spacing: -0.04em;
@@ -724,7 +724,7 @@ input {
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.9);
@@ -742,11 +742,11 @@ input {
 }
 
 .vs-how-people-card[data-variant='style'] {
-  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
+  --vs-card-bg: url('/web_images/campania_106_asset_302.jpg');
 }
 
 .vs-how-people-card[data-variant='export'] {
-  --vs-card-bg: url('/web_images/campania_107_asset_192.jpg');
+  --vs-card-bg: url('/web_images/campania_106_asset_310.mp4');
 }
 
 .vs-how-people-card:hover {
@@ -845,7 +845,7 @@ input {
 .vs-how-title {
   margin: 12px 0 0;
   font-size: clamp(36px, 4.4vw, 64px);
-  font-family: 'Space Grotesk', 'Cormorant Garamond', serif;
+  font-family: var(--vs-font-display);
   line-height: 1.06;
   color: rgba(255, 255, 255, 0.96);
 }
@@ -1153,7 +1153,7 @@ input {
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
   box-shadow: 0 26px 80px rgba(0, 0, 0, 0.32);
   color: rgba(255, 255, 255, 0.92);
@@ -1454,7 +1454,7 @@ input {
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
   overflow: hidden;
@@ -1853,7 +1853,7 @@ input {
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
   background-origin: border-box;
   background-clip: border-box;

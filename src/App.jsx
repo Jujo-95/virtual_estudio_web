@@ -90,7 +90,6 @@ function App() {
                 De foto de prenda a campaña completa (UGC, editorial y video), con Brand DNA y
                 créditos en COP.
               </p>
-
               <div className="vs-hero-cta">
                 <Button href={SITE.appUrl} variant="primary" className="vs-calc-cta">
                   Comienza ahora
