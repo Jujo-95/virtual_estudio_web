@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
-import Button from './Button.jsx'; // Import Button component
-import { SITE } from '../lib/site.js'; // Import SITE object
+import { useMemo } from 'react'
+import Button from './Button.jsx'
+import { SITE } from '../lib/site.js'
 
 const CHECKLIST_ITEMS = {
   basic: [
@@ -10,56 +10,66 @@ const CHECKLIST_ITEMS = {
     'Imágenes listas para redes sociales',
   ],
   pro: [
-    'Todo en basic',
+    'Todo en Basic',
     'Acceso a todos los fondos y fondos personalizados',
     'Acceso a todos los modelos y modelos personalizados',
     'Resolución de imagen 2K',
     '2 revisiones de fotos gratuitas por crédito',
-    '1 Correccion de foto gratuita por campaña',
+    '1 corrección de foto gratuita por campaña',
   ],
   enterprise: [
-    'Todo en pro',
-    'Resolucion de imagen 4K',
-    '3 retoques graruitos por campaña',
-    'Se el primero en probar nuevas funcionalidades'
-  ]
-};
+    'Todo en Pro',
+    'Resolución de imagen 4K',
+    '3 retoques gratuitos por campaña',
+    'Sé el primero en probar nuevas funcionalidades',
+  ],
+}
 
-function CalculatorRail({ postsPerWeek }) {
+function CalculatorRail({ postsPerWeek, estimatedAssetsPerMonth }) {
   const currentPlan = useMemo(() => {
     if (postsPerWeek >= 1 && postsPerWeek <= 5) {
-      return { name: 'Plan Basic', price: '30 USD / mes', features: CHECKLIST_ITEMS.basic, ctaLink: SITE.appUrl };
-    } else if (postsPerWeek > 5 && postsPerWeek <= 10) {
-      return { name: 'Plan Pro', price: '50 USD / mes', features: CHECKLIST_ITEMS.pro, ctaLink: SITE.appUrl };
-    } else {
-      return { name: 'Plan Empresarial/Agencia', price: '*personalizado', features: CHECKLIST_ITEMS.enterprise, ctaLink: '#contacto' };
+      return {
+        name: 'Plan Basic',
+        price: 'Créditos en COP (recomendado)',
+        features: CHECKLIST_ITEMS.basic,
+        ctaLink: SITE.appUrl,
+      }
     }
-  }, [postsPerWeek]);
+    if (postsPerWeek > 5 && postsPerWeek <= 10) {
+      return {
+        name: 'Plan Pro',
+        price: 'Créditos en COP (recomendado)',
+        features: CHECKLIST_ITEMS.pro,
+        ctaLink: SITE.appUrl,
+      }
+    }
+    return {
+      name: 'Plan Empresarial / Agencia',
+      price: 'Personalizado',
+      features: CHECKLIST_ITEMS.enterprise,
+      ctaLink: '#contacto',
+    }
+  }, [postsPerWeek])
 
   return (
-    <div className="vs-calc-card vs-how-people-card"> {/* Apply vs-how-people-card styles */}
+    <div className="vs-calc-card vs-how-people-card">
       <div className="vs-calc-result">
-        <div className="vs-calc-kpi">
-          <div className="vs-calc-kpi-label">Plan Sugerido</div>
-          <div className="vs-calc-kpi-value vs-plan-transition">
-            {currentPlan.name}
-          </div>
+        <div className="vs-calc-kpi" aria-live="polite">
+          <div className="vs-calc-kpi-label">Plan sugerido</div>
+          <div className="vs-calc-kpi-value vs-plan-transition">{currentPlan.name}</div>
+          <div className="vs-calc-kpi-sub vs-plan-transition">{currentPlan.price}</div>
           <div className="vs-calc-kpi-sub vs-plan-transition">
-            {currentPlan.price}
+            ≈ {estimatedAssetsPerMonth} piezas/mes
           </div>
         </div>
         <div className="vs-calc-cta">
-          <Button
-            href={currentPlan.ctaLink}
-            variant="primary"
-            className="vs-calc-cta__btn"
-          >
+          <Button href={currentPlan.ctaLink} variant="primary" className="vs-calc-cta__btn">
             Comienza ahora
           </Button>
         </div>
-        <ul className="vs-plan-features"> {/* New ul for features */}
-          {currentPlan.features.map((feature, index) => (
-            <li key={index} className="vs-plan-feature-item">
+        <ul className="vs-plan-features">
+          {currentPlan.features.map((feature) => (
+            <li key={`${currentPlan.name}:${feature}`} className="vs-plan-feature-item">
               {feature}
             </li>
           ))}
@@ -69,7 +79,7 @@ function CalculatorRail({ postsPerWeek }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default CalculatorRail;
+export default CalculatorRail

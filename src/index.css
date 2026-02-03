@@ -2,10 +2,6 @@
   --vs-font-sans: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial,
     sans-serif;
   --vs-font-display: 'Playfair Display', var(--vs-font-sans);
-  --vs-font-montreal: var(--vs-font-sans);
-  /* Mapping to existing sans-serif */
-  --vs-font-editorial: 'Cormorant Garamond', serif;
-  /* Using an existing serif from other components */
 
   --vs-bg-rgb: 9 13 24;
   --vs-bg: rgb(var(--vs-bg-rgb));
@@ -89,7 +85,6 @@ body::after {
 }
 
 @keyframes vsFloat {
-
   0%,
   100% {
     transform: translate3d(0, 0, 0);
@@ -452,7 +447,6 @@ input {
 }
 
 @keyframes vsCaretBlink {
-
   0%,
   55% {
     opacity: 1;
@@ -2226,28 +2220,17 @@ input {
 }
 
 .vs-calc-card {
-  /* Inherits most styles from .vs-how-people-card */
   min-height: auto;
-  /* Override min-height from .vs-how-people-card */
   display: block;
-  /* Override display: flex */
   padding: 28px 28px 22px;
-  /* Add padding back to the card */
 }
 
 .vs-calc-slider-outside {
   margin-bottom: 20px;
-  /* Add some spacing between slider and card */
-
-
-  padding-left: 0px;
-  padding-right: 0px;
-
-
+  padding: 0;
 }
 
 .vs-calc-card .vs-calc-result {
-  /* Adjust styles for the result card within the calculator rail */
   border: none;
   background: none;
   padding: 0;
@@ -2298,7 +2281,7 @@ input {
 }
 
 .vs-calc-column-right {
-  /* No specific styles needed for now, just acts as a container */
+  display: flex;
 }
 
 .vs-plan-features {
@@ -2316,18 +2299,12 @@ input {
 
 .vs-plan-feature-item::before {
   content: '✓';
-  /* Checkmark icon */
   color: var(--vs-success);
   margin-right: 8px;
 }
 
 .vs-calc-cta {
-  width: 30vw;
-  margin-top: 20px;
-  text-align: center;
-  background: #fff;
-  color: #000;
-  margin: 20px 0px 20px 0px;
+  margin-top: 18px;
 }
 
 .vs-calc-cta__btn {
@@ -2335,21 +2312,16 @@ input {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
-  color: #000;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  box-sizing: border-box;
 }
 
 /* hover */
 .vs-calc-cta__btn:hover {
-  background: rgba(255, 255, 255, 0.92);
+  transform: translateY(-1px);
 }
 
 /* focus */
 .vs-calc-cta__btn:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 .vs-preview-caption {

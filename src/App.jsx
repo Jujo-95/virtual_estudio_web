@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
 import FeatureRail from './components/FeatureRail.jsx'
@@ -8,52 +8,62 @@ import HowScroller from './components/HowScroller.jsx'
 import { SITE } from './lib/site.js'
 import CalculatorRail from './components/CalculatorRail.jsx'
 
+const WEEKS_PER_MONTH = 4.3
+
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+
+const buildMailto = (payload) => {
+  const subject = encodeURIComponent('Contacto — Virtual Estudio')
+  const body = encodeURIComponent(
+    `Nombre: ${payload.name}\n` +
+      `Correo: ${payload.email}\n` +
+      `Teléfono: ${payload.phone}\n` +
+      `Campañas/semana: ${payload.postsPerWeek}\n` +
+      `Piezas/mes (estimado): ${payload.estimatedAssetsPerMonth}\n\n` +
+      `Me interesa conocer el plan recomendado de créditos y el flujo ideal (Campañas / Videos / Prendas / Modelos / Brand DNA).`,
+  )
+  return `mailto:${SITE.contactEmail}?subject=${subject}&body=${body}`
+}
+
 function App() {
   const [postsPerWeek, setPostsPerWeek] = useState(6)
 
   const estimatedAssetsPerMonth = useMemo(() => {
     const safePosts = Number.isFinite(postsPerWeek) ? postsPerWeek : 0
-    return Math.max(0, safePosts)
+    return Math.round(Math.max(0, safePosts) * WEEKS_PER_MONTH)
   }, [postsPerWeek])
 
-  const buildMailto = (payload) => {
-    const subject = encodeURIComponent('Contacto — Virtual Estudio')
-    const body = encodeURIComponent(
-      `Nombre: ${payload.name}\n` +
-      `Correo: ${payload.email}\n` +
-      `Teléfono: ${payload.phone}\n` +
-      `Publicaciones/semana: ${payload.postsPerWeek}\n` +
-      `Piezas/mes (estimado): ${payload.estimatedAssetsPerMonth}\n\n` +
-      `Me interesa conocer el plan recomendado de créditos y el flujo ideal (Campañas / Videos / Prendas / Modelos / Brand DNA).`,
-    )
-    return `mailto:${SITE.contactEmail}?subject=${subject}&body=${body}`
-  }
+  const onPostsPerWeekChange = useCallback((event) => {
+    const raw = Number(event.target.value)
+    const safe = Number.isFinite(raw) ? raw : 0
+    setPostsPerWeek(clamp(safe, 1, 20))
+  }, [])
 
-  const onSubmit = (event) => {
+  const onSubmit = useCallback((event) => {
     event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const name = String(formData.get('name') || '').trim()
-    const email = String(formData.get('email') || '').trim()
-    const phone = String(formData.get('phone') || '').trim()
-    const postsPerWeekStr = String(formData.get('posts_per_week') || '').trim()
-
-    if (!name || !email || !phone || postsPerWeekStr === '') {
-      alert('Completa todos los campos.')
+    const form = event.currentTarget
+    if (!form.checkValidity()) {
+      form.reportValidity()
       return
     }
 
-    const parsedPosts = Number(postsPerWeekStr)
+    const formData = new FormData(form)
+    const name = String(formData.get('name') || '').trim()
+    const email = String(formData.get('email') || '').trim()
+    const phone = String(formData.get('phone') || '').trim()
+    const parsedPosts = Number(formData.get('posts_per_week'))
+    if (!name || !email || !phone || !Number.isFinite(parsedPosts)) return
 
-    const estimated = Math.max(0, parsedPosts)
+    const weekly = clamp(parsedPosts, 1, 20)
+    const estimated = Math.round(weekly * WEEKS_PER_MONTH)
     window.location.href = buildMailto({
       name,
       email,
       phone,
-      postsPerWeek: parsedPosts,
+      postsPerWeek: weekly,
       estimatedAssetsPerMonth: estimated,
     })
-  }
-
+  }, [])
 
   return (
     <div className="vs-app">
@@ -61,8 +71,6 @@ function App() {
 
       <main>
         <section className="vs-hero vs-hero--ref" id="top">
-          {/* hero ambient decorations removed */}
-
           <div className="vs-container">
             <div className="vs-hero-center">
               <h1 className="vs-hero-title">
@@ -74,12 +82,10 @@ function App() {
                 créditos en COP.
               </p>
               <div className="vs-hero-cta">
-                <Button href={SITE.appUrl} variant="primary" className="vs-calc-cta">
+                <Button href={SITE.appUrl} variant="primary" className="vs-hero-cta-btn">
                   Comienza ahora
                 </Button>
               </div>
-
-
             </div>
           </div>
         </section>
@@ -107,22 +113,20 @@ function App() {
 
         <section className="vs-section" id="creditos">
           <div className="vs-container">
-            <header className="vs-section-header vs-section-header--center">
-              <p className="vs-section-lead">
-                {/* Subtitle removed as per new requirements */}
-              </p>
-            </header>
-            <div className="vs-calc-grid-container"> {/* New container for two columns */}
-              <div className="vs-calc-column-left"> {/* Column 1: Subtitle and Slider */}
-                <h2 className="vs-section-title-xl">
-                  Calcula el plan ideal para tu marca
-                  <span className="vs-hero-caret" aria-hidden="true" />
-                </h2>
-                <p className="vs-subtitle">
-                  Selecciona el número de campañas semanales para estimar tu plan ideal.
-                </p>
-                <div className="vs-calc-field vs-calc-slider-outside"> {/* Slider field */}
+            <div className="vs-calc-grid-container">
+              <div className="vs-calc-column-left">
+                <header className="vs-section-header vs-section-header--center">
+                  <h2 className="vs-section-title-xl">
+                    Calcula el plan ideal para tu marca
+                    <span className="vs-hero-caret" aria-hidden="true" />
+                  </h2>
+                  <p className="vs-subtitle" id="vs-calc-help">
+                    Ajusta tu cadencia semanal para estimar un plan recomendado.
+                  </p>
+                </header>
 
+                <div className="vs-calc-field vs-calc-slider-outside">
+                  <label htmlFor="postsPerWeek">Campañas por semana</label>
                   <input
                     id="postsPerWeek"
                     type="range"
@@ -130,7 +134,8 @@ function App() {
                     max="20"
                     step="1"
                     value={postsPerWeek}
-                    onChange={(e) => setPostsPerWeek(Number(e.target.value))}
+                    onChange={onPostsPerWeekChange}
+                    aria-describedby="vs-calc-help"
                   />
                   <div className="vs-calc-meta">
                     <span>{postsPerWeek}</span>
@@ -138,11 +143,9 @@ function App() {
                   </div>
                 </div>
               </div>
-              <div className="vs-calc-column-right"> {/* Column 2: Plans Card */}
-                <CalculatorRail
-                  postsPerWeek={postsPerWeek}
-                  estimatedAssetsPerMonth={estimatedAssetsPerMonth}
-                />
+
+              <div className="vs-calc-column-right">
+                <CalculatorRail postsPerWeek={postsPerWeek} estimatedAssetsPerMonth={estimatedAssetsPerMonth} />
               </div>
             </div>
           </div>
@@ -220,13 +223,14 @@ function App() {
                       id="posts_per_week"
                       name="posts_per_week"
                       type="number"
-                      min="0"
+                      min="1"
+                      max="20"
                       step="1"
-                      defaultValue={postsPerWeek}
+                      value={postsPerWeek}
+                      onChange={onPostsPerWeekChange}
                       required
                     />
                   </div>
-
                 </div>
 
                 <div className="vs-form-actions">
