@@ -75,7 +75,6 @@ function App() {
             <div className="vs-hero-center">
               <h1 className="vs-hero-title">
                 Campañas de moda con IA
-                <span className="vs-hero-caret" aria-hidden="true" />
               </h1>
               <p className="vs-hero-subtitle">
                 De foto de prenda a campaña completa (UGC, editorial y video), con Brand DNA y
@@ -95,7 +94,6 @@ function App() {
             <header className="vs-section-header vs-section-header--center">
               <h2 className="vs-section-title-xl">
                 Qué compras
-                <span className="vs-hero-caret" aria-hidden="true" />
               </h2>
               <p className="vs-section-lead">
                 Un flujo completo pensado para moda: de prenda a piezas listas para anuncios,
@@ -115,10 +113,9 @@ function App() {
           <div className="vs-container">
             <div className="vs-calc-grid-container">
               <div className="vs-calc-column-left">
-                <header className="vs-section-header vs-section-header--center">
+                <header className="vs-section-header">
                   <h2 className="vs-section-title-xl">
                     Calcula el plan ideal para tu marca
-                    <span className="vs-hero-caret" aria-hidden="true" />
                   </h2>
                   <p className="vs-subtitle" id="vs-calc-help">
                     Ajusta tu cadencia semanal para estimar un plan recomendado.

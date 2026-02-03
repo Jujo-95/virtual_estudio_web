@@ -435,29 +435,6 @@ input {
   letter-spacing: -0.05em;
 }
 
-.vs-hero-caret {
-  display: inline-block;
-  width: 3px;
-  height: 0.95em;
-  background: rgba(255, 255, 255, 0.72);
-  margin-left: 10px;
-  transform: translateY(0.08em);
-  border-radius: 999px;
-  animation: vsCaretBlink 1.2s steps(1, end) infinite;
-}
-
-@keyframes vsCaretBlink {
-  0%,
-  55% {
-    opacity: 1;
-  }
-
-  56%,
-  100% {
-    opacity: 0;
-  }
-}
-
 .vs-hero-subtitle {
   margin: 16px auto 0;
   color: rgba(255, 255, 255, 0.75);
@@ -509,11 +486,6 @@ input {
 @media (prefers-reduced-motion: reduce) {
   .vs-hero-side::before {
     animation: none;
-  }
-
-  .vs-hero-caret {
-    animation: none;
-    opacity: 1;
   }
 }
 
@@ -2282,7 +2254,7 @@ input {
 
 @media (min-width: 980px) {
   .vs-calc-grid-container {
-    grid-template-columns: 1fr minmax(520px, 860px);
+    grid-template-columns: 1fr 1fr;
     gap: 56px;
     align-items: center;
   }
@@ -2292,7 +2264,6 @@ input {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 520px;
 }
 
 .vs-calc-column-right {
