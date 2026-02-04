@@ -505,19 +505,6 @@ input {
   }
 }
 
-.vs-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--vs-border);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--vs-muted);
-  font-weight: 800;
-  font-size: 13px;
-}
-
 .vs-h1 {
   margin: 16px 0 12px;
   font-family: var(--vs-font-display);
