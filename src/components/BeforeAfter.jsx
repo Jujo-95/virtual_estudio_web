@@ -2,7 +2,7 @@ import { useId, useState } from 'react'
 
 function BeforeAfter() {
   const rangeId = useId()
-  const [position, setPosition] = useState(58)
+  const [position, setPosition] = useState(12)
 
   return (
     <div className="vs-before-after" style={{ '--vs-before-after-pos': `${position}%` }}>
