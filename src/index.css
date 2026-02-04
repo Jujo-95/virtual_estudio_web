@@ -2356,6 +2356,13 @@ input {
   display: flex;
 }
 
+.vs-panel.vs-demo-split-left {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
 .vs-demo-split-right {
   display: flex;
   flex-direction: column;
@@ -2382,13 +2389,13 @@ input {
 .vs-before-after {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .vs-before-after-frame {
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.25);
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.35);
   height: 100%;
@@ -2422,7 +2429,9 @@ input {
 
 .vs-before-after-top {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: -18px;
   z-index: 5;
   display: flex;
   align-items: center;
