@@ -93,7 +93,7 @@ function App() {
           </div>
         </section>
 
-        <section className="vs-section" id="demo">
+        <section className="vs-section vs-section--demo" id="demo">
           <div className="vs-container">
             <div className="vs-demo-split">
               <div className="vs-panel vs-demo-split-left">

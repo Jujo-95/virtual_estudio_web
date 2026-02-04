@@ -567,6 +567,10 @@ input {
   margin: 0px 0;
 }
 
+.vs-section--demo {
+  padding: 88px 0 92px;
+}
+
 /* Unified background: use the same background as the "Por qué Virtual Estudio" section */
 .vs-section,
 .vs-section--rail,
@@ -2337,20 +2341,26 @@ input {
   display: grid;
   grid-template-columns: 1fr;
   gap: 22px;
-  align-items: center;
+  align-items: stretch;
 }
 
 @media (min-width: 980px) {
   .vs-demo-split {
     grid-template-columns: 1.15fr 0.85fr;
     gap: 56px;
+    min-height: min(780px, 78vh);
   }
+}
+
+.vs-demo-split-left {
+  display: flex;
 }
 
 .vs-demo-split-right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: center;
 }
 
 .vs-demo-header-right {
@@ -2369,6 +2379,11 @@ input {
 }
 
 /* BeforeAfter */
+.vs-before-after {
+  width: 100%;
+  height: 100%;
+}
+
 .vs-before-after-frame {
   position: relative;
   overflow: hidden;
@@ -2376,7 +2391,9 @@ input {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.25);
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.35);
-  height: clamp(312px, 50vh, 546px);
+  height: 100%;
+  min-height: clamp(312px, 50vh, 546px);
+  max-height: 720px;
 }
 
 .vs-before-after-img {
