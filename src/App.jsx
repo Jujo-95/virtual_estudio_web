@@ -17,11 +17,11 @@ const buildMailto = (payload) => {
   const subject = encodeURIComponent(`Contacto — ${SITE.name}`)
   const body = encodeURIComponent(
     `Nombre: ${payload.name}\n` +
-      `Correo: ${payload.email}\n` +
-      `Teléfono: ${payload.phone}\n` +
-      `Piezas/semana: ${payload.postsPerWeek}\n` +
-      `Piezas/mes (estimado): ${payload.estimatedAssetsPerMonth}\n\n` +
-      `Me interesa conocer el plan recomendado y el flujo ideal (Casting digital / Brand DNA / Fidelidad textil / Video cinematográfico).`,
+    `Correo: ${payload.email}\n` +
+    `Teléfono: ${payload.phone}\n` +
+    `Piezas/semana: ${payload.postsPerWeek}\n` +
+    `Piezas/mes (estimado): ${payload.estimatedAssetsPerMonth}\n\n` +
+    `Me interesa conocer el plan recomendado y el flujo ideal (Casting digital / Brand DNA / Fidelidad textil / Video cinematográfico).`,
   )
   return `mailto:${SITE.contactEmail}?subject=${subject}&body=${body}`
 }
@@ -74,7 +74,6 @@ function App() {
         <section className="vs-hero vs-hero--ref" id="top">
           <div className="vs-container">
             <div className="vs-hero-center">
-              <div className="vs-badge">Producción Visual Infinita</div>
               <h1 className="vs-hero-title">De la prenda al catálogo en minutos, no en semanas.</h1>
               <p className="vs-hero-subtitle">
                 {SITE.name} es la infraestructura de producción visual con IA diseñada para escalar marcas de moda.
