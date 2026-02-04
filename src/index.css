@@ -2429,9 +2429,7 @@ input {
 
 .vs-before-after-top {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: -18px;
+  inset: 0;
   z-index: 5;
   display: flex;
   align-items: center;
@@ -2443,7 +2441,7 @@ input {
   width: calc(100% + 28px);
   margin-left: -14px;
   margin-right: -14px;
-  height: 48px;
+  height: 100%;
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -2466,22 +2464,30 @@ input {
 .vs-before-after-top input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background-color: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50%;
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
   margin-top: -6px;
-  box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.12);
+  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.14);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M10%208l-4%204%204%204M14%208l4%204-4%204%27%20stroke%3D%27%230b0b12%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
 }
 
 .vs-before-after-top input[type='range']::-moz-range-thumb {
-  background-color: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.12);
+  height: 24px;
+  width: 24px;
+  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.14);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M10%208l-4%204%204%204M14%208l4%204-4%204%27%20stroke%3D%27%230b0b12%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
 }
 
 .vs-before-after-hint {
