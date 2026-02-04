@@ -28,7 +28,7 @@ function HowScroller() {
       <div className="vs-container vs-how-people-grid">
         <div className="vs-how-people-copy">
           <p className="vs-how-people-kicker">Cómo funciona</p>
-          <h2 className="vs-how-people-title">De la prenda al catálogo en minutos.</h2>
+          <h2 className="vs-how-people-title">Producción visual lista para publicar.</h2>
           <p className="vs-how-people-subtitle">
             Controla casting, consistencia y fidelidad de prenda. Genera campañas y video sin un shooting tradicional.
           </p>

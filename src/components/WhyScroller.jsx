@@ -14,7 +14,7 @@ const ITEMS = [
   {
     key: 'modes',
     kicker: 'Por qué Virtual Studio',
-    title: 'De la prenda al\ncatálogo en minutos.',
+    title: 'Lanzamientos en\ntiempo real.',
     body:
       'Lanzamientos en tiempo real: transforma una foto básica (plano o maniquí) en campañas editoriales listas para publicar en ~15 minutos.',
     cardTitle: 'Velocidad',

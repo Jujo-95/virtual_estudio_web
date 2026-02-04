@@ -2,7 +2,7 @@ const ITEMS = [
   {
     key: 'campaigns',
     title: 'Catálogos',
-    subtitle: 'De la prenda al catálogo en minutos',
+    subtitle: 'Lanzamientos en tiempo real (~15 min)',
     variant: 'campaigns',
   },
   {
