@@ -3,8 +3,9 @@ import { SITE } from '../lib/site.js'
 
 function NavBar() {
   const links = [
+    { href: '#demo', label: 'Demo' },
     { href: '#como-funciona', label: 'Cómo funciona' },
-    { href: '#servicios', label: 'Servicios' },
+    { href: '#servicios', label: 'Capacidades' },
     { href: '#creditos', label: 'Créditos' },
     { href: '#contacto', label: 'Contacto' },
   ]
@@ -26,11 +27,8 @@ function NavBar() {
               ))}
             </nav>
             <div className="vs-nav-actions">
-              <Button href={SITE.appUrl} variant="ghost">
-                Registrarme
-              </Button>
               <Button href={SITE.appUrl} variant="primary">
-                Iniciar sesión
+                Comienza ahora
               </Button>
             </div>
           </div>

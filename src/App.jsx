@@ -7,20 +7,21 @@ import WhyScroller from './components/WhyScroller.jsx'
 import HowScroller from './components/HowScroller.jsx'
 import { SITE } from './lib/site.js'
 import CalculatorRail from './components/CalculatorRail.jsx'
+import BeforeAfter from './components/BeforeAfter.jsx'
 
 const WEEKS_PER_MONTH = 4.3
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
 
 const buildMailto = (payload) => {
-  const subject = encodeURIComponent('Contacto — Virtual Estudio')
+  const subject = encodeURIComponent(`Contacto — ${SITE.name}`)
   const body = encodeURIComponent(
     `Nombre: ${payload.name}\n` +
       `Correo: ${payload.email}\n` +
       `Teléfono: ${payload.phone}\n` +
-      `Campañas/semana: ${payload.postsPerWeek}\n` +
+      `Piezas/semana: ${payload.postsPerWeek}\n` +
       `Piezas/mes (estimado): ${payload.estimatedAssetsPerMonth}\n\n` +
-      `Me interesa conocer el plan recomendado de créditos y el flujo ideal (Campañas / Videos / Prendas / Modelos / Brand DNA).`,
+      `Me interesa conocer el plan recomendado y el flujo ideal (Casting digital / Brand DNA / Fidelidad textil / Video cinematográfico).`,
   )
   return `mailto:${SITE.contactEmail}?subject=${subject}&body=${body}`
 }
@@ -73,18 +74,35 @@ function App() {
         <section className="vs-hero vs-hero--ref" id="top">
           <div className="vs-container">
             <div className="vs-hero-center">
-              <h1 className="vs-hero-title">
-                Campañas de moda con IA
-              </h1>
+              <div className="vs-badge">Producción Visual Infinita</div>
+              <h1 className="vs-hero-title">De la prenda al catálogo en minutos, no en semanas.</h1>
               <p className="vs-hero-subtitle">
-                De foto de prenda a campaña completa (UGC, editorial y video), con Brand DNA y
-                créditos en COP.
+                {SITE.name} es la infraestructura de producción visual con IA diseñada para escalar marcas de moda.
+                Produce campañas de alta gama y videos cinematográficos sin los costos ni la logística de un shooting tradicional.
               </p>
               <div className="vs-hero-cta">
                 <Button href={SITE.appUrl} variant="primary" className="vs-hero-cta-btn">
-                  Comienza ahora
+                  Comienza ahora — 5 créditos gratis
+                </Button>
+                <Button href="#demo" variant="secondary" className="vs-hero-cta-btn">
+                  Ver demostración funcional
                 </Button>
               </div>
+              <p className="vs-microcopy">Tu Brand DNA es innegociable. La producción ya no es el límite, es el multiplicador.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="vs-section" id="demo">
+          <div className="vs-container">
+            <header className="vs-section-header vs-section-header--center">
+              <h2 className="vs-section-title-xl">Antes y después, en una sola vista</h2>
+              <p className="vs-section-lead">
+                Desliza para ver cómo una foto base se convierte en un resultado editorial listo para catálogo.
+              </p>
+            </header>
+            <div className="vs-panel">
+              <BeforeAfter />
             </div>
           </div>
         </section>
@@ -92,12 +110,10 @@ function App() {
         <section className="vs-section vs-section--rail" id="servicios">
           <div className="vs-container">
             <header className="vs-section-header vs-section-header--center">
-              <h2 className="vs-section-title-xl">
-                Qué compras
-              </h2>
+              <h2 className="vs-section-title-xl">Capacidades diseñadas para moda</h2>
               <p className="vs-section-lead">
-                Un flujo completo pensado para moda: de prenda a piezas listas para anuncios,
-                redes y e‑commerce.
+                No es un generador genérico: es un motor vertical que preserva fidelidad de prenda,
+                respeta tu Brand DNA y te permite producir a escala.
               </p>
             </header>
 
@@ -118,12 +134,12 @@ function App() {
                     Calcula el plan ideal para tu marca
                   </h2>
                   <p className="vs-subtitle" id="vs-calc-help">
-                    Ajusta tu cadencia semanal para estimar un plan recomendado.
+                    Sin cargos ocultos. Pagas solo por capacidad de producción visual con créditos (1 imagen = 1 crédito).
                   </p>
                 </header>
 
                 <div className="vs-calc-field vs-calc-slider-outside">
-                  <label htmlFor="postsPerWeek">Campañas por semana</label>
+                  <label htmlFor="postsPerWeek">Piezas por semana</label>
                   <input
                     id="postsPerWeek"
                     type="range"
@@ -159,30 +175,49 @@ function App() {
               <details className="vs-faq-item">
                 <summary>¿Esto reemplaza mi equipo creativo?</summary>
                 <p>
-                  No. Virtual Estudio acelera la producción (variaciones, formatos y
-                  consistencia) para que tu equipo se enfoque en dirección creativa y
-                  performance.
+                  No. {SITE.name} acelera la producción (variaciones, formatos y consistencia) para que tu equipo se enfoque en dirección creativa y performance.
                 </p>
               </details>
               <details className="vs-faq-item">
                 <summary>¿Puedo controlar el estilo?</summary>
                 <p>
-                  Sí: eliges modo (UGC/editorial), modelo, escena y tu Brand DNA para
-                  mantener el look de marca.
+                  Sí: eliges modo (UGC/editorial), modelo, escena y tu Brand DNA para mantener el look de marca.
                 </p>
               </details>
               <details className="vs-faq-item">
                 <summary>¿Cómo funcionan los créditos?</summary>
                 <p>
-                  Compras créditos en COP y los consumes al generar contenido (imágenes
-                  y videos). El plan ideal depende de tu cadencia de publicaciones.
+                  Pagas por capacidad de producción. En general, 1 imagen = 1 crédito (y el consumo depende del tipo de output). Tu plan ideal depende de cuántas piezas necesitas por semana.
                 </p>
               </details>
               <details className="vs-faq-item">
                 <summary>¿Qué necesito para empezar?</summary>
                 <p>
-                  Fotos claras de tus prendas. Con eso puedes crear campañas y
-                  variaciones rápidamente.
+                  Una foto base clara de la prenda (plano o maniquí) y un objetivo de campaña. Con eso puedes generar campañas y variaciones rápidamente.
+                </p>
+              </details>
+              <details className="vs-faq-item">
+                <summary>¿Cuánto tarda crear mi primera campaña?</summary>
+                <p>
+                  En minutos. Normalmente puedes pasar de foto base a un set listo para catálogo en ~15 minutos, dependiendo de la complejidad y las variaciones que quieras.
+                </p>
+              </details>
+              <details className="vs-faq-item">
+                <summary>¿Los modelos tienen derechos de imagen?</summary>
+                <p>
+                  No. Usamos modelos 100% sintéticos para reducir riesgo de derechos de imagen y asociaciones reputacionales.
+                </p>
+              </details>
+              <details className="vs-faq-item">
+                <summary>¿Qué pasa si la prenda se ve diferente?</summary>
+                <p>
+                  Nuestra prioridad es la fidelidad textil: preservar costuras, patrones y ajuste. Si algo no se ve bien, iteras variaciones de pose/escena hasta lograr el resultado.
+                </p>
+              </details>
+              <details className="vs-faq-item">
+                <summary>¿Tienen garantía o devolución de créditos?</summary>
+                <p>
+                  Hoy priorizamos iteración rápida y soporte para que llegues al resultado correcto. Si necesitas acuerdos formales (SLA / soporte dedicado), el plan Empresarial/Agencia es el recomendado.
                 </p>
               </details>
             </div>
@@ -193,10 +228,9 @@ function App() {
           <div className="vs-container">
             <div className="vs-panel">
               <header className="vs-section-header">
-                <h2 className="vs-h2">Hablemos de tu marca</h2>
+                <h2 className="vs-h2">Hablemos de tu catálogo</h2>
                 <p className="vs-subtitle">
-                  Cuéntanos tu cadencia de publicaciones y te recomendamos un plan de
-                  créditos y un flujo (Campañas / Videos / Brand DNA).
+                  Cuéntanos tu volumen de piezas por semana y te recomendamos el plan ideal y el flujo (Casting / Brand DNA / Fidelidad / Video).
                 </p>
               </header>
 
@@ -215,7 +249,7 @@ function App() {
                     <input id="phone" name="phone" type="tel" required />
                   </div>
                   <div className="vs-field">
-                    <label htmlFor="posts_per_week">Publicaciones por semana</label>
+                    <label htmlFor="posts_per_week">Piezas por semana</label>
                     <input
                       id="posts_per_week"
                       name="posts_per_week"

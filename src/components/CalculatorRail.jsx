@@ -4,24 +4,24 @@ import { SITE } from '../lib/site.js'
 
 const CHECKLIST_ITEMS = {
   basic: [
-    'Sin marcas de agua de Virtual Estudio',
-    'Selección limitada de fondos',
-    'Resolución de imagen HD',
-    'Imágenes listas para redes sociales',
+    'Campañas HD listas para publicar',
+    'Casting digital básico',
+    'Fondos curados para moda',
+    'Consistencia con Brand DNA',
   ],
   pro: [
     'Todo en Basic',
-    'Acceso a todos los fondos y fondos personalizados',
-    'Acceso a todos los modelos y modelos personalizados',
-    'Resolución de imagen 2K',
-    '2 revisiones de fotos gratuitas por crédito',
-    '1 corrección de foto gratuita por campaña',
+    'Resolución 2K',
+    'Fondos personalizados',
+    'Modelos personalizados',
+    'Variaciones de pose con consistencia',
   ],
   enterprise: [
     'Todo en Pro',
-    'Resolución de imagen 4K',
-    '3 retoques gratuitos por campaña',
-    'Sé el primero en probar nuevas funcionalidades',
+    'Resolución 4K',
+    'Catálogos masivos y agencias',
+    'Onboarding y soporte dedicado',
+    'Controles avanzados y seguridad jurídica',
   ],
 }
 
@@ -30,7 +30,7 @@ function CalculatorRail({ postsPerWeek, estimatedAssetsPerMonth }) {
     if (postsPerWeek >= 1 && postsPerWeek <= 5) {
       return {
         name: 'Plan Basic',
-        price: 'Créditos en COP (recomendado)',
+        price: '$30 USD / mes',
         features: CHECKLIST_ITEMS.basic,
         ctaLink: SITE.appUrl,
       }
@@ -38,7 +38,7 @@ function CalculatorRail({ postsPerWeek, estimatedAssetsPerMonth }) {
     if (postsPerWeek > 5 && postsPerWeek <= 10) {
       return {
         name: 'Plan Pro',
-        price: 'Créditos en COP (recomendado)',
+        price: '$50 USD / mes',
         features: CHECKLIST_ITEMS.pro,
         ctaLink: SITE.appUrl,
       }
@@ -64,7 +64,7 @@ function CalculatorRail({ postsPerWeek, estimatedAssetsPerMonth }) {
         </div>
         <div className="vs-calc-cta">
           <Button href={currentPlan.ctaLink} variant="primary" className="vs-calc-cta__btn">
-            Comienza ahora
+            Comienza ahora — 5 créditos gratis
           </Button>
         </div>
         <ul className="vs-plan-features">
@@ -75,7 +75,7 @@ function CalculatorRail({ postsPerWeek, estimatedAssetsPerMonth }) {
           ))}
         </ul>
         <div className="vs-calc-note">
-          La estimación usa ~4.3 semanas/mes y sirve solo como referencia.
+          1 imagen = 1 crédito. La estimación usa ~4.3 semanas/mes y sirve solo como referencia.
         </div>
       </div>
     </div>
