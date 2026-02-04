@@ -3,21 +3,21 @@ const STEPS = [
     title: 'Sube tu prenda',
     subtitle: 'Tu prenda como punto de partida',
     description:
-      'Parte de tus fotos de prenda. Sube tu prenda y úsalo como base para generar campañas y variaciones sin coordinar un photoshoot.',
+      'Parte de una foto básica (plano o maniquí). La prenda es el input: desde ahí construyes campañas sin logística.',
     variant: 'sku',
   },
   {
     title: 'Elige modelo + estilo',
     subtitle: 'UGC o editorial + Brand DNA',
     description:
-      'Selecciona un modelo virtual, define el estilo (UGC/editorial) y aplica tu Brand DNA para mantener consistencia de marca.',
+      'Haz casting digital, define el estilo (UGC/editorial) y aplica tu Brand DNA para mantener consistencia absoluta.',
     variant: 'style',
   },
   {
     title: 'Genera y exporta',
     subtitle: 'Listo para publicar',
     description:
-      'Genera variaciones y exporta formatos 1:1, 4:5 y 9:16. Crea también videos cortos para anuncios y contenido social.',
+      'Genera variaciones de pose con fidelidad textil, exporta formatos y crea video cinematográfico para Reels/TikTok.',
     variant: 'export',
   },
 ]
@@ -28,9 +28,9 @@ function HowScroller() {
       <div className="vs-container vs-how-people-grid">
         <div className="vs-how-people-copy">
           <p className="vs-how-people-kicker">Cómo funciona</p>
-          <h2 className="vs-how-people-title">Un flujo diseñado para producir campañas consistentes.</h2>
+          <h2 className="vs-how-people-title">Producción visual lista para publicar.</h2>
           <p className="vs-how-people-subtitle">
-            Subir prendas, elegir modelos y variaciones, y exportar formatos listos para anuncios y social en minutos.
+            Controla casting, consistencia y fidelidad de prenda. Genera campañas y video sin un shooting tradicional.
           </p>
         </div>
 
