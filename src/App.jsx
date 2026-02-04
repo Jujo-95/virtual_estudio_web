@@ -93,16 +93,30 @@ function App() {
           </div>
         </section>
 
-        <section className="vs-section" id="demo">
+        <section className="vs-section vs-section--demo" id="demo">
           <div className="vs-container">
-            <header className="vs-section-header vs-section-header--center">
-              <h2 className="vs-section-title-xl">Antes y después, en una sola vista</h2>
-              <p className="vs-section-lead">
-                Desliza para ver cómo una foto base se convierte en un resultado editorial listo para catálogo.
-              </p>
-            </header>
-            <div className="vs-panel">
-              <BeforeAfter />
+            <div className="vs-demo-split">
+              <div className="vs-panel vs-demo-split-left">
+                <BeforeAfter />
+              </div>
+
+              <div className="vs-demo-split-right">
+                <header className="vs-section-header vs-demo-header-right">
+                  <h2 className="vs-section-title-xl">Antes y después, en una sola vista</h2>
+                  <p className="vs-demo-lead">
+                    Una foto base se convierte en un resultado editorial listo para publicar, con consistencia de Brand DNA y fidelidad de prenda.
+                  </p>
+                </header>
+
+                <div className="vs-actions vs-demo-actions">
+                  <Button href={SITE.appUrl} variant="primary">
+                    Comienza ahora — 5 créditos gratis
+                  </Button>
+                  <Button href="#creditos" variant="secondary">
+                    Ver créditos
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </section>

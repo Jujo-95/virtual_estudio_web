@@ -85,6 +85,7 @@ body::after {
 }
 
 @keyframes vsFloat {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0);
@@ -566,6 +567,10 @@ input {
   margin: 0px 0;
 }
 
+.vs-section--demo {
+  padding: 88px 0 92px;
+}
+
 /* Unified background: use the same background as the "Por qué Virtual Estudio" section */
 .vs-section,
 .vs-section--rail,
@@ -733,11 +738,9 @@ input {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(
-    180deg,
-    rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
-    rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))
-  );
+  background-image: linear-gradient(180deg,
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b)));
   z-index: 1;
 }
 
@@ -2333,19 +2336,74 @@ input {
   gap: 8px;
 }
 
+/* Demo split */
+.vs-demo-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+@media (min-width: 980px) {
+  .vs-demo-split {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    min-height: min(780px, 78vh);
+  }
+}
+
+.vs-demo-split-left {
+  display: flex;
+}
+
+.vs-panel.vs-demo-split-left {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.vs-demo-split-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.vs-demo-header-right {
+  text-align: right;
+}
+
+.vs-demo-lead {
+  margin: 14px 0 0;
+  max-width: 56ch;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.6;
+}
+
+.vs-demo-actions {
+  justify-content: flex-end;
+}
+
 /* BeforeAfter */
+.vs-before-after {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
 .vs-before-after-frame {
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.25);
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.35);
-  aspect-ratio: 16 / 10;
-  min-height: 260px;
+  height: 100%;
+  min-height: clamp(312px, 50vh, 546px);
+  max-height: 720px;
 }
 
-.vs-before-after-img {
+.vs-before-after-media {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2353,7 +2411,7 @@ input {
   object-fit: cover;
 }
 
-.vs-before-after-img--after {
+.vs-before-after-media--after {
   clip-path: inset(0 calc(100% - var(--vs-before-after-pos, 50%)) 0 0);
 }
 
@@ -2364,82 +2422,107 @@ input {
   left: var(--vs-before-after-pos, 50%);
   width: 2px;
   transform: translateX(-1px);
-  background: rgba(255, 255, 255, 0.65);
-  box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.12);
-  z-index: 2;
+  background: rgba(255, 255, 255, 0.48);
+  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.08);
+  z-index: 4;
 }
 
-.vs-before-after-handle::before {
-  content: '';
+.vs-before-after-top {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 34px;
-  height: 34px;
-  transform: translate(-50%, -50%);
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
-.vs-before-after-controls {
-  margin-top: 14px;
-}
-
-.vs-before-after-label {
-  display: block;
-  font-size: 13px;
-  color: var(--vs-muted);
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.vs-before-after-controls input[type='range'] {
-  width: 100%;
+.vs-before-after-top input[type='range'] {
+  width: calc(100% + 28px);
+  margin-left: -14px;
+  margin-right: -14px;
+  height: 100%;
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
   cursor: pointer;
+  pointer-events: auto;
 }
 
-.vs-before-after-controls input[type='range']::-webkit-slider-runnable-track {
-  background: rgba(255, 255, 255, 0.3);
+.vs-before-after-top input[type='range']::-webkit-slider-runnable-track {
+  background: transparent;
   border-radius: 5px;
   height: 8px;
 }
 
-.vs-before-after-controls input[type='range']::-moz-range-track {
-  background: rgba(255, 255, 255, 0.3);
+.vs-before-after-top input[type='range']::-moz-range-track {
+  background: transparent;
   border-radius: 5px;
   height: 8px;
 }
 
-.vs-before-after-controls input[type='range']::-webkit-slider-thumb {
+.vs-before-after-top input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background-color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50%;
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
   margin-top: -6px;
+  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.14);
+  animation: vsThumbPulse 2.6s ease-in-out infinite;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M10%208l-4%204%204%204M14%208l4%204-4%204%27%20stroke%3D%27%230b0b12%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
 }
 
-.vs-before-after-controls input[type='range']::-moz-range-thumb {
-  background-color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.vs-before-after-top input[type='range']::-moz-range-thumb {
+  background-color: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50%;
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
+  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.14);
+  animation: vsThumbPulse 2.6s ease-in-out infinite;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M10%208l-4%204%204%204M14%208l4%204-4%204%27%20stroke%3D%27%230b0b12%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
 }
 
-.vs-before-after-captions {
-  margin-top: 10px;
+@keyframes vsThumbPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 0 0 12px rgba(34, 211, 238, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-before-after-top input[type='range']::-webkit-slider-thumb,
+  .vs-before-after-top input[type='range']::-moz-range-thumb {
+    animation: none;
+  }
+}
+
+.vs-before-after-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 22px 18px 14px;
   display: flex;
-  justify-content: space-between;
-  color: rgba(255, 255, 255, 0.62);
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.86);
   font-size: 12px;
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.58));
+  z-index: 5;
 }
