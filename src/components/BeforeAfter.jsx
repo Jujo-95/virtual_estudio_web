@@ -20,26 +20,23 @@ function BeforeAfter() {
           loading="lazy"
         />
         <div className="vs-before-after-handle" aria-hidden="true" />
-      </div>
 
-      <div className="vs-before-after-controls">
-        <label className="vs-before-after-label" htmlFor={rangeId}>
-          Desliza para ver el cambio
-        </label>
-        <input
-          id={rangeId}
-          type="range"
-          min="0"
-          max="100"
-          step="1"
-          value={position}
-          onChange={(event) => setPosition(Number(event.target.value))}
-        />
-      </div>
+        <div className="vs-before-after-top">
+          <input
+            id={rangeId}
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            value={position}
+            onChange={(event) => setPosition(Number(event.target.value))}
+            aria-label="Desliza para comparar antes y después"
+          />
+        </div>
 
-      <div className="vs-before-after-captions" aria-hidden="true">
-        <span>Foto base</span>
-        <span>Catálogo</span>
+        <div className="vs-before-after-hint" aria-hidden="true">
+          Desliza para ver el resultado
+        </div>
       </div>
     </div>
   )
