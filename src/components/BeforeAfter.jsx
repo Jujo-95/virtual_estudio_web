@@ -21,16 +21,19 @@ function BeforeAfter() {
 
       <div className="vs-before-after-frame" aria-label="Comparación antes y después">
         <img
-          className="vs-before-after-img"
+          className="vs-before-after-media"
           src="/web_images/garment_top.jpg"
           alt="Foto base de prenda"
           loading="lazy"
         />
-        <img
-          className="vs-before-after-img vs-before-after-img--after"
-          src="/web_images/campania_106_asset_302.jpg"
-          alt="Resultado generado listo para catálogo"
-          loading="lazy"
+        <video
+          className="vs-before-after-media vs-before-after-media--after"
+          src="/web_images/campania_106_asset_310.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-label="Resultado generado en video"
         />
         <div className="vs-before-after-handle" aria-hidden="true" />
 

@@ -2403,7 +2403,7 @@ input {
   max-height: 720px;
 }
 
-.vs-before-after-img {
+.vs-before-after-media {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2411,7 +2411,7 @@ input {
   object-fit: cover;
 }
 
-.vs-before-after-img--after {
+.vs-before-after-media--after {
   clip-path: inset(0 calc(100% - var(--vs-before-after-pos, 50%)) 0 0);
 }
 
