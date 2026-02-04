@@ -2340,7 +2340,7 @@ input {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.25);
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.35);
-  height: clamp(240px, 38vh, 420px);
+  height: clamp(312px, 50vh, 546px);
 }
 
 .vs-before-after-img {
