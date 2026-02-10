@@ -22,9 +22,12 @@ function DemoPinned() {
       const rect = container.getBoundingClientRect()
       const stickyTopRaw = getComputedStyle(container).getPropertyValue('--vs-demo-sticky-top')
       const stickyTop = Number.parseFloat(stickyTopRaw) || 0
-      const viewport = window.innerHeight - stickyTop
-      const denom = rect.height - viewport
-      const progress = denom > 0 ? clamp01((stickyTop - rect.top) / denom) : 1
+      const scrollY = window.scrollY || window.pageYOffset || 0
+      const elementTop = rect.top + scrollY
+      const startScroll = elementTop - stickyTop
+      const endScroll = elementTop + rect.height - window.innerHeight
+      const denom = endScroll - startScroll
+      const progress = denom > 0 ? clamp01((scrollY - startScroll) / denom) : 1
 
       const eased = 1 - (1 - progress) ** 3
       setPosition(Math.round(eased * 100))
