@@ -53,6 +53,11 @@ function HowScroller() {
         const card = cards[idx]
         if (!card) return
 
+        if (idx === 0) {
+          card.style.setProperty('--vs-how-scale', '1')
+          return
+        }
+
         const start = idx / count
         const localT = clamp01((containerProgress - start) / (1 - start))
         const targetScale = 1 - (count - idx) * 0.05

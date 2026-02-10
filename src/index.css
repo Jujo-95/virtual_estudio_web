@@ -613,6 +613,7 @@ input {
   align-self: start;
   position: sticky;
   top: 110px;
+  text-align: right;
 }
 
 .vs-how-people-kicker {
