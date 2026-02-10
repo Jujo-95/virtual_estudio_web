@@ -2318,7 +2318,15 @@ input {
 .vs-calc-card {
   min-height: auto;
   display: block;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgb(var(--vs-bg-rgb) / 0.82), rgb(var(--vs-bg-rgb) / 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
   padding: 28px 28px 22px;
+}
+
+.vs-calc-card--dark {
+  color: var(--vs-text);
 }
 
 .vs-calc-slider-outside {
