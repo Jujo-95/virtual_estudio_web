@@ -68,7 +68,10 @@ function WhyScroller() {
       const count = Math.max(1, items.length)
       const segment = 1 / count
       const travel = count - 1
-      const progressCards = Math.min(travel, containerProgress * travel * 1.22)
+      const HOLD_AT = 0.82
+      const eased = (t) => 1 - (1 - t) ** 3
+      const t = clamp01(containerProgress / HOLD_AT)
+      const progressCards = Math.min(travel, eased(t) * travel)
 
       items.forEach((item, idx) => {
         const card = cards[idx]
