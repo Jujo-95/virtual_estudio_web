@@ -705,7 +705,7 @@ input {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
-  transition: transform 180ms ease, color 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease;
   position: relative;
   overflow: hidden;
 }

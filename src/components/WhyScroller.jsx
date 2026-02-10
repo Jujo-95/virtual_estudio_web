@@ -123,7 +123,7 @@ function WhyScroller() {
                 className="vs-why-card vs-why-parallax-card"
                 data-variant={item.variant}
                 role="listitem"
-                style={{ top: `calc(-5vh + ${idx * 25}px)`, zIndex: idx + 1 }}
+                style={{ top: '0px', zIndex: idx + 1 }}
               >
                 <div className="vs-how-card-inner">
                   <div className="vs-how-card-media" data-variant={item.variant} aria-hidden="true">
