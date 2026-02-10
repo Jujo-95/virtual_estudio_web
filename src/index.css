@@ -785,8 +785,24 @@ input {
 
 .vs-section--demo-pinned .vs-before-after-frame {
   height: auto;
-  min-height: clamp(360px, 58vh, 660px);
-  max-height: min(860px, calc(100vh - var(--vs-demo-sticky-top) - 160px));
+  min-height: clamp(420px, 66vh, 760px);
+  max-height: min(980px, calc(100vh - var(--vs-demo-sticky-top) - 120px));
+}
+
+.vs-section--demo-pinned .vs-section-title-xl {
+  font-size: clamp(46px, 4.8vw, 82px);
+  line-height: 1.02;
+}
+
+.vs-section--demo-pinned .vs-demo-lead {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
+.vs-section--demo-pinned .vs-btn {
+  padding: 14px 22px;
+  font-size: 15px;
 }
 
 /* Unified background: use the same background as the "Por qué Virtual Estudio" section */
@@ -2866,7 +2882,7 @@ input {
 
 @media (min-width: 980px) {
   .vs-section--demo-pinned .vs-demo-split {
-    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-columns: 1.45fr 0.55fr;
   }
 }
 
