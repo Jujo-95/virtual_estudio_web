@@ -36,6 +36,9 @@ const ITEMS = [
 function FeatureRail() {
   const trackRef = useRef(null)
   const speedRef = useRef(28)
+  const activeCardRef = useRef(null)
+  const pointerRef = useRef({ x: 0, y: 0 })
+  const rafRef = useRef(0)
 
   const loopItems = useMemo(() => [...ITEMS, ...ITEMS], [])
 
@@ -45,6 +48,8 @@ function FeatureRail() {
 
     const media = window.matchMedia?.('(prefers-reduced-motion: reduce)')
     if (media?.matches) return
+
+    const finePointer = window.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches
 
     const NORMAL_SPEED = 28
     const SLOW_SPEED = 10
@@ -74,6 +79,62 @@ function FeatureRail() {
     track.addEventListener('focusin', onFocusIn)
     track.addEventListener('focusout', onFocusOut)
 
+    const resetCard = (card) => {
+      if (!card) return
+      card.style.removeProperty('--vs-rail-img-x')
+      card.style.removeProperty('--vs-rail-img-y')
+      card.style.removeProperty('--vs-rail-img-scale')
+    }
+
+    const applyMouseScale = () => {
+      rafRef.current = 0
+      const card = activeCardRef.current
+      if (!card) return
+
+      const rect = card.getBoundingClientRect()
+      const px = rect.width > 0 ? (pointerRef.current.x - rect.left) / rect.width : 0.5
+      const py = rect.height > 0 ? (pointerRef.current.y - rect.top) / rect.height : 0.3
+
+      const x = Math.min(1, Math.max(0, px)) * 100
+      const y = Math.min(1, Math.max(0, py)) * 100
+
+      card.style.setProperty('--vs-rail-img-x', x.toFixed(2))
+      card.style.setProperty('--vs-rail-img-y', y.toFixed(2))
+      card.style.setProperty('--vs-rail-img-scale', '1.16')
+    }
+
+    const onPointerMove = (event) => {
+      if (!finePointer) return
+
+      const card = event.target?.closest?.('.vs-rail-card')
+      if (!card) {
+        if (activeCardRef.current) {
+          resetCard(activeCardRef.current)
+          activeCardRef.current = null
+        }
+        return
+      }
+
+      if (activeCardRef.current && activeCardRef.current !== card) {
+        resetCard(activeCardRef.current)
+      }
+
+      activeCardRef.current = card
+      pointerRef.current.x = event.clientX
+      pointerRef.current.y = event.clientY
+
+      if (rafRef.current) return
+      rafRef.current = window.requestAnimationFrame(applyMouseScale)
+    }
+
+    const onPointerLeave = () => {
+      if (activeCardRef.current) resetCard(activeCardRef.current)
+      activeCardRef.current = null
+    }
+
+    track.addEventListener('pointermove', onPointerMove, { passive: true })
+    track.addEventListener('pointerleave', onPointerLeave)
+
     let rafId = 0
     let lastTs = performance.now()
 
@@ -94,10 +155,14 @@ function FeatureRail() {
 
     return () => {
       window.cancelAnimationFrame(rafId)
+      if (rafRef.current) window.cancelAnimationFrame(rafRef.current)
       track.removeEventListener('pointerover', onPointerOver)
       track.removeEventListener('pointerout', onPointerOut)
       track.removeEventListener('focusin', onFocusIn)
       track.removeEventListener('focusout', onFocusOut)
+      track.removeEventListener('pointermove', onPointerMove)
+      track.removeEventListener('pointerleave', onPointerLeave)
+      onPointerLeave()
     }
   }, [])
 

@@ -1926,23 +1926,36 @@ input {
   --vs-card-bg: none;
   --vs-card-overlay-a: 0.0;
   --vs-card-overlay-b: 0.0;
+  --vs-rail-img-x: 50;
+  --vs-rail-img-y: 22;
+  --vs-rail-img-scale: 1;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background-color: rgba(0, 0, 0, 0.35);
-  background-image: linear-gradient(180deg,
-      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
-      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
-    var(--vs-card-bg);
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
+  isolation: isolate;
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
   overflow: hidden;
   aspect-ratio: 3 / 4;
   transition: transform 160ms ease, border-color 160ms ease;
   will-change: transform;
-  background-origin: border-box;
-  background-clip: border-box;
+}
+
+.vs-rail-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(180deg,
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
+    var(--vs-card-bg);
+  background-size: cover;
+  background-position: calc(var(--vs-rail-img-x, 50) * 1%) calc(var(--vs-rail-img-y, 22) * 1%);
+  background-repeat: no-repeat;
+  transform: scale(var(--vs-rail-img-scale, 1));
+  transform-origin: calc(var(--vs-rail-img-x, 50) * 1%) calc(var(--vs-rail-img-y, 22) * 1%);
+  transition: transform 240ms ease;
+  will-change: transform, background-position;
+  z-index: 0;
 }
 
 .vs-rail-card:hover {
@@ -1961,10 +1974,7 @@ input {
   transform: rotate(-6deg);
   opacity: 0.55;
   pointer-events: none;
-}
-
-.vs-rail-card::before {
-  display: none;
+  z-index: 1;
 }
 
 .vs-rail-card[data-variant='campaigns'] {
@@ -2032,6 +2042,7 @@ input {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(10px);
+  z-index: 2;
 }
 
 .vs-rail-footer-title {
