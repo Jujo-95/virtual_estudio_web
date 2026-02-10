@@ -659,6 +659,12 @@ input {
   }
 }
 
+@media (max-width: 980px) {
+  .vs-demo-sticky {
+    padding: 64px 0 70px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .vs-hero-side::before {
     animation: none;
@@ -666,6 +672,16 @@ input {
 
   .vs-hero-plane {
     transform: none !important;
+  }
+
+  .vs-demo-pin {
+    height: auto;
+  }
+
+  .vs-demo-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
   }
 }
 
@@ -732,6 +748,25 @@ input {
 }
 
 .vs-section--demo {
+  padding: 88px 0 92px;
+}
+
+.vs-section--demo-pinned {
+  padding: 0;
+}
+
+.vs-demo-pin {
+  --vs-demo-sticky-top: 84px;
+  height: 170vh;
+  position: relative;
+}
+
+.vs-demo-sticky {
+  position: sticky;
+  top: var(--vs-demo-sticky-top);
+  height: calc(100vh - var(--vs-demo-sticky-top));
+  display: grid;
+  place-items: center;
   padding: 88px 0 92px;
 }
 
