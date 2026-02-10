@@ -685,7 +685,7 @@ input {
   width: var(--vs-how-people-card-w);
   max-width: 100%;
   margin: 0 auto;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 247, 255, 0.92));
+  background: #f6f7ff;
   border: none;
   color: rgba(11, 11, 18, 0.92);
   min-height: 520px;
