@@ -767,7 +767,25 @@ input {
   height: calc(100vh - var(--vs-demo-sticky-top));
   display: grid;
   place-items: center;
-  padding: 88px 0 92px;
+  padding: 0;
+}
+
+.vs-section--demo-pinned .vs-demo-split {
+  align-items: center;
+  min-height: 0;
+}
+
+.vs-section--demo-pinned .vs-demo-split-left {
+  align-items: center;
+}
+
+.vs-section--demo-pinned .vs-before-after {
+  height: auto;
+}
+
+.vs-section--demo-pinned .vs-before-after-frame {
+  height: auto;
+  max-height: min(720px, calc(100vh - var(--vs-demo-sticky-top) - 220px));
 }
 
 /* Unified background: use the same background as the "Por qué Virtual Estudio" section */
