@@ -602,13 +602,14 @@ input {
 
 .vs-how-people-grid {
   display: grid;
-  grid-template-columns: 1fr minmax(520px, 860px);
+  grid-template-columns: minmax(520px, 860px) 1fr;
   gap: 56px;
   align-items: center;
 }
 
 .vs-how-people-copy {
   max-width: 520px;
+  justify-self: end;
 }
 
 .vs-how-people-kicker {
@@ -638,49 +639,47 @@ input {
 
 .vs-how-people-rail {
   position: relative;
-  overflow: hidden;
-  margin-right: calc(10% - 30vw);
-  padding-right: calc(30vw - 30%);
+  overflow: visible;
+  margin-right: 0;
+  padding-right: 0;
 }
 
 .vs-how-people-rail::before,
 .vs-how-people-rail::after {
-  content: '';
+  content: none;
+}
+
+.vs-how-deck {
+  position: relative;
+  height: 540px;
+  perspective: 1100px;
+  transform-style: preserve-3d;
+}
+
+.vs-how-deck-card {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 18px;
-  pointer-events: none;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(0.2, 0.85, 0.2, 1), opacity 520ms ease;
+  will-change: transform, opacity;
+}
+
+.vs-how-deck-card[data-pos='0'] {
+  z-index: 3;
+  opacity: 1;
+  transform: translate3d(0, 0, 80px) rotateX(0deg) scale(1);
+}
+
+.vs-how-deck-card[data-pos='1'] {
   z-index: 2;
+  opacity: 0.92;
+  transform: translate3d(0, 18px, 20px) rotateX(0deg) scale(0.985);
 }
 
-.vs-how-people-rail::before {
-  left: 0;
-  background: linear-gradient(90deg, rgb(var(--vs-bg-rgb) / 1), rgb(var(--vs-bg-rgb) / 0));
-}
-
-.vs-how-people-rail::after {
-  right: 0;
-  background: linear-gradient(270deg, rgb(var(--vs-bg-rgb) / 1), rgb(var(--vs-bg-rgb) / 0));
-}
-
-.vs-how-people-cards {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: var(--vs-how-people-card-w);
-  gap: 18px;
-  align-items: stretch;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  padding-inline: max(28px, calc((100% - var(--vs-how-people-card-w)) / 2));
-  scroll-padding-inline: max(28px, calc((100% - var(--vs-how-people-card-w)) / 2));
-  margin: 0;
-  scrollbar-width: none;
-}
-
-.vs-how-people-cards::-webkit-scrollbar {
-  display: none;
+.vs-how-deck-card[data-pos='2'] {
+  z-index: 1;
+  opacity: 0.84;
+  transform: translate3d(0, 36px, -18px) rotateX(0deg) scale(0.97);
 }
 
 .vs-how-people-card {
@@ -740,7 +739,7 @@ input {
 }
 
 .vs-how-people-card[data-variant='export'] {
-  /* The background is now handled by the video tag */
+  --vs-card-bg: url('/web_images/campania_85_asset_146.jpg');
 }
 
 .vs-how-people-card:hover {
@@ -802,27 +801,39 @@ input {
   }
 
   .vs-how-people-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 26px;
   }
 
   .vs-how-people-rail {
-    margin-right: 0;
-    padding-right: 0;
+    order: 1;
   }
 
-  .vs-how-people-rail::before,
-  .vs-how-people-rail::after {
-    display: none;
+  .vs-how-people-copy {
+    order: 0;
+    justify-self: auto;
   }
 
-  .vs-how-people-cards {
-    grid-auto-columns: minmax(280px, 86vw);
-    padding: 0;
+  .vs-how-deck {
+    height: 480px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-how-deck {
+    height: auto;
+    perspective: none;
+    display: grid;
+    gap: 18px;
   }
 
-  .vs-how-people-card {
-    min-height: 380px;
+  .vs-how-deck-card {
+    position: relative;
+    inset: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none;
   }
 }
 
@@ -2193,6 +2204,84 @@ input {
   /* h-full */
   object-fit: cover;
   /* object-cover */
+}
+
+.vs-faq-cards {
+  display: grid;
+  gap: 12px;
+}
+
+.vs-faq-card {
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+.vs-faq-btn {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.vs-faq-title {
+  font-family: var(--vs-font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.vs-faq-plus {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.24);
+  position: relative;
+  flex: none;
+}
+
+.vs-faq-plus::before,
+.vs-faq-plus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.78);
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+}
+
+.vs-faq-plus::after {
+  width: 2px;
+  height: 10px;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.vs-faq-card.is-open .vs-faq-plus::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleY(0);
+}
+
+.vs-faq-panel {
+  padding: 0 18px 16px;
+}
+
+.vs-faq-body {
+  margin: 0;
+  color: var(--vs-muted);
+  line-height: 1.65;
 }
 
 .vs-calc-card {

@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useRef } from 'react'
+
 const ITEMS = [
   {
     key: 'campaigns',
@@ -29,24 +31,72 @@ const ITEMS = [
     subtitle: 'Consistencia absoluta en cada campaña',
     variant: 'dna',
   },
-  {
-    key: 'credits',
-    title: 'Créditos',
-    subtitle: '1 imagen = 1 crédito (sin cargos ocultos)',
-    variant: 'credits',
-  },
 ]
 
 function FeatureRail() {
+  const trackRef = useRef(null)
+  const pauseRef = useRef(false)
+
+  const loopItems = useMemo(() => [...ITEMS, ...ITEMS], [])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const media = window.matchMedia?.('(prefers-reduced-motion: reduce)')
+    if (media?.matches) return
+
+    const onEnter = () => {
+      pauseRef.current = true
+    }
+    const onLeave = () => {
+      pauseRef.current = false
+    }
+    track.addEventListener('pointerenter', onEnter)
+    track.addEventListener('pointerleave', onLeave)
+    track.addEventListener('focusin', onEnter)
+    track.addEventListener('focusout', onLeave)
+
+    let rafId = 0
+    let lastTs = performance.now()
+    const speedPxPerSecond = 26
+
+    const tick = (ts) => {
+      const dt = Math.min(64, ts - lastTs)
+      lastTs = ts
+
+      if (!pauseRef.current) {
+        const halfWidth = track.scrollWidth / 2
+        track.scrollLeft += (speedPxPerSecond * dt) / 1000
+        if (track.scrollLeft >= halfWidth) track.scrollLeft -= halfWidth
+      }
+
+      rafId = window.requestAnimationFrame(tick)
+    }
+
+    rafId = window.requestAnimationFrame(tick)
+
+    return () => {
+      window.cancelAnimationFrame(rafId)
+      track.removeEventListener('pointerenter', onEnter)
+      track.removeEventListener('pointerleave', onLeave)
+      track.removeEventListener('focusin', onEnter)
+      track.removeEventListener('focusout', onLeave)
+    }
+  }, [])
+
   return (
     <div className="vs-rail" aria-label="Qué compras">
-      <div className="vs-rail-track" role="list">
-        {ITEMS.map((item) => (
+      <div className="vs-rail-track" role="list" ref={trackRef}>
+        {loopItems.map((item, idx) => {
+          const isClone = idx >= ITEMS.length
+          return (
           <article
-            key={item.key}
+            key={`${item.key}-${isClone ? 'clone' : 'base'}-${idx}`}
             className="vs-rail-item"
             role="listitem"
             aria-label={`${item.title}: ${item.subtitle}`}
+            aria-hidden={isClone}
           >
             <div className="vs-rail-card" data-variant={item.variant} aria-hidden="true">
               <div className="vs-rail-footer" aria-hidden="true">
@@ -55,7 +105,8 @@ function FeatureRail() {
               </div>
             </div>
           </article>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
