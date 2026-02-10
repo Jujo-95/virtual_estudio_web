@@ -1902,30 +1902,31 @@ input {
   padding-left: calc(18px + env(safe-area-inset-left));
   padding-right: calc(18px + env(safe-area-inset-right));
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
-}
-
-.vs-cap-ms-row {
-  display: flex;
-  gap: 18px;
-  width: 100%;
-  align-items: stretch;
 }
 
 .vs-cap-ms-item {
-  flex: 0 0 auto;
-  width: 50%;
   min-width: 0;
 }
 
 .vs-cap-ms-card {
   position: relative;
-  height: clamp(260px, 32vw, 460px);
+  --vs-cap-ms-h-base: clamp(240px, 22vw, 380px);
+  --vs-cap-ms-h-active: clamp(320px, 28vw, 520px);
+  height: var(--vs-cap-ms-h-base);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.35);
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
   overflow: hidden;
+  transition: height 260ms ease, transform 220ms ease, border-color 220ms ease;
+  will-change: height;
+}
+
+.vs-cap-ms-card.is-active {
+  height: var(--vs-cap-ms-h-active);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .vs-cap-ms-media {
@@ -1938,16 +1939,24 @@ input {
 }
 
 @media (max-width: 860px) {
-  .vs-cap-ms-row {
-    flex-direction: column;
-  }
-
-  .vs-cap-ms-item {
-    width: 100% !important;
+  .vs-cap-ms {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .vs-cap-ms-card {
-    height: clamp(240px, 60vw, 420px);
+    --vs-cap-ms-h-base: clamp(240px, 48vw, 380px);
+    --vs-cap-ms-h-active: clamp(300px, 56vw, 460px);
+  }
+}
+
+@media (max-width: 560px) {
+  .vs-cap-ms {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vs-cap-ms-card {
+    --vs-cap-ms-h-base: clamp(240px, 66vw, 420px);
+    --vs-cap-ms-h-active: clamp(280px, 74vw, 480px);
   }
 }
 
