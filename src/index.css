@@ -679,6 +679,34 @@ input {
   will-change: transform;
 }
 
+.vs-section--why-parallax {
+  padding: 88px 0 92px;
+  overflow-x: clip;
+}
+
+.vs-why-parallax {
+  display: grid;
+  gap: 0;
+  margin-top: 26px;
+}
+
+.vs-why-parallax-item {
+  --vs-why-sticky-top: 84px;
+  height: calc(100vh - var(--vs-why-sticky-top));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: var(--vs-why-sticky-top);
+}
+
+.vs-why-parallax-card {
+  position: relative;
+  transform: translate3d(var(--vs-why-x, 0px), var(--vs-how-ty, 0px), 0) scale(var(--vs-why-scale, 1));
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+
 .vs-how-people-card {
   --vs-how-media-pad: 26px;
   scroll-snap-align: center;
@@ -711,6 +739,22 @@ input {
 
 .vs-how-people-card[data-variant='export'] {
   background: #eef9ff;
+}
+
+.vs-how-people-card[data-variant='why-cost'] {
+  background: #f2f7ff;
+}
+
+.vs-how-people-card[data-variant='why-speed'] {
+  background: #f4f1ff;
+}
+
+.vs-how-people-card[data-variant='why-dna'] {
+  background: #eef9ff;
+}
+
+.vs-how-people-card[data-variant='why-fidelity'] {
+  background: #f6fff5;
 }
 
 .vs-how-card-inner {
@@ -753,6 +797,22 @@ input {
 
 .vs-how-card-media[data-variant='export'] .vs-how-card-image {
   background-image: url('/web_images/campania_85_asset_146.jpg');
+}
+
+.vs-how-card-media[data-variant='why-cost'] .vs-how-card-image {
+  background-image: url('/web_images/campania_101_asset_179.jpg');
+}
+
+.vs-how-card-media[data-variant='why-speed'] .vs-how-card-image {
+  background-image: url('/web_images/editorial_campania_96_asset_174.jpg');
+}
+
+.vs-how-card-media[data-variant='why-dna'] .vs-how-card-image {
+  background-image: url('/web_images/campania_111_asset_208.jpg');
+}
+
+.vs-how-card-media[data-variant='why-fidelity'] .vs-how-card-image {
+  background-image: url('/web_images/garment_bottom.jpg');
 }
 
 .vs-how-card-image {
@@ -851,6 +911,16 @@ input {
 }
 
 @media (max-width: 980px) {
+  .vs-section--why-parallax {
+    padding: 64px 0 70px;
+  }
+
+  .vs-why-parallax-item {
+    height: 92vh;
+    position: relative;
+    top: auto;
+  }
+
   .vs-how-people {
     padding: 64px 0 70px;
   }
@@ -863,6 +933,14 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .vs-why-parallax-item {
+    height: auto;
+    min-height: 0;
+    margin-bottom: 18px;
+    position: relative;
+    top: auto;
+  }
+
   .vs-how-parallax-item {
     height: auto;
     min-height: 0;
