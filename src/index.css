@@ -321,6 +321,17 @@ input {
     linear-gradient(180deg, rgb(var(--vs-bg-rgb) / 0.45), rgb(var(--vs-bg-rgb) / 0.98));
 }
 
+.vs-hero--ref::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: -2;
+}
+
 .vs-hero--pinned {
   padding: 0;
   min-height: auto;
@@ -398,7 +409,7 @@ input {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: -2;
+  z-index: -3;
 }
 
 .vs-hero-floating {
@@ -2951,7 +2962,7 @@ input {
 
 .vs-before-after-media--after {
   clip-path: inset(0 calc(100% - var(--vs-before-after-pos, 50%)) 0 0);
-  object-position: 50% -20px;
+  object-position: 50% -200px;
 }
 
 .vs-before-after-handle {
