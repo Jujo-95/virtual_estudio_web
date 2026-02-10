@@ -86,6 +86,7 @@ function HowScroller() {
             <div key={step.title} className="vs-how-parallax-item">
               <article
                 className="vs-how-people-card vs-how-parallax-card"
+                data-variant={step.variant}
                 role="listitem"
                 style={{ top: `calc(-5vh + ${idx * 25}px)`, zIndex: idx + 1 }}
               >

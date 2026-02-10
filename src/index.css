@@ -680,6 +680,7 @@ input {
 }
 
 .vs-how-people-card {
+  --vs-how-media-pad: 26px;
   scroll-snap-align: center;
   border-radius: 28px;
   padding: 0;
@@ -700,6 +701,18 @@ input {
   overflow: hidden;
 }
 
+.vs-how-people-card[data-variant='sku'] {
+  background: #f3f7ff;
+}
+
+.vs-how-people-card[data-variant='style'] {
+  background: #f5f2ff;
+}
+
+.vs-how-people-card[data-variant='export'] {
+  background: #eef9ff;
+}
+
 .vs-how-card-inner {
   display: flex;
   min-height: 520px;
@@ -717,7 +730,7 @@ input {
 .vs-how-card-media::after {
   content: '';
   position: absolute;
-  inset: 18px;
+  inset: var(--vs-how-media-pad);
   border-radius: 22px;
   background: none;
   pointer-events: none;
@@ -725,7 +738,7 @@ input {
 
 .vs-how-card-frame {
   position: absolute;
-  inset: 18px;
+  inset: var(--vs-how-media-pad);
   border-radius: 22px;
   overflow: hidden;
 }
