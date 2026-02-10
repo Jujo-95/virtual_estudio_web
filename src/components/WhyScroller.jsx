@@ -109,10 +109,6 @@ function WhyScroller() {
   return (
     <section className="vs-section vs-section--why-parallax" id="diferenciales">
       <div className="vs-container">
-        <header className="vs-section-header vs-section-header--center">
-          <h2 className="vs-section-title-xl">Por qué Virtual Studio</h2>
-          <p className="vs-section-lead">Diferenciales diseñados para producir moda a escala.</p>
-        </header>
       </div>
 
       <div className="vs-why-full">
