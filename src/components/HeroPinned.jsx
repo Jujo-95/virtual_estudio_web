@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import Button from './Button.jsx'
 import { SITE } from '../lib/site.js'
+import { mediaVars } from '../lib/mediaTuning.js'
 
 const clamp01 = (value) => Math.min(1, Math.max(0, value))
 const lerp = (start, target, amount) => start * (1 - amount) + target * amount
@@ -92,18 +93,58 @@ function HeroPinned() {
         <div className="vs-hero-sticky" onMouseMove={onMouseMove}>
           <div className="vs-hero-floating" aria-hidden="true">
             <div ref={plane1Ref} className="vs-hero-plane vs-hero-plane--1">
-              <img className="vs-hero-float-img vs-hero-float-img--a" src="/web_images/campania_111_asset_225.jpg" alt="" />
-              <img className="vs-hero-float-img vs-hero-float-img--b" src="/web_images/campania_107_asset_192.jpg" alt="" />
-              <img className="vs-hero-float-img vs-hero-float-img--c" src="/web_images/garment_top.jpg" alt="" />
+              <img
+                className="vs-hero-float-img vs-hero-float-img--a"
+                src="/web_images/campania_111_asset_225.jpg"
+                alt=""
+                style={mediaVars('/web_images/campania_111_asset_225.jpg')}
+              />
+              <img
+                className="vs-hero-float-img vs-hero-float-img--b"
+                src="/web_images/campania_107_asset_192.jpg"
+                alt=""
+                style={mediaVars('/web_images/campania_107_asset_192.jpg')}
+              />
+              <img
+                className="vs-hero-float-img vs-hero-float-img--c"
+                src="/web_images/garment_top.jpg"
+                alt=""
+                style={mediaVars('/web_images/garment_top.jpg')}
+              />
             </div>
             <div ref={plane2Ref} className="vs-hero-plane vs-hero-plane--2">
-              <img className="vs-hero-float-img vs-hero-float-img--d" src="/web_images/campania_106_asset_302.jpg" alt="" />
-              <img className="vs-hero-float-img vs-hero-float-img--e" src="/web_images/editorial_campania_96_asset_174.jpg" alt="" />
-              <img className="vs-hero-float-img vs-hero-float-img--f" src="/web_images/campania_111_asset_208.jpg" alt="" />
+              <img
+                className="vs-hero-float-img vs-hero-float-img--d"
+                src="/web_images/campania_106_asset_302.jpg"
+                alt=""
+                style={mediaVars('/web_images/campania_106_asset_302.jpg')}
+              />
+              <img
+                className="vs-hero-float-img vs-hero-float-img--e"
+                src="/web_images/editorial_campania_96_asset_174.jpg"
+                alt=""
+                style={mediaVars('/web_images/editorial_campania_96_asset_174.jpg')}
+              />
+              <img
+                className="vs-hero-float-img vs-hero-float-img--f"
+                src="/web_images/campania_111_asset_208.jpg"
+                alt=""
+                style={mediaVars('/web_images/campania_111_asset_208.jpg')}
+              />
             </div>
             <div ref={plane3Ref} className="vs-hero-plane vs-hero-plane--3">
-              <img className="vs-hero-float-img vs-hero-float-img--g" src="/web_images/campania_101_asset_179.jpg" alt="" />
-              <img className="vs-hero-float-img vs-hero-float-img--h" src="/web_images/garment_bottom.jpg" alt="" />
+              <img
+                className="vs-hero-float-img vs-hero-float-img--g"
+                src="/web_images/campania_101_asset_179.jpg"
+                alt=""
+                style={mediaVars('/web_images/campania_101_asset_179.jpg')}
+              />
+              <img
+                className="vs-hero-float-img vs-hero-float-img--h"
+                src="/web_images/garment_bottom.jpg"
+                alt=""
+                style={mediaVars('/web_images/garment_bottom.jpg')}
+              />
             </div>
           </div>
 

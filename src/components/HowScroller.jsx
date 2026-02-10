@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { bgVars, mediaVars } from '../lib/mediaTuning.js'
 
 const STEPS = [
   {
@@ -7,6 +8,8 @@ const STEPS = [
     description:
       'Parte de una foto básica (plano o maniquí). La prenda es el input: desde ahí construyes campañas sin logística.',
     variant: 'sku',
+    mediaType: 'image',
+    mediaSrc: '/web_images/garment_top.jpg',
   },
   {
     title: 'Elige modelo + estilo',
@@ -14,6 +17,8 @@ const STEPS = [
     description:
       'Haz casting digital, define el estilo (UGC/editorial) y aplica tu Brand DNA para mantener consistencia absoluta.',
     variant: 'style',
+    mediaType: 'image',
+    mediaSrc: '/web_images/campania_106_asset_302.jpg',
   },
   {
     title: 'Genera y exporta',
@@ -21,6 +26,8 @@ const STEPS = [
     description:
       'Genera variaciones de pose con fidelidad textil, exporta formatos y crea video cinematográfico para Reels/TikTok.',
     variant: 'export',
+    mediaType: 'video',
+    mediaSrc: '/web_images/campania_106_asset_310.mp4',
   },
 ]
 
@@ -96,18 +103,25 @@ function HowScroller() {
                 <div className="vs-how-card-inner">
                   <div className="vs-how-card-media" data-variant={step.variant} aria-hidden="true">
                     <div className="vs-how-card-frame">
-                      {step.variant === 'export' ? (
+                      {step.mediaType === 'video' ? (
                         <video
                           className="vs-how-card-video"
-                          src="/web_images/campania_106_asset_310.mp4"
+                          src={step.mediaSrc}
                           autoPlay
                           loop
                           muted
                           playsInline
                           preload="metadata"
+                          style={mediaVars(step.mediaSrc)}
                         />
                       ) : (
-                        <div className="vs-how-card-image" />
+                        <div
+                          className="vs-how-card-image"
+                          style={{
+                            backgroundImage: `url('${step.mediaSrc}')`,
+                            ...bgVars(step.mediaSrc),
+                          }}
+                        />
                       )}
                     </div>
                   </div>

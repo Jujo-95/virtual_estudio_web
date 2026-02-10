@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { bgVars, mediaVars } from '../lib/mediaTuning.js'
 
 const ITEMS = [
   {
@@ -6,18 +7,21 @@ const ITEMS = [
     title: 'Catálogos',
     subtitle: 'Lanzamientos en tiempo real (~15 min)',
     variant: 'campaigns',
+    imageSrc: '/web_images/campania_101_asset_179.jpg',
   },
   {
     key: 'products',
     title: 'Fidelidad textil',
     subtitle: 'Costuras y patrones intactos (lencería y activewear)',
     variant: 'products',
+    imageSrc: '/web_images/garment_bottom.jpg',
   },
   {
     key: 'models',
     title: 'Casting digital',
     subtitle: 'Diversidad instantánea sin logística',
     variant: 'models',
+    imageSrc: '/web_images/editorial_campania_96_asset_174.jpg',
   },
   {
     key: 'video',
@@ -32,6 +36,7 @@ const ITEMS = [
     title: 'Brand DNA',
     subtitle: 'Consistencia absoluta en cada campaña',
     variant: 'dna',
+    imageSrc: '/web_images/campania_111_asset_208.jpg',
   },
 ]
 
@@ -128,7 +133,19 @@ function FeatureRail() {
               aria-label={`${item.title}: ${item.subtitle}`}
               aria-hidden={isClone}
             >
-              <div className="vs-rail-card" data-variant={item.variant} aria-hidden="true">
+              <div
+                className="vs-rail-card"
+                data-variant={item.variant}
+                aria-hidden="true"
+                style={
+                  item.imageSrc
+                    ? {
+                      '--vs-card-bg': `url('${item.imageSrc}')`,
+                      ...bgVars(item.imageSrc),
+                    }
+                    : undefined
+                }
+              >
                 {item.variant === 'video' ? (
                   <video
                     className="vs-rail-card-media"
@@ -139,6 +156,7 @@ function FeatureRail() {
                     muted
                     playsInline
                     preload="metadata"
+                    style={mediaVars(item.videoSrc)}
                     aria-hidden="true"
                   />
                 ) : null}

@@ -1,4 +1,5 @@
 import { useId, useState } from 'react'
+import { mediaVars } from '../lib/mediaTuning.js'
 
 function BeforeAfter({ externalPosition }) {
   const rangeId = useId()
@@ -28,6 +29,7 @@ function BeforeAfter({ externalPosition }) {
           src="/web_images/garment_top.jpg"
           alt="Foto base de prenda"
           loading="lazy"
+          style={mediaVars('/web_images/garment_top.jpg')}
         />
         <video
           className="vs-before-after-media vs-before-after-media--after"
@@ -37,6 +39,7 @@ function BeforeAfter({ externalPosition }) {
           muted
           playsInline
           aria-label="Resultado generado en video"
+          style={mediaVars('/web_images/campania_106_asset_310.mp4')}
         />
         <div className="vs-before-after-handle" aria-hidden="true" />
 

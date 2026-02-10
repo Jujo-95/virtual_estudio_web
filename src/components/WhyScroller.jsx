@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { bgVars } from '../lib/mediaTuning.js'
 
 const ITEMS = [
   {
@@ -7,6 +8,7 @@ const ITEMS = [
     description:
       'En vez de pagar sesiones repetidas, compras capacidad de producción visual para generar más piezas por colección sin costos fijos.',
     variant: 'why-cost',
+    mediaSrc: '/web_images/campania_101_asset_179.jpg',
   },
   {
     title: 'Lanzamientos en tiempo real.',
@@ -14,6 +16,7 @@ const ITEMS = [
     description:
       'Transforma una foto básica (plano o maniquí) en assets consistentes para catálogo y anuncios, con velocidad de performance.',
     variant: 'why-speed',
+    mediaSrc: '/web_images/editorial_campania_96_asset_174.jpg',
   },
   {
     title: 'Tu Brand DNA, siempre consistente.',
@@ -21,6 +24,7 @@ const ITEMS = [
     description:
       'Mantén consistencia de marca en cada colección. Controla el estilo sin depender de terceros ni de agendas de producción.',
     variant: 'why-dna',
+    mediaSrc: '/web_images/campania_111_asset_208.jpg',
   },
   {
     title: 'Fidelidad textil para moda real.',
@@ -28,6 +32,7 @@ const ITEMS = [
     description:
       'Resultados pensados para categorías exigentes como lencería y activewear, donde la prenda es el centro de la imagen.',
     variant: 'why-fidelity',
+    mediaSrc: '/web_images/garment_bottom.jpg',
   },
 ]
 
@@ -112,7 +117,13 @@ function WhyScroller() {
                 <div className="vs-how-card-inner">
                   <div className="vs-how-card-media" data-variant={item.variant} aria-hidden="true">
                     <div className="vs-how-card-frame">
-                      <div className="vs-how-card-image" />
+                      <div
+                        className="vs-how-card-image"
+                        style={{
+                          backgroundImage: `url('${item.mediaSrc}')`,
+                          ...bgVars(item.mediaSrc),
+                        }}
+                      />
                     </div>
                   </div>
 

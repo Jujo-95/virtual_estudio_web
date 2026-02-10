@@ -450,7 +450,8 @@ input {
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: 0 26px 90px rgba(0, 0, 0, 0.58);
-  object-fit: cover;
+  object-fit: var(--vs-media-fit, cover);
+  object-position: var(--vs-media-pos, 50% 50%);
   background: rgba(0, 0, 0, 0.12);
 }
 
@@ -1111,39 +1112,12 @@ input {
   overflow: hidden;
 }
 
-.vs-how-card-media[data-variant='sku'] .vs-how-card-image {
-  background-image: url('/web_images/garment_top.jpg');
-}
-
-.vs-how-card-media[data-variant='style'] .vs-how-card-image {
-  background-image: url('/web_images/campania_106_asset_302.jpg');
-}
-
-.vs-how-card-media[data-variant='export'] .vs-how-card-image {
-  background-image: url('/web_images/campania_85_asset_146.jpg');
-}
-
-.vs-how-card-media[data-variant='why-cost'] .vs-how-card-image {
-  background-image: url('/web_images/campania_101_asset_179.jpg');
-}
-
-.vs-how-card-media[data-variant='why-speed'] .vs-how-card-image {
-  background-image: url('/web_images/editorial_campania_96_asset_174.jpg');
-}
-
-.vs-how-card-media[data-variant='why-dna'] .vs-how-card-image {
-  background-image: url('/web_images/campania_111_asset_208.jpg');
-}
-
-.vs-how-card-media[data-variant='why-fidelity'] .vs-how-card-image {
-  background-image: url('/web_images/garment_bottom.jpg');
-}
-
 .vs-how-card-image {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
+  background-color: var(--vs-bg-color, transparent);
+  background-size: var(--vs-bg-size, cover);
+  background-position: var(--vs-bg-pos, center);
   background-repeat: no-repeat;
   transform: scale(1.02);
 }
@@ -1153,8 +1127,8 @@ input {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: var(--vs-media-fit, cover);
+  object-position: var(--vs-media-pos, top center);
   z-index: 0;
   border-radius: inherit;
 }
@@ -1928,13 +1902,13 @@ input {
   --vs-card-overlay-b: 0.0;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: var(--vs-bg-color, rgba(0, 0, 0, 0.35));
   background-image: linear-gradient(180deg,
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
-  background-size: cover;
-  background-position: top;
+  background-size: var(--vs-bg-size, cover);
+  background-position: var(--vs-bg-pos, top);
   background-repeat: no-repeat;
   isolation: isolate;
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
@@ -1951,7 +1925,8 @@ input {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: var(--vs-media-fit, cover);
+  object-position: var(--vs-media-pos, 50% 50%);
   transform: scale(1.02);
   z-index: 0;
 }
@@ -1960,6 +1935,7 @@ input {
   content: '';
   position: absolute;
   inset: 0;
+  display: block;
   background: linear-gradient(180deg,
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b)));
@@ -1989,61 +1965,6 @@ input {
 
 .vs-rail-card::before {
   display: none;
-}
-
-.vs-rail-card[data-variant='campaigns'] {
-  --vs-card-bg: url('/web_images/campania_101_asset_179.jpg');
-}
-
-.vs-rail-card[data-variant='products'] {
-  --vs-card-bg: url('/web_images/garment_bottom.jpg');
-}
-
-.vs-rail-card[data-variant='models'] {
-  --vs-card-bg: url('/web_images/editorial_campania_96_asset_174.jpg');
-}
-
-.vs-rail-card[data-variant='video'] {
-  --vs-card-bg: url('/web_images/campania_85_asset_146.jpg');
-}
-
-.vs-rail-card[data-variant='dna'] {
-  --vs-card-bg: url('/web_images/campania_111_asset_208.jpg');
-}
-
-.vs-rail-card[data-variant='credits'] {
-  --vs-card-bg: url('/web_images/campania_138_asset_308 (1).jpg');
-}
-
-.vs-rail-card[data-variant='campaigns']::before {
-  background: radial-gradient(340px 340px at 28% 30%, rgba(34, 211, 238, 0.22), transparent 62%),
-    radial-gradient(320px 320px at 72% 70%, rgba(251, 113, 133, 0.2), transparent 62%),
-    radial-gradient(340px 340px at 55% 22%, rgba(255, 186, 74, 0.14), transparent 62%);
-}
-
-.vs-rail-card[data-variant='products']::before {
-  background: radial-gradient(340px 340px at 28% 30%, rgba(167, 139, 250, 0.22), transparent 62%),
-    radial-gradient(320px 320px at 72% 70%, rgba(34, 211, 238, 0.16), transparent 62%);
-}
-
-.vs-rail-card[data-variant='models']::before {
-  background: radial-gradient(340px 340px at 28% 30%, rgba(251, 113, 133, 0.2), transparent 62%),
-    radial-gradient(320px 320px at 72% 70%, rgba(167, 139, 250, 0.18), transparent 62%);
-}
-
-.vs-rail-card[data-variant='video']::before {
-  background: radial-gradient(340px 340px at 28% 30%, rgba(34, 211, 238, 0.22), transparent 62%),
-    radial-gradient(320px 320px at 72% 70%, rgba(255, 186, 74, 0.14), transparent 62%);
-}
-
-.vs-rail-card[data-variant='dna']::before {
-  background: radial-gradient(340px 340px at 28% 30%, rgba(255, 186, 74, 0.16), transparent 62%),
-    radial-gradient(320px 320px at 72% 70%, rgba(167, 139, 250, 0.2), transparent 62%);
-}
-
-.vs-rail-card[data-variant='credits']::before {
-  background: radial-gradient(340px 340px at 28% 30%, rgba(34, 211, 238, 0.2), transparent 62%),
-    radial-gradient(320px 320px at 72% 70%, rgba(251, 113, 133, 0.16), transparent 62%);
 }
 
 .vs-rail-footer {
@@ -2988,12 +2909,13 @@ input {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: var(--vs-media-fit, cover);
+  object-position: var(--vs-media-pos, 50% 50%);
 }
 
 .vs-before-after-media--after {
   clip-path: inset(0 calc(100% - var(--vs-before-after-pos, 50%)) 0 0);
-  object-position: 50% -200px;
+  object-position: var(--vs-media-pos, 50% -20px);
 }
 
 .vs-before-after-handle {
