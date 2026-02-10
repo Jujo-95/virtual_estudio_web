@@ -373,7 +373,7 @@ input {
   top: 56%;
   height: 0.1em;
   border-radius: 999px;
-  background: #fff;
+  background: oklch(62.793% 0.25768 29.223);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
   transform-origin: 0 50%;
   transform: scaleX(var(--vs-hero-strike, 0));
