@@ -684,12 +684,33 @@ input {
   overflow-x: clip;
 }
 
-.vs-section--why-parallax .vs-how-people-card {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+.vs-why-card {
+  --vs-how-media-pad: 26px;
+  border-radius: 28px;
+  padding: 0;
+  width: min(1120px, 100%);
+  max-width: 100%;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(34px);
+  -webkit-backdrop-filter: blur(34px);
+  box-shadow: 0 30px 130px rgba(0, 0, 0, 0.48);
+  transition: transform 180ms ease, box-shadow 180ms ease, color 180ms ease, background 180ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vs-why-card:hover {
+  color: rgba(255, 255, 255, 0.96);
+  --vs-how-ty: -4px;
+  box-shadow: 0 36px 150px rgba(0, 0, 0, 0.56);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .vs-section--why-parallax .vs-how-card-kicker {
@@ -709,7 +730,7 @@ input {
 }
 
 .vs-section--why-parallax .vs-how-card-frame {
-  background: rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .vs-section--why-parallax .vs-how-card-image {
@@ -772,22 +793,6 @@ input {
 
 .vs-how-people-card[data-variant='export'] {
   background: #eef9ff;
-}
-
-.vs-how-people-card[data-variant='why-cost'] {
-  background: #f2f7ff;
-}
-
-.vs-how-people-card[data-variant='why-speed'] {
-  background: #f4f1ff;
-}
-
-.vs-how-people-card[data-variant='why-dna'] {
-  background: #eef9ff;
-}
-
-.vs-how-people-card[data-variant='why-fidelity'] {
-  background: #f6fff5;
 }
 
 .vs-how-card-inner {

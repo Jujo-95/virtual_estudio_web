@@ -118,7 +118,7 @@ function WhyScroller() {
           {ITEMS.map((item, idx) => (
             <div key={item.title} className="vs-why-parallax-item">
               <article
-                className="vs-how-people-card vs-why-parallax-card"
+                className="vs-why-card vs-why-parallax-card"
                 data-variant={item.variant}
                 role="listitem"
                 style={{ top: `calc(-5vh + ${idx * 25}px)`, zIndex: idx + 1 }}
@@ -147,4 +147,3 @@ function WhyScroller() {
 }
 
 export default WhyScroller
-
