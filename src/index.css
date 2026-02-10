@@ -602,14 +602,14 @@ input {
 
 .vs-how-people-grid {
   display: grid;
-  grid-template-columns: minmax(520px, 860px) 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 56px;
   align-items: start;
 }
 
 .vs-how-people-copy {
-  max-width: 520px;
-  justify-self: end;
+  max-width: none;
+  justify-self: stretch;
   align-self: start;
   position: sticky;
   top: 110px;
@@ -2569,6 +2569,7 @@ input {
 }
 
 @keyframes vsThumbPulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.12);
@@ -2580,6 +2581,7 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .vs-before-after-top input[type='range']::-webkit-slider-thumb,
   .vs-before-after-top input[type='range']::-moz-range-thumb {
     animation: none;
