@@ -785,18 +785,18 @@ input {
 
 .vs-section--demo-pinned .vs-before-after-frame {
   height: auto;
-  min-height: clamp(420px, 66vh, 760px);
-  max-height: min(980px, calc(100vh - var(--vs-demo-sticky-top) - 120px));
+  min-height: clamp(520px, 62vh, 660px);
+  max-height: min(760px, calc(100vh - var(--vs-demo-sticky-top) - 220px));
 }
 
 .vs-section--demo-pinned .vs-section-title-xl {
-  font-size: clamp(46px, 4.8vw, 82px);
-  line-height: 1.02;
+  font-size: clamp(56px, 4.8vw, 88px);
+  line-height: 1.06;
 }
 
 .vs-section--demo-pinned .vs-demo-lead {
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 20px;
+  line-height: 1.65;
   max-width: 62ch;
 }
 
@@ -2882,7 +2882,7 @@ input {
 
 @media (min-width: 980px) {
   .vs-section--demo-pinned .vs-demo-split {
-    grid-template-columns: 1.45fr 0.55fr;
+    grid-template-columns: 1.12fr 0.88fr;
   }
 }
 
