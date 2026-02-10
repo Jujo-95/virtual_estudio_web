@@ -1,7 +1,7 @@
 export const MEDIA_TUNING = {
   '/web_images/campania_101_asset_179.jpg': {
     bgSize: 'cover',
-    bgPos: '50% 35%',
+    bgPos: '50% 5%',
     fit: 'cover',
     pos: '50% 35%',
   },
@@ -21,9 +21,9 @@ export const MEDIA_TUNING = {
   },
   '/web_images/campania_111_asset_208.jpg': {
     bgSize: 'cover',
-    bgPos: '50% -200px',
+    bgPos: '5% 5%',
     fit: 'cover',
-    pos: '50% 35%',
+    pos: '5% 5%',
   },
   '/web_images/campania_111_asset_225.jpg': {
     fit: 'cover',
@@ -67,6 +67,26 @@ export const MEDIA_TUNING = {
   },
 }
 
+const store = (() => {
+  if (!import.meta.hot) return { version: 0, listeners: new Set() }
+  const existing = import.meta.hot.data.__vsMediaTuningStore
+  if (existing) return existing
+  const next = { version: 0, listeners: new Set() }
+  import.meta.hot.data.__vsMediaTuningStore = next
+  return next
+})()
+
+function bumpVersion() {
+  store.version += 1
+  store.listeners.forEach((listener) => listener())
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    bumpVersion()
+  })
+}
+
 const fallbackMedia = {
   fit: 'cover',
   pos: '50% 50%',
@@ -76,6 +96,15 @@ const fallbackBg = {
   bgSize: 'cover',
   bgPos: '50% 50%',
   bgColor: 'rgba(0, 0, 0, 0.35)',
+}
+
+export function subscribeMediaTuning(listener) {
+  store.listeners.add(listener)
+  return () => store.listeners.delete(listener)
+}
+
+export function getMediaTuningVersion() {
+  return store.version
 }
 
 export function mediaVars(src, overrides = {}) {

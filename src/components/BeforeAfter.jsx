@@ -1,7 +1,9 @@
 import { useId, useState } from 'react'
 import { mediaVars } from '../lib/mediaTuning.js'
+import useMediaTuningVersion from '../lib/useMediaTuningVersion.js'
 
 function BeforeAfter({ externalPosition }) {
+  useMediaTuningVersion()
   const rangeId = useId()
   const [position, setPosition] = useState(12)
 

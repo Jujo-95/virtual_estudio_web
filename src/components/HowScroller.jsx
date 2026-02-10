@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { bgVars, mediaVars } from '../lib/mediaTuning.js'
+import useMediaTuningVersion from '../lib/useMediaTuningVersion.js'
 
 const STEPS = [
   {
@@ -32,6 +33,7 @@ const STEPS = [
 ]
 
 function HowScroller() {
+  useMediaTuningVersion()
   const parallaxRef = useRef(null)
 
   useEffect(() => {

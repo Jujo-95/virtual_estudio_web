@@ -2,11 +2,13 @@ import { useEffect, useRef } from 'react'
 import Button from './Button.jsx'
 import { SITE } from '../lib/site.js'
 import { mediaVars } from '../lib/mediaTuning.js'
+import useMediaTuningVersion from '../lib/useMediaTuningVersion.js'
 
 const clamp01 = (value) => Math.min(1, Math.max(0, value))
 const lerp = (start, target, amount) => start * (1 - amount) + target * amount
 
 function HeroPinned() {
+  useMediaTuningVersion()
   const pinRef = useRef(null)
   const plane1Ref = useRef(null)
   const plane2Ref = useRef(null)

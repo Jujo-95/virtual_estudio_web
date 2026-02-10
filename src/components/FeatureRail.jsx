@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { bgVars, mediaVars } from '../lib/mediaTuning.js'
+import useMediaTuningVersion from '../lib/useMediaTuningVersion.js'
 
 const ITEMS = [
   {
@@ -41,6 +42,7 @@ const ITEMS = [
 ]
 
 function FeatureRail() {
+  useMediaTuningVersion()
   const trackRef = useRef(null)
   const speedRef = useRef(28)
   const [allowMotion, setAllowMotion] = useState(true)

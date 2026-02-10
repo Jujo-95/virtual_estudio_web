@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { bgVars } from '../lib/mediaTuning.js'
+import useMediaTuningVersion from '../lib/useMediaTuningVersion.js'
 
 const ITEMS = [
   {
@@ -37,6 +38,7 @@ const ITEMS = [
 ]
 
 function WhyScroller() {
+  useMediaTuningVersion()
   const parallaxRef = useRef(null)
 
   useEffect(() => {
