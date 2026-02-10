@@ -1,5 +1,3 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-
 const STEPS = [
   {
     title: 'Sube tu prenda',
@@ -25,64 +23,20 @@ const STEPS = [
 ]
 
 function HowScroller() {
-  const pauseRef = useRef(false)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [leavingIndex, setLeavingIndex] = useState(null)
-
-  const orderedSteps = useMemo(() => STEPS, [])
-
-  useEffect(() => {
-    const media = window.matchMedia?.('(prefers-reduced-motion: reduce)')
-    if (media?.matches) return
-
-    const id = window.setInterval(() => {
-      if (pauseRef.current) return
-      setActiveIndex((prev) => {
-        setLeavingIndex(prev)
-        return (prev + 1) % orderedSteps.length
-      })
-    }, 3400)
-
-    return () => window.clearInterval(id)
-  }, [orderedSteps.length])
-
-  useEffect(() => {
-    if (leavingIndex == null) return
-    const id = window.setTimeout(() => setLeavingIndex(null), 560)
-    return () => window.clearTimeout(id)
-  }, [leavingIndex])
-
   return (
     <section className="vs-how-people" id="como-funciona">
       <div className="vs-container vs-how-people-grid">
-        <div
-          className="vs-how-people-rail"
-          aria-label="Pasos del flujo"
-          onPointerEnter={() => {
-            pauseRef.current = true
-          }}
-          onPointerLeave={() => {
-            pauseRef.current = false
-          }}
-        >
-          <div className="vs-how-deck" role="list" aria-label="Pasos del flujo">
-            {orderedSteps.map((step, idx) => {
-              const nextIndex = (activeIndex + 1) % orderedSteps.length
-              const isLeaving = idx === leavingIndex
-              const isActive = idx === activeIndex
-              const isNext = idx === nextIndex
-
-              const state = isLeaving ? 'leaving' : isActive ? 'active' : isNext ? 'next' : 'rest'
-              return (
+        <div className="vs-how-people-rail" aria-label="Pasos del flujo">
+          <div className="vs-how-parallax" role="list">
+            {STEPS.map((step, idx) => (
+              <div key={step.title} className="vs-how-parallax-item">
                 <article
-                  key={step.title}
-                  className="vs-how-people-card vs-how-deck-card"
+                  className="vs-how-people-card vs-how-parallax-card"
                   data-variant={step.variant}
-                  data-state={state}
                   role="listitem"
-                  aria-current={isActive}
+                  style={{ top: `calc(10vh + ${idx * 22}px)` }}
                 >
-                  {step.variant === 'export' && isActive && (
+                  {step.variant === 'export' && (
                     <video
                       className="vs-how-people-card-video"
                       src="/web_images/campania_106_asset_310.mp4"
@@ -90,6 +44,7 @@ function HowScroller() {
                       loop
                       muted
                       playsInline
+                      preload="metadata"
                     />
                   )}
                   <p className="vs-how-people-card-text">{step.description}</p>
@@ -101,8 +56,8 @@ function HowScroller() {
                     </div>
                   </footer>
                 </article>
-              )
-            })}
+              </div>
+            ))}
           </div>
         </div>
 
