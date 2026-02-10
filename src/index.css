@@ -755,24 +755,26 @@ input {
 }
 
 .vs-why-parallax {
-  display: grid;
-  gap: 0;
+  --vs-why-sticky-top: 84px;
+  height: calc((var(--vs-why-count, 4) + 0.65) * 100vh);
+  position: relative;
   margin-top: 26px;
 }
 
-.vs-why-parallax-item {
-  --vs-why-sticky-top: 84px;
-  height: calc(100vh - var(--vs-why-sticky-top));
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.vs-why-sticky {
   position: sticky;
   top: var(--vs-why-sticky-top);
+  height: calc(100vh - var(--vs-why-sticky-top));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
 }
 
 .vs-why-parallax-card {
-  position: relative;
-  transform: translate3d(var(--vs-why-x, 0px), 0, 0) scale(var(--vs-why-scale, 1));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(calc(-50% + var(--vs-why-x, 0px)), -50%, 0);
   transform-origin: 50% 50%;
   will-change: transform;
 }
@@ -975,10 +977,8 @@ input {
     padding: 0 18px;
   }
 
-  .vs-why-parallax-item {
-    height: 92vh;
-    position: relative;
-    top: auto;
+  .vs-why-parallax {
+    height: calc((var(--vs-why-count, 4) + 0.45) * 100vh);
   }
 
   .vs-how-people {
@@ -993,12 +993,23 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vs-why-parallax-item {
+  .vs-why-parallax {
     height: auto;
-    min-height: 0;
-    margin-bottom: 18px;
+  }
+
+  .vs-why-sticky {
     position: relative;
     top: auto;
+    height: auto;
+    overflow: visible;
+    gap: 18px;
+  }
+
+  .vs-why-parallax-card {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
   }
 
   .vs-how-parallax-item {

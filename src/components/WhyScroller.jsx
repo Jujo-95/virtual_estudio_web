@@ -41,49 +41,26 @@ function WhyScroller() {
     const container = parallaxRef.current
     if (!container) return
 
-    const items = Array.from(container.querySelectorAll('.vs-why-parallax-item'))
-    const cards = items
-      .map((item) => item.querySelector('.vs-why-parallax-card'))
-      .filter(Boolean)
+    const cards = Array.from(container.querySelectorAll('.vs-why-parallax-card'))
 
     let rafId = 0
     const clamp01 = (value) => Math.min(1, Math.max(0, value))
-    let stepX = 0
-
-    const measure = () => {
-      const cardRect = cards[0]?.getBoundingClientRect()
-      const cardWidth = cardRect?.width || 0
-      stepX = Math.max(window.innerWidth * 1.06, cardWidth + 96)
-    }
+    let stepX = Math.max(360, window.innerWidth + 80)
 
     const update = () => {
       rafId = 0
       const rect = container.getBoundingClientRect()
-      const stickyTopRaw = items.length ? window.getComputedStyle(items[0]).top : '0px'
-      const stickyTop = Number.parseFloat(stickyTopRaw) || 0
+      const stickyTop = Number.parseFloat(getComputedStyle(container).getPropertyValue('--vs-why-sticky-top')) || 0
       const viewport = window.innerHeight - stickyTop
       const denom = rect.height - viewport
       const containerProgress = denom > 0 ? clamp01((-rect.top - stickyTop) / denom) : 1
 
-      const count = Math.max(1, items.length)
-      const segment = 1 / count
-      const travel = count - 1
-      const HOLD_AT = 0.82
-      const eased = (t) => 1 - (1 - t) ** 3
-      const t = clamp01(containerProgress / HOLD_AT)
-      const progressCards = Math.min(travel, eased(t) * travel)
+      const count = Math.max(1, cards.length)
+      const travel = Math.max(1, count - 1)
+      const progressCards = containerProgress * travel
 
-      items.forEach((item, idx) => {
-        const card = cards[idx]
-        if (!card) return
-
-        const start = Math.min(0.9, idx * segment)
-        const localT = clamp01((containerProgress - start) / (1 - start))
-        const targetScale = 1 - (count - idx) * 0.05
-        const scale = 1 + (targetScale - 1) * localT
+      cards.forEach((card, idx) => {
         const x = (idx - progressCards) * stepX
-
-        card.style.setProperty('--vs-why-scale', scale.toFixed(4))
         card.style.setProperty('--vs-why-x', `${x.toFixed(2)}px`)
       })
     }
@@ -94,11 +71,10 @@ function WhyScroller() {
     }
 
     const onResize = () => {
-      measure()
+      stepX = Math.max(360, window.innerWidth + 80)
       onScroll()
     }
 
-    measure()
     update()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onResize)
@@ -116,14 +92,20 @@ function WhyScroller() {
       </div>
 
       <div className="vs-why-full">
-        <div ref={parallaxRef} className="vs-why-parallax" role="list" aria-label="Por qué Virtual Studio">
-          {ITEMS.map((item, idx) => (
-            <div key={item.title} className="vs-why-parallax-item">
+        <div
+          ref={parallaxRef}
+          className="vs-why-parallax"
+          style={{ '--vs-why-count': ITEMS.length }}
+          aria-label="Por qué Virtual Studio"
+        >
+          <div className="vs-why-sticky" role="list">
+            {ITEMS.map((item, idx) => (
               <article
+                key={item.title}
                 className="vs-why-card vs-why-parallax-card"
                 data-variant={item.variant}
                 role="listitem"
-                style={{ top: '0px', zIndex: idx + 1 }}
+                style={{ zIndex: ITEMS.length - idx }}
               >
                 <div className="vs-how-card-inner">
                   <div className="vs-how-card-media" data-variant={item.variant} aria-hidden="true">
@@ -140,8 +122,8 @@ function WhyScroller() {
                   </div>
                 </div>
               </article>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
