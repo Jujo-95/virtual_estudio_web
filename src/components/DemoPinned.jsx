@@ -24,11 +24,10 @@ function DemoPinned() {
       const stickyTop = Number.parseFloat(stickyTopRaw) || 0
       const viewport = window.innerHeight - stickyTop
       const denom = rect.height - viewport
-      const progress = denom > 0 ? clamp01((-rect.top - stickyTop) / denom) : 1
+      const progress = denom > 0 ? clamp01((stickyTop - rect.top) / denom) : 1
 
       const eased = 1 - (1 - progress) ** 3
-      const next = 12 + eased * 76
-      setPosition(Math.round(next))
+      setPosition(Math.round(eased * 100))
     }
 
     const onScroll = () => {
@@ -83,4 +82,3 @@ function DemoPinned() {
 }
 
 export default DemoPinned
-

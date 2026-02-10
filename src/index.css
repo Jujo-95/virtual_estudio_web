@@ -755,6 +755,10 @@ input {
   padding: 0;
 }
 
+.vs-section--demo-pinned .vs-container {
+  width: min(1320px, 100%);
+}
+
 .vs-demo-pin {
   --vs-demo-sticky-top: 84px;
   height: 170vh;
@@ -3006,7 +3010,7 @@ input {
   margin-top: -6px;
   box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.14);
   animation: vsThumbPulse 2.6s ease-in-out infinite;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M10%208l-4%204%204%204M14%208l4%204-4%204%27%20stroke%3D%27%230b0b12%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  background-image: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 14px 14px;
@@ -3020,7 +3024,7 @@ input {
   width: 24px;
   box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.14);
   animation: vsThumbPulse 2.6s ease-in-out infinite;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M10%208l-4%204%204%204M14%208l4%204-4%204%27%20stroke%3D%27%230b0b12%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  background-image: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 14px 14px;
