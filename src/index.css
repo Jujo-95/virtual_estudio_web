@@ -664,22 +664,28 @@ input {
   will-change: transform, opacity;
 }
 
-.vs-how-deck-card[data-pos='0'] {
+.vs-how-deck-card[data-state='active'] {
   z-index: 3;
   opacity: 1;
-  transform: translate3d(0, 0, 80px) rotateX(0deg) scale(1);
+  transform: translate3d(0, 0, 40px) rotateZ(0deg) scale(1);
 }
 
-.vs-how-deck-card[data-pos='1'] {
+.vs-how-deck-card[data-state='next'] {
   z-index: 2;
-  opacity: 0.92;
-  transform: translate3d(0, 18px, 20px) rotateX(0deg) scale(0.985);
+  opacity: 1;
+  transform: translate3d(0, 0, -20px) rotateZ(0deg) scale(0.992);
 }
 
-.vs-how-deck-card[data-pos='2'] {
+.vs-how-deck-card[data-state='leaving'] {
+  z-index: 4;
+  opacity: 0;
+  transform: translate3d(-26px, -18px, 180px) rotateZ(-8deg) scale(1.02);
+}
+
+.vs-how-deck-card[data-state='rest'] {
   z-index: 1;
-  opacity: 0.84;
-  transform: translate3d(0, 36px, -18px) rotateX(0deg) scale(0.97);
+  opacity: 0;
+  transform: translate3d(0, 0, -80px) scale(0.98);
 }
 
 .vs-how-people-card {

@@ -27,6 +27,7 @@ const STEPS = [
 function HowScroller() {
   const pauseRef = useRef(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [leavingIndex, setLeavingIndex] = useState(null)
 
   const orderedSteps = useMemo(() => STEPS, [])
 
@@ -36,11 +37,20 @@ function HowScroller() {
 
     const id = window.setInterval(() => {
       if (pauseRef.current) return
-      setActiveIndex((prev) => (prev + 1) % orderedSteps.length)
+      setActiveIndex((prev) => {
+        setLeavingIndex(prev)
+        return (prev + 1) % orderedSteps.length
+      })
     }, 3400)
 
     return () => window.clearInterval(id)
   }, [orderedSteps.length])
+
+  useEffect(() => {
+    if (leavingIndex == null) return
+    const id = window.setTimeout(() => setLeavingIndex(null), 560)
+    return () => window.clearTimeout(id)
+  }, [leavingIndex])
 
   return (
     <section className="vs-how-people" id="como-funciona">
@@ -57,14 +67,18 @@ function HowScroller() {
         >
           <div className="vs-how-deck" role="list" aria-label="Pasos del flujo">
             {orderedSteps.map((step, idx) => {
-              const pos = (idx - activeIndex + orderedSteps.length) % orderedSteps.length
-              const isActive = pos === 0
+              const nextIndex = (activeIndex + 1) % orderedSteps.length
+              const isLeaving = idx === leavingIndex
+              const isActive = idx === activeIndex
+              const isNext = idx === nextIndex
+
+              const state = isLeaving ? 'leaving' : isActive ? 'active' : isNext ? 'next' : 'rest'
               return (
                 <article
                   key={step.title}
                   className="vs-how-people-card vs-how-deck-card"
                   data-variant={step.variant}
-                  data-pos={pos}
+                  data-state={state}
                   role="listitem"
                   aria-current={isActive}
                 >
