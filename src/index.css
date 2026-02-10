@@ -657,21 +657,26 @@ input {
 }
 
 .vs-how-parallax-item {
-  height: 100vh;
-  min-height: 760px;
+  height: clamp(520px, 64vh, 760px);
   display: grid;
-  align-items: start;
+  place-items: start center;
+  position: relative;
 }
 
 .vs-how-parallax-card {
   position: sticky;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, var(--vs-how-ty, 0px), 0) scale(var(--vs-how-scale, 1));
+  transform-origin: 50% 0%;
+  will-change: transform;
 }
 
 .vs-how-people-card {
   scroll-snap-align: center;
   border-radius: 28px;
   padding: 28px 28px 22px;
+  width: var(--vs-how-people-card-w);
+  max-width: 100%;
+  margin: 0 auto;
   --vs-card-bg: none;
   --vs-card-overlay-a: 0.28;
   --vs-card-overlay-b: 0.86;
@@ -730,7 +735,7 @@ input {
 
 .vs-how-people-card:hover {
   color: rgba(255, 255, 255, 0.96);
-  transform: translateY(-4px);
+  --vs-how-ty: -4px;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
 }
 
@@ -804,8 +809,7 @@ input {
   }
 
   .vs-how-parallax-item {
-    height: 86vh;
-    min-height: 620px;
+    height: clamp(480px, 70vh, 700px);
   }
 }
 
