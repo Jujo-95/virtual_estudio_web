@@ -708,7 +708,7 @@ input {
   position: relative;
   flex: 0 0 56%;
   min-height: 520px;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  border-right: none;
   overflow: hidden;
   padding: 18px;
 }
@@ -818,7 +818,7 @@ input {
     flex-basis: auto;
     min-height: 320px;
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: none;
   }
 
   .vs-how-card-content {
