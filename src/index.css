@@ -595,7 +595,7 @@ input {
 }
 
 .vs-how-people {
-  --vs-how-people-card-w: clamp(340px, 24vw, 420px);
+  --vs-how-people-card-w: clamp(420px, 34vw, 640px);
   padding: 88px 0 92px;
   color: var(--vs-text);
 }
@@ -604,12 +604,13 @@ input {
   display: grid;
   grid-template-columns: minmax(520px, 860px) 1fr;
   gap: 56px;
-  align-items: center;
+  align-items: start;
 }
 
 .vs-how-people-copy {
   max-width: 520px;
   justify-self: end;
+  align-self: start;
   position: sticky;
   top: 110px;
 }
