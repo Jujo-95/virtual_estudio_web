@@ -45,15 +45,18 @@ function HowScroller() {
     const update = () => {
       rafId = 0
       const rect = container.getBoundingClientRect()
-      const denom = rect.height - window.innerHeight
-      const containerProgress = denom > 0 ? clamp01(-rect.top / denom) : 1
+      const stickyTopRaw = items.length ? window.getComputedStyle(items[0]).top : '0px'
+      const stickyTop = Number.parseFloat(stickyTopRaw) || 0
+      const viewport = window.innerHeight - stickyTop
+      const denom = rect.height - viewport
+      const containerProgress = denom > 0 ? clamp01((-rect.top - stickyTop) / denom) : 1
 
       const count = Math.max(1, items.length)
       items.forEach((item, idx) => {
         const card = cards[idx]
         if (!card) return
 
-        const start = idx / count
+        const start = Math.min(0.9, idx * 0.25)
         const localT = clamp01((containerProgress - start) / (1 - start))
         const targetScale = 1 - (count - idx) * 0.05
         const scale = 1 + (targetScale - 1) * localT
