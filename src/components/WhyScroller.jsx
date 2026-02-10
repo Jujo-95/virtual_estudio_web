@@ -113,7 +113,9 @@ function WhyScroller() {
           <h2 className="vs-section-title-xl">Por qué Virtual Studio</h2>
           <p className="vs-section-lead">Diferenciales diseñados para producir moda a escala.</p>
         </header>
+      </div>
 
+      <div className="vs-why-full">
         <div ref={parallaxRef} className="vs-why-parallax" role="list" aria-label="Por qué Virtual Studio">
           {ITEMS.map((item, idx) => (
             <div key={item.title} className="vs-why-parallax-item">
