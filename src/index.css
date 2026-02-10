@@ -1897,6 +1897,10 @@ input {
 /* CapabilitiesMouseScale */
 .vs-cap-ms {
   margin-top: 26px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding-left: calc(18px + env(safe-area-inset-left));
+  padding-right: calc(18px + env(safe-area-inset-right));
   display: grid;
   gap: 18px;
 }
