@@ -8,6 +8,7 @@ import HowScroller from './components/HowScroller.jsx'
 import { SITE } from './lib/site.js'
 import CalculatorRail from './components/CalculatorRail.jsx'
 import BeforeAfter from './components/BeforeAfter.jsx'
+import FaqAccordion from './components/FaqAccordion.jsx'
 
 const WEEKS_PER_MONTH = 4.3
 
@@ -184,56 +185,42 @@ function App() {
               <p className="vs-subtitle">Respuestas cortas a objeciones comunes.</p>
             </header>
 
-            <div className="vs-faq">
-              <details className="vs-faq-item">
-                <summary>¿Esto reemplaza mi equipo creativo?</summary>
-                <p>
-                  No. {SITE.name} acelera la producción (variaciones, formatos y consistencia) para que tu equipo se enfoque en dirección creativa y performance.
-                </p>
-              </details>
-              <details className="vs-faq-item">
-                <summary>¿Puedo controlar el estilo?</summary>
-                <p>
-                  Sí: eliges modo (UGC/editorial), modelo, escena y tu Brand DNA para mantener el look de marca.
-                </p>
-              </details>
-              <details className="vs-faq-item">
-                <summary>¿Cómo funcionan los créditos?</summary>
-                <p>
-                  Pagas por capacidad de producción. En general, 1 imagen = 1 crédito (y el consumo depende del tipo de output). Tu plan ideal depende de cuántas piezas necesitas por semana.
-                </p>
-              </details>
-              <details className="vs-faq-item">
-                <summary>¿Qué necesito para empezar?</summary>
-                <p>
-                  Una foto base clara de la prenda (plano o maniquí) y un objetivo de campaña. Con eso puedes generar campañas y variaciones rápidamente.
-                </p>
-              </details>
-              <details className="vs-faq-item">
-                <summary>¿Cuánto tarda crear mi primera campaña?</summary>
-                <p>
-                  En minutos. Normalmente puedes pasar de foto base a un set listo para catálogo en ~15 minutos, dependiendo de la complejidad y las variaciones que quieras.
-                </p>
-              </details>
-              <details className="vs-faq-item">
-                <summary>¿Los modelos tienen derechos de imagen?</summary>
-                <p>
-                  No. Usamos modelos 100% sintéticos para reducir riesgo de derechos de imagen y asociaciones reputacionales.
-                </p>
-              </details>
-              <details className="vs-faq-item">
-                <summary>¿Qué pasa si la prenda se ve diferente?</summary>
-                <p>
-                  Nuestra prioridad es la fidelidad textil: preservar costuras, patrones y ajuste. Si algo no se ve bien, iteras variaciones de pose/escena hasta lograr el resultado.
-                </p>
-              </details>
-              <details className="vs-faq-item">
-                <summary>¿Tienen garantía o devolución de créditos?</summary>
-                <p>
-                  Hoy priorizamos iteración rápida y soporte para que llegues al resultado correcto. Si necesitas acuerdos formales (SLA / soporte dedicado), el plan Empresarial/Agencia es el recomendado.
-                </p>
-              </details>
-            </div>
+            <FaqAccordion
+              items={[
+                {
+                  q: '¿Esto reemplaza mi equipo creativo?',
+                  a: `No. ${SITE.name} acelera la producción (variaciones, formatos y consistencia) para que tu equipo se enfoque en dirección creativa y performance.`,
+                },
+                {
+                  q: '¿Puedo controlar el estilo?',
+                  a: 'Sí: eliges modo (UGC/editorial), modelo, escena y tu Brand DNA para mantener el look de marca.',
+                },
+                {
+                  q: '¿Cómo funcionan los créditos?',
+                  a: 'Pagas por capacidad de producción. En general, 1 imagen = 1 crédito (y el consumo depende del tipo de output). Tu plan ideal depende de cuántas piezas necesitas por semana.',
+                },
+                {
+                  q: '¿Qué necesito para empezar?',
+                  a: 'Una foto base clara de la prenda (plano o maniquí) y un objetivo de campaña. Con eso puedes generar campañas y variaciones rápidamente.',
+                },
+                {
+                  q: '¿Cuánto tarda crear mi primera campaña?',
+                  a: 'En minutos. Normalmente puedes pasar de foto base a un set listo para catálogo en ~15 minutos, dependiendo de la complejidad y las variaciones que quieras.',
+                },
+                {
+                  q: '¿Los modelos tienen derechos de imagen?',
+                  a: 'No. Usamos modelos 100% sintéticos para reducir riesgo de derechos de imagen y asociaciones reputacionales.',
+                },
+                {
+                  q: '¿Qué pasa si la prenda se ve diferente?',
+                  a: 'Nuestra prioridad es la fidelidad textil: preservar costuras, patrones y ajuste. Si algo no se ve bien, iteras variaciones de pose/escena hasta lograr el resultado.',
+                },
+                {
+                  q: '¿Tienen garantía o devolución de créditos?',
+                  a: 'Hoy priorizamos iteración rápida y soporte para que llegues al resultado correcto. Si necesitas acuerdos formales (SLA / soporte dedicado), el plan Empresarial/Agencia es el recomendado.',
+                },
+              ]}
+            />
           </div>
         </section>
 

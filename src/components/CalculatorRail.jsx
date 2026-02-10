@@ -52,7 +52,7 @@ function CalculatorRail({ postsPerWeek, estimatedAssetsPerMonth }) {
   }, [postsPerWeek])
 
   return (
-    <div className="vs-calc-card vs-how-people-card">
+    <div className="vs-calc-card vs-calc-card--dark">
       <div className="vs-calc-result">
         <div className="vs-calc-kpi" aria-live="polite">
           <div className="vs-calc-kpi-label">Plan sugerido</div>
