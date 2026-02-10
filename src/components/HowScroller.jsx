@@ -91,19 +91,21 @@ function HowScroller() {
               >
                 <div className="vs-how-card-inner">
                   <div className="vs-how-card-media" data-variant={step.variant} aria-hidden="true">
-                    {step.variant === 'export' ? (
-                      <video
-                        className="vs-how-card-video"
-                        src="/web_images/campania_106_asset_310.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                      />
-                    ) : (
-                      <div className="vs-how-card-image" />
-                    )}
+                    <div className="vs-how-card-frame">
+                      {step.variant === 'export' ? (
+                        <video
+                          className="vs-how-card-video"
+                          src="/web_images/campania_106_asset_310.mp4"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="metadata"
+                        />
+                      ) : (
+                        <div className="vs-how-card-image" />
+                      )}
+                    </div>
                   </div>
 
                   <div className="vs-how-card-content">
