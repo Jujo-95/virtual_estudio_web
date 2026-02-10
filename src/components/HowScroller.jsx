@@ -44,17 +44,19 @@ function HowScroller() {
 
     const update = () => {
       rafId = 0
+      const rect = container.getBoundingClientRect()
+      const denom = rect.height - window.innerHeight
+      const containerProgress = denom > 0 ? clamp01(-rect.top / denom) : 1
+
+      const count = Math.max(1, items.length)
       items.forEach((item, idx) => {
         const card = cards[idx]
         if (!card) return
 
-        const rect = item.getBoundingClientRect()
-        const rawProgress = rect.height ? -rect.top / rect.height : 0
-        const progress = clamp01(rawProgress)
-
-        const remaining = Math.max(0, items.length - idx - 1)
-        const maxShrink = remaining * 0.06
-        const scale = 1 - progress * maxShrink
+        const start = idx / count
+        const localT = clamp01((containerProgress - start) / (1 - start))
+        const targetScale = 1 - (count - idx) * 0.05
+        const scale = 1 + (targetScale - 1) * localT
 
         card.style.setProperty('--vs-how-scale', scale.toFixed(4))
       })
@@ -87,7 +89,7 @@ function HowScroller() {
                   className="vs-how-people-card vs-how-parallax-card"
                   data-variant={step.variant}
                   role="listitem"
-                  style={{ top: `calc(88px + ${idx * 25}px)`, zIndex: idx + 1 }}
+                  style={{ top: `calc(-5vh + ${idx * 25}px)`, zIndex: idx + 1 }}
                 >
                   {step.variant === 'export' && (
                     <video
