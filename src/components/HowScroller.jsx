@@ -89,7 +89,7 @@ function HowScroller() {
                   className="vs-how-people-card vs-how-parallax-card"
                   data-variant={step.variant}
                   role="listitem"
-                  style={{ top: `calc(-5vh + ${idx * 25}px)`, zIndex: idx + 1 }}
+                  style={{ top: idx === 0 ? '0px' : `calc(-5vh + ${idx * 25}px)`, zIndex: idx + 1 }}
                 >
                   {step.variant === 'export' && (
                     <video
