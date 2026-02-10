@@ -1452,6 +1452,10 @@ input {
   scrollbar-width: none;
 }
 
+.vs-rail-track--auto {
+  scroll-snap-type: none;
+}
+
 .vs-rail-track::-webkit-scrollbar {
   display: none;
 }

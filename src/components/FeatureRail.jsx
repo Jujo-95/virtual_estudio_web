@@ -35,7 +35,7 @@ const ITEMS = [
 
 function FeatureRail() {
   const trackRef = useRef(null)
-  const pauseRef = useRef(false)
+  const speedRef = useRef(28)
 
   const loopItems = useMemo(() => [...ITEMS, ...ITEMS], [])
 
@@ -46,28 +46,44 @@ function FeatureRail() {
     const media = window.matchMedia?.('(prefers-reduced-motion: reduce)')
     if (media?.matches) return
 
-    const onEnter = () => {
-      pauseRef.current = true
+    const NORMAL_SPEED = 28
+    const SLOW_SPEED = 10
+
+    const isOverCard = (node) => Boolean(node && node.closest && node.closest('.vs-rail-item'))
+
+    const onPointerOver = (event) => {
+      if (isOverCard(event.target)) speedRef.current = SLOW_SPEED
     }
-    const onLeave = () => {
-      pauseRef.current = false
+
+    const onPointerOut = (event) => {
+      if (!isOverCard(event.target)) return
+      if (isOverCard(event.relatedTarget)) return
+      speedRef.current = NORMAL_SPEED
     }
-    track.addEventListener('pointerenter', onEnter)
-    track.addEventListener('pointerleave', onLeave)
-    track.addEventListener('focusin', onEnter)
-    track.addEventListener('focusout', onLeave)
+
+    const onFocusIn = () => {
+      speedRef.current = SLOW_SPEED
+    }
+
+    const onFocusOut = () => {
+      speedRef.current = NORMAL_SPEED
+    }
+
+    track.addEventListener('pointerover', onPointerOver)
+    track.addEventListener('pointerout', onPointerOut)
+    track.addEventListener('focusin', onFocusIn)
+    track.addEventListener('focusout', onFocusOut)
 
     let rafId = 0
     let lastTs = performance.now()
-    const speedPxPerSecond = 26
 
     const tick = (ts) => {
       const dt = Math.min(64, ts - lastTs)
       lastTs = ts
 
-      if (!pauseRef.current) {
-        const halfWidth = track.scrollWidth / 2
-        track.scrollLeft += (speedPxPerSecond * dt) / 1000
+      const halfWidth = track.scrollWidth / 2
+      if (halfWidth > 0) {
+        track.scrollLeft += (speedRef.current * dt) / 1000
         if (track.scrollLeft >= halfWidth) track.scrollLeft -= halfWidth
       }
 
@@ -78,33 +94,33 @@ function FeatureRail() {
 
     return () => {
       window.cancelAnimationFrame(rafId)
-      track.removeEventListener('pointerenter', onEnter)
-      track.removeEventListener('pointerleave', onLeave)
-      track.removeEventListener('focusin', onEnter)
-      track.removeEventListener('focusout', onLeave)
+      track.removeEventListener('pointerover', onPointerOver)
+      track.removeEventListener('pointerout', onPointerOut)
+      track.removeEventListener('focusin', onFocusIn)
+      track.removeEventListener('focusout', onFocusOut)
     }
   }, [])
 
   return (
     <div className="vs-rail" aria-label="Qué compras">
-      <div className="vs-rail-track" role="list" ref={trackRef}>
+      <div className="vs-rail-track vs-rail-track--auto" role="list" ref={trackRef}>
         {loopItems.map((item, idx) => {
           const isClone = idx >= ITEMS.length
           return (
-          <article
-            key={`${item.key}-${isClone ? 'clone' : 'base'}-${idx}`}
-            className="vs-rail-item"
-            role="listitem"
-            aria-label={`${item.title}: ${item.subtitle}`}
-            aria-hidden={isClone}
-          >
-            <div className="vs-rail-card" data-variant={item.variant} aria-hidden="true">
-              <div className="vs-rail-footer" aria-hidden="true">
-                <div className="vs-rail-footer-title">{item.title}</div>
-                <div className="vs-rail-footer-subtitle">{item.subtitle}</div>
+            <article
+              key={`${item.key}-${isClone ? 'clone' : 'base'}-${idx}`}
+              className="vs-rail-item"
+              role="listitem"
+              aria-label={`${item.title}: ${item.subtitle}`}
+              aria-hidden={isClone}
+            >
+              <div className="vs-rail-card" data-variant={item.variant} aria-hidden="true">
+                <div className="vs-rail-footer" aria-hidden="true">
+                  <div className="vs-rail-footer-title">{item.title}</div>
+                  <div className="vs-rail-footer-subtitle">{item.subtitle}</div>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
           )
         })}
       </div>
