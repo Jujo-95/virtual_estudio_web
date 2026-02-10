@@ -733,11 +733,14 @@ input {
 .vs-section--why-parallax .vs-how-card-frame {
   background: transparent;
   border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  overflow: hidden;
 }
 
 .vs-section--why-parallax .vs-how-card-image {
   background-size: contain;
   transform: none;
+  border-radius: inherit;
 }
 
 .vs-section--why-parallax .vs-how-card-content {
@@ -881,6 +884,7 @@ input {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  border-radius: inherit;
 }
 
 .vs-how-card-content {
