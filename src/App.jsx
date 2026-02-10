@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
-import FeatureRail from './components/FeatureRail.jsx'
 import NavBar from './components/NavBar.jsx'
 import WhyScroller from './components/WhyScroller.jsx'
 import HowScroller from './components/HowScroller.jsx'
@@ -10,6 +9,7 @@ import CalculatorRail from './components/CalculatorRail.jsx'
 import FaqAccordion from './components/FaqAccordion.jsx'
 import HeroPinned from './components/HeroPinned.jsx'
 import DemoPinned from './components/DemoPinned.jsx'
+import CapabilitiesMouseScale from './components/CapabilitiesMouseScale.jsx'
 
 const WEEKS_PER_MONTH = 4.3
 
@@ -77,19 +77,19 @@ function App() {
 
         <DemoPinned />
 
-        <section className="vs-section vs-section--rail" id="servicios">
-          <div className="vs-container">
-            <header className="vs-section-header vs-section-header--center">
-              <h2 className="vs-section-title-xl">Capacidades diseñadas para moda</h2>
-              <p className="vs-section-lead">
-                No es un generador genérico: es un motor vertical que preserva fidelidad de prenda,
-                respeta tu Brand DNA y te permite producir a escala.
-              </p>
-            </header>
+	      <section className="vs-section vs-section--rail" id="servicios">
+	        <div className="vs-container">
+	          <header className="vs-section-header vs-section-header--center">
+	            <h2 className="vs-section-title-xl">Capacidades diseñadas para moda</h2>
+	            <p className="vs-section-lead">
+	              No es un generador genérico: es un motor vertical que preserva fidelidad de prenda,
+	              respeta tu Brand DNA y te permite producir a escala.
+	            </p>
+	          </header>
 
-            <FeatureRail />
-          </div>
-        </section>
+	          <CapabilitiesMouseScale />
+	        </div>
+	      </section>
 
         <WhyScroller />
 

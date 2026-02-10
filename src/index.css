@@ -1894,6 +1894,58 @@ input {
   content: none;
 }
 
+/* CapabilitiesMouseScale */
+.vs-cap-ms {
+  margin-top: 26px;
+  display: grid;
+  gap: 18px;
+}
+
+.vs-cap-ms-row {
+  display: flex;
+  gap: 18px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.vs-cap-ms-item {
+  flex: 0 0 auto;
+  width: 50%;
+  min-width: 0;
+}
+
+.vs-cap-ms-card {
+  position: relative;
+  height: clamp(260px, 32vw, 460px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+.vs-cap-ms-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 860px) {
+  .vs-cap-ms-row {
+    flex-direction: column;
+  }
+
+  .vs-cap-ms-item {
+    width: 100% !important;
+  }
+
+  .vs-cap-ms-card {
+    height: clamp(240px, 60vw, 420px);
+  }
+}
+
 .vs-rail-track {
   display: grid;
   grid-auto-flow: column;
@@ -1926,36 +1978,27 @@ input {
   --vs-card-bg: none;
   --vs-card-overlay-a: 0.0;
   --vs-card-overlay-b: 0.0;
-  --vs-rail-img-x: 50;
-  --vs-rail-img-y: 22;
-  --vs-rail-img-scale: 1;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background-color: rgba(0, 0, 0, 0.35);
-  isolation: isolate;
-  box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
-  transition: transform 160ms ease, border-color 160ms ease;
-  will-change: transform;
-}
-
-.vs-rail-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
   background-image: linear-gradient(180deg,
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
       rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b))),
     var(--vs-card-bg);
   background-size: cover;
-  background-position: calc(var(--vs-rail-img-x, 50) * 1%) calc(var(--vs-rail-img-y, 22) * 1%);
+  background-position: top;
   background-repeat: no-repeat;
-  transform: scale(var(--vs-rail-img-scale, 1));
-  transform-origin: calc(var(--vs-rail-img-x, 50) * 1%) calc(var(--vs-rail-img-y, 22) * 1%);
-  transition: transform 240ms ease;
-  will-change: transform, background-position;
-  z-index: 0;
+  box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  transition: transform 160ms ease, border-color 160ms ease;
+  will-change: transform;
+  background-origin: border-box;
+  background-clip: border-box;
+}
+
+.vs-rail-card::before {
+  display: none;
 }
 
 .vs-rail-card:hover {
@@ -1974,7 +2017,6 @@ input {
   transform: rotate(-6deg);
   opacity: 0.55;
   pointer-events: none;
-  z-index: 1;
 }
 
 .vs-rail-card[data-variant='campaigns'] {
@@ -2042,7 +2084,6 @@ input {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(10px);
-  z-index: 2;
 }
 
 .vs-rail-footer-title {
