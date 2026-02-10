@@ -1912,21 +1912,21 @@ input {
 
 .vs-cap-ms-card {
   position: relative;
-  --vs-cap-ms-h-base: clamp(240px, 22vw, 380px);
-  --vs-cap-ms-h-active: clamp(320px, 28vw, 520px);
-  height: var(--vs-cap-ms-h-base);
+  aspect-ratio: var(--vs-cap-ms-ar, 3 / 4);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.35);
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
   overflow: hidden;
-  transition: height 260ms ease, transform 220ms ease, border-color 220ms ease;
-  will-change: height;
+  transition: transform 240ms ease, border-color 220ms ease;
+  will-change: transform;
+  transform-origin: top center;
 }
 
 .vs-cap-ms-card.is-active {
-  height: var(--vs-cap-ms-h-active);
+  transform: scaleY(1.08);
   border-color: rgba(255, 255, 255, 0.22);
+  z-index: 2;
 }
 
 .vs-cap-ms-media {
@@ -1934,7 +1934,7 @@ input {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: top center;
 }
 
@@ -1944,8 +1944,7 @@ input {
   }
 
   .vs-cap-ms-card {
-    --vs-cap-ms-h-base: clamp(240px, 48vw, 380px);
-    --vs-cap-ms-h-active: clamp(300px, 56vw, 460px);
+    transform-origin: top center;
   }
 }
 
@@ -1955,8 +1954,7 @@ input {
   }
 
   .vs-cap-ms-card {
-    --vs-cap-ms-h-base: clamp(240px, 66vw, 420px);
-    --vs-cap-ms-h-active: clamp(280px, 74vw, 480px);
+    transform-origin: top center;
   }
 }
 
