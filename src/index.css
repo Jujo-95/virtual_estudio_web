@@ -743,6 +743,11 @@ input {
 .vs-section--why-parallax .vs-how-card-content {
   text-align: right;
   align-items: flex-end;
+  order: 0;
+}
+
+.vs-section--why-parallax .vs-how-card-media {
+  order: 1;
 }
 
 .vs-why-parallax {
