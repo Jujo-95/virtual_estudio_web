@@ -702,32 +702,32 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  backdrop-filter: blur(34px);
-  -webkit-backdrop-filter: blur(34px);
-  box-shadow: 0 30px 130px rgba(0, 0, 0, 0.48);
-  transition: transform 180ms ease, box-shadow 180ms ease, color 180ms ease, background 180ms ease;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  transition: transform 180ms ease, color 180ms ease;
   position: relative;
   overflow: hidden;
 }
 
 .vs-section--why-parallax .vs-how-card-kicker {
   color: rgba(255, 255, 255, 0.66);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .vs-section--why-parallax .vs-how-card-title {
   color: rgba(255, 255, 255, 0.96);
-  font-size: clamp(48px, 4.2vw, 76px);
+  font-size: clamp(56px, 4.8vw, 88px);
 }
 
 .vs-section--why-parallax .vs-how-card-subtitle {
   color: rgba(255, 255, 255, 0.72);
-  font-size: 19px;
+  font-size: 21px;
 }
 
 .vs-section--why-parallax .vs-how-card-desc {
   color: rgba(255, 255, 255, 0.62);
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .vs-section--why-parallax .vs-how-card-frame {
