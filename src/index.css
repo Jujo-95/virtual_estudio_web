@@ -685,13 +685,13 @@ input {
 }
 
 .vs-why-card {
-  --vs-how-media-pad: 26px;
+  --vs-how-media-pad: 28px;
   border-radius: 28px;
   padding: 0;
   width: min(1120px, 100%);
   max-width: 100%;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.92);
   min-height: 520px;
@@ -709,9 +709,10 @@ input {
 .vs-why-card:hover {
   color: rgba(255, 255, 255, 0.96);
   --vs-how-ty: -4px;
+  transform: translateY(-2px);
   box-shadow: 0 36px 150px rgba(0, 0, 0, 0.56);
-  background: rgba(255, 255, 255, 0.04);
 }
+
 
 .vs-section--why-parallax .vs-how-card-kicker {
   color: rgba(255, 255, 255, 0.66);
@@ -719,18 +720,21 @@ input {
 
 .vs-section--why-parallax .vs-how-card-title {
   color: rgba(255, 255, 255, 0.96);
+  font-size: clamp(42px, 3.6vw, 68px);
 }
 
 .vs-section--why-parallax .vs-how-card-subtitle {
   color: rgba(255, 255, 255, 0.72);
+  font-size: 18px;
 }
 
 .vs-section--why-parallax .vs-how-card-desc {
   color: rgba(255, 255, 255, 0.62);
+  font-size: 17px;
 }
 
 .vs-section--why-parallax .vs-how-card-frame {
-  background: rgba(0, 0, 0, 0.12);
+  background: transparent;
 }
 
 .vs-section--why-parallax .vs-how-card-image {
@@ -2737,6 +2741,7 @@ input {
 }
 
 @keyframes vsThumbPulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.12);
@@ -2748,6 +2753,7 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .vs-before-after-top input[type='range']::-webkit-slider-thumb,
   .vs-before-after-top input[type='range']::-moz-range-thumb {
     animation: none;
