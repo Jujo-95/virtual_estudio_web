@@ -53,11 +53,6 @@ function HowScroller() {
         const card = cards[idx]
         if (!card) return
 
-        if (idx === 0) {
-          card.style.setProperty('--vs-how-scale', '1')
-          return
-        }
-
         const start = idx / count
         const localT = clamp01((containerProgress - start) / (1 - start))
         const targetScale = 1 - (count - idx) * 0.05
@@ -85,48 +80,50 @@ function HowScroller() {
 
   return (
     <section className="vs-how-people" id="como-funciona">
-      <div className="vs-container vs-how-people-grid">
-        <div className="vs-how-people-rail" aria-label="Pasos del flujo">
-          <div ref={parallaxRef} className="vs-how-parallax" role="list">
-            {STEPS.map((step, idx) => (
-              <div key={step.title} className="vs-how-parallax-item">
-                <article
-                  className="vs-how-people-card vs-how-parallax-card"
-                  data-variant={step.variant}
-                  role="listitem"
-                  style={{ top: idx === 0 ? '0px' : `calc(-5vh + ${idx * 25}px)`, zIndex: idx + 1 }}
-                >
-                  {step.variant === 'export' && (
-                    <video
-                      className="vs-how-people-card-video"
-                      src="/web_images/campania_106_asset_310.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                    />
-                  )}
-                  <p className="vs-how-people-card-text">{step.description}</p>
-                  <footer className="vs-how-people-card-footer">
-                    <div className="vs-how-people-step">{idx + 1}</div>
-                    <div className="vs-how-people-card-person">
-                      <div className="vs-how-people-card-name">{step.title}</div>
-                      <div className="vs-how-people-card-role">Paso {idx + 1} · {step.subtitle}</div>
-                    </div>
-                  </footer>
-                </article>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="vs-how-people-copy">
+      <div className="vs-container">
+        <header className="vs-how-header">
           <p className="vs-how-people-kicker">Cómo funciona</p>
           <h2 className="vs-how-people-title">Producción visual lista para publicar.</h2>
           <p className="vs-how-people-subtitle">
             Controla casting, consistencia y fidelidad de prenda. Genera campañas y video sin un shooting tradicional.
           </p>
+        </header>
+
+        <div ref={parallaxRef} className="vs-how-parallax" role="list" aria-label="Pasos del flujo">
+          {STEPS.map((step, idx) => (
+            <div key={step.title} className="vs-how-parallax-item">
+              <article
+                className="vs-how-people-card vs-how-parallax-card"
+                role="listitem"
+                style={{ top: `calc(-5vh + ${idx * 25}px)`, zIndex: idx + 1 }}
+              >
+                <div className="vs-how-card-inner">
+                  <div className="vs-how-card-media" data-variant={step.variant} aria-hidden="true">
+                    {step.variant === 'export' ? (
+                      <video
+                        className="vs-how-card-video"
+                        src="/web_images/campania_106_asset_310.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                      />
+                    ) : (
+                      <div className="vs-how-card-image" />
+                    )}
+                  </div>
+
+                  <div className="vs-how-card-content">
+                    <p className="vs-how-card-kicker">Paso {idx + 1}</p>
+                    <h3 className="vs-how-card-title">{step.title}</h3>
+                    <p className="vs-how-card-subtitle">{step.subtitle}</p>
+                    <p className="vs-how-card-desc">{step.description}</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))}
         </div>
       </div>
     </section>
