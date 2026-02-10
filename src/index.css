@@ -679,6 +679,106 @@ input {
   will-change: transform;
 }
 
+.vs-section--why-parallax {
+  padding: 88px 0 92px;
+  overflow-x: clip;
+}
+
+.vs-why-full {
+  width: 100%;
+  padding: 0 18px;
+}
+
+.vs-why-card {
+  --vs-how-media-pad: 28px;
+  border-radius: 28px;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  transition: color 180ms ease, border-color 180ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vs-section--why-parallax .vs-how-card-kicker {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 16px;
+}
+
+.vs-section--why-parallax .vs-how-card-title {
+  color: rgba(255, 255, 255, 0.96);
+  font-size: clamp(56px, 4.8vw, 88px);
+}
+
+.vs-section--why-parallax .vs-how-card-subtitle {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 21px;
+}
+
+.vs-section--why-parallax .vs-how-card-desc {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 20px;
+}
+
+.vs-section--why-parallax .vs-how-card-frame {
+  background: transparent;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+}
+
+.vs-section--why-parallax .vs-how-card-image {
+  background-size: cover;
+  background-position: top center;
+  transform: none;
+  border-radius: inherit;
+}
+
+.vs-section--why-parallax .vs-how-card-content {
+  text-align: right;
+  align-items: flex-end;
+  order: 0;
+}
+
+.vs-section--why-parallax .vs-how-card-media {
+  order: 1;
+}
+
+.vs-why-parallax {
+  --vs-why-sticky-top: 84px;
+  height: calc((var(--vs-why-count, 4) + 0.65) * 100vh);
+  position: relative;
+  margin-top: 26px;
+}
+
+.vs-why-sticky {
+  position: sticky;
+  top: var(--vs-why-sticky-top);
+  height: calc(100vh - var(--vs-why-sticky-top));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.vs-why-parallax-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(calc(-50% + var(--vs-why-x, 0px)), -50%, 0);
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
 .vs-how-people-card {
   --vs-how-media-pad: 26px;
   scroll-snap-align: center;
@@ -755,6 +855,22 @@ input {
   background-image: url('/web_images/campania_85_asset_146.jpg');
 }
 
+.vs-how-card-media[data-variant='why-cost'] .vs-how-card-image {
+  background-image: url('/web_images/campania_101_asset_179.jpg');
+}
+
+.vs-how-card-media[data-variant='why-speed'] .vs-how-card-image {
+  background-image: url('/web_images/editorial_campania_96_asset_174.jpg');
+}
+
+.vs-how-card-media[data-variant='why-dna'] .vs-how-card-image {
+  background-image: url('/web_images/campania_111_asset_208.jpg');
+}
+
+.vs-how-card-media[data-variant='why-fidelity'] .vs-how-card-image {
+  background-image: url('/web_images/garment_bottom.jpg');
+}
+
 .vs-how-card-image {
   position: absolute;
   inset: 0;
@@ -770,7 +886,9 @@ input {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   z-index: 0;
+  border-radius: inherit;
 }
 
 .vs-how-card-content {
@@ -851,6 +969,18 @@ input {
 }
 
 @media (max-width: 980px) {
+  .vs-section--why-parallax {
+    padding: 64px 0 70px;
+  }
+
+  .vs-why-full {
+    padding: 0 18px;
+  }
+
+  .vs-why-parallax {
+    height: calc((var(--vs-why-count, 4) + 0.45) * 100vh);
+  }
+
   .vs-how-people {
     padding: 64px 0 70px;
   }
@@ -863,6 +993,25 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .vs-why-parallax {
+    height: auto;
+  }
+
+  .vs-why-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
+    gap: 18px;
+  }
+
+  .vs-why-parallax-card {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+  }
+
   .vs-how-parallax-item {
     height: auto;
     min-height: 0;
@@ -2621,6 +2770,7 @@ input {
 }
 
 @keyframes vsThumbPulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.12);
@@ -2632,6 +2782,7 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .vs-before-after-top input[type='range']::-webkit-slider-thumb,
   .vs-before-after-top input[type='range']::-moz-range-thumb {
     animation: none;
