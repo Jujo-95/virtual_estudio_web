@@ -81,14 +81,6 @@ function HowScroller() {
   return (
     <section className="vs-how-people" id="como-funciona">
       <div className="vs-container">
-        <header className="vs-how-header">
-          <p className="vs-how-people-kicker">Cómo funciona</p>
-          <h2 className="vs-how-people-title">Producción visual lista para publicar.</h2>
-          <p className="vs-how-people-subtitle">
-            Controla casting, consistencia y fidelidad de prenda. Genera campañas y video sin un shooting tradicional.
-          </p>
-        </header>
-
         <div ref={parallaxRef} className="vs-how-parallax" role="list" aria-label="Pasos del flujo">
           {STEPS.map((step, idx) => (
             <div key={step.title} className="vs-how-parallax-item">

@@ -601,9 +601,7 @@ input {
 }
 
 .vs-how-header {
-  max-width: 72ch;
-  margin: 0 0 26px;
-  text-align: right;
+  display: none;
 }
 
 .vs-how-people-grid {
@@ -687,9 +685,8 @@ input {
   width: var(--vs-how-people-card-w);
   max-width: 100%;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.35);
-  background-image: linear-gradient(180deg, rgb(var(--vs-bg-rgb) / 0.28), rgb(var(--vs-bg-rgb) / 0.86));
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgb(var(--vs-bg-rgb) / 0.98);
+  border: none;
   color: rgba(255, 255, 255, 0.9);
   min-height: 520px;
   display: flex;
@@ -767,14 +764,14 @@ input {
   margin: 0;
   color: rgba(255, 255, 255, 0.62);
   font-weight: 800;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.02em;
 }
 
 .vs-how-card-title {
   margin: 0;
   font-family: var(--vs-font-display);
-  font-size: clamp(28px, 2.5vw, 44px);
+  font-size: clamp(34px, 3.1vw, 56px);
   line-height: 1.06;
   letter-spacing: -0.04em;
   color: rgba(255, 255, 255, 0.96);
@@ -783,7 +780,7 @@ input {
 .vs-how-card-subtitle {
   margin: 0;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.55;
   max-width: 46ch;
   margin-left: auto;
@@ -792,7 +789,7 @@ input {
 .vs-how-card-desc {
   margin: 6px 0 0;
   color: rgba(255, 255, 255, 0.62);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.65;
   max-width: 54ch;
   margin-left: auto;
