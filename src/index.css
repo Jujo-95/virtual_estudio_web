@@ -1936,6 +1936,7 @@ input {
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
+  isolation: isolate;
   box-shadow: 0 22px 90px rgba(0, 0, 0, 0.55);
   overflow: hidden;
   aspect-ratio: 3 / 4;
@@ -1943,6 +1944,28 @@ input {
   will-change: transform;
   background-origin: border-box;
   background-clip: border-box;
+}
+
+.vs-rail-card-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  z-index: 0;
+}
+
+.vs-rail-card[data-variant='video']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-a)),
+      rgb(var(--vs-bg-rgb) / var(--vs-card-overlay-b)));
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .vs-rail-card:hover {
@@ -1961,6 +1984,7 @@ input {
   transform: rotate(-6deg);
   opacity: 0.55;
   pointer-events: none;
+  z-index: 2;
 }
 
 .vs-rail-card::before {
@@ -2032,6 +2056,7 @@ input {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(10px);
+  z-index: 3;
 }
 
 .vs-rail-footer-title {

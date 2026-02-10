@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 const ITEMS = [
   {
@@ -24,6 +24,8 @@ const ITEMS = [
     title: 'Video',
     subtitle: 'Clips cinematográficos para Reels y TikTok',
     variant: 'video',
+    videoSrc: '/web_images/campania_85_asset_148.mp4',
+    poster: '/web_images/campania_85_asset_146.jpg',
   },
   {
     key: 'dna',
@@ -36,8 +38,20 @@ const ITEMS = [
 function FeatureRail() {
   const trackRef = useRef(null)
   const speedRef = useRef(28)
+  const [allowMotion, setAllowMotion] = useState(true)
 
   const loopItems = useMemo(() => [...ITEMS, ...ITEMS], [])
+
+  useEffect(() => {
+    const media = window.matchMedia?.('(prefers-reduced-motion: reduce)')
+    if (media) {
+      const update = () => setAllowMotion(!media.matches)
+      update()
+      media.addEventListener?.('change', update)
+      return () => media.removeEventListener?.('change', update)
+    }
+    return undefined
+  }, [])
 
   useEffect(() => {
     const track = trackRef.current
@@ -115,6 +129,19 @@ function FeatureRail() {
               aria-hidden={isClone}
             >
               <div className="vs-rail-card" data-variant={item.variant} aria-hidden="true">
+                {item.variant === 'video' ? (
+                  <video
+                    className="vs-rail-card-media"
+                    src={item.videoSrc}
+                    poster={item.poster}
+                    autoPlay={allowMotion}
+                    loop={allowMotion}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    aria-hidden="true"
+                  />
+                ) : null}
                 <div className="vs-rail-footer" aria-hidden="true">
                   <div className="vs-rail-footer-title">{item.title}</div>
                   <div className="vs-rail-footer-subtitle">{item.subtitle}</div>
