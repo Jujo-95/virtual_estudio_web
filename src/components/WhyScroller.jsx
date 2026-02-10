@@ -45,7 +45,7 @@ function WhyScroller() {
 
     let rafId = 0
     const clamp01 = (value) => Math.min(1, Math.max(0, value))
-    let stepX = Math.max(360, window.innerWidth + 80)
+    let stepX = Math.max(360, window.innerWidth + 200)
 
     const update = () => {
       rafId = 0
@@ -57,7 +57,9 @@ function WhyScroller() {
 
       const count = Math.max(1, cards.length)
       const travel = Math.max(1, count - 1)
-      const progressCards = containerProgress * travel
+      const holdAt = travel / (travel + 1)
+      const t = clamp01(containerProgress / holdAt)
+      const progressCards = Math.min(travel, t * travel)
 
       cards.forEach((card, idx) => {
         const x = (idx - progressCards) * stepX
@@ -95,7 +97,7 @@ function WhyScroller() {
         <div
           ref={parallaxRef}
           className="vs-why-parallax"
-          style={{ '--vs-why-count': ITEMS.length }}
+          style={{ '--vs-why-count': ITEMS.length + 1 }}
           aria-label="Por qué Virtual Studio"
         >
           <div className="vs-why-sticky" role="list">
