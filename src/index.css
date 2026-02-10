@@ -663,12 +663,13 @@ input {
 }
 
 .vs-how-parallax-item {
-  height: 100vh;
+  --vs-how-sticky-top: 84px;
+  height: calc(100vh - var(--vs-how-sticky-top));
   display: flex;
   align-items: center;
   justify-content: center;
   position: sticky;
-  top: 0;
+  top: var(--vs-how-sticky-top);
 }
 
 .vs-how-parallax-card {
