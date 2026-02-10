@@ -40,21 +40,35 @@ const CAPABILITIES = [
 
 function CapabilitiesMouseScale() {
   const galleryRef = useRef(null)
+  const trackRef = useRef(null)
   const activeRef = useRef(null)
+  const speedRef = useRef(26)
 
-  const rows = useMemo(
-    () => [...CAPABILITIES, ...CAPABILITIES.slice(0, 1)],
-    [],
-  )
+  const items = useMemo(() => [...CAPABILITIES, ...CAPABILITIES], [])
 
   useEffect(() => {
     const gallery = galleryRef.current
     if (!gallery) return
+    const track = trackRef.current
+    if (!track) return
 
     const media = window.matchMedia?.('(prefers-reduced-motion: reduce)')
-    const finePointer = window.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches
-    const enabled = Boolean(finePointer && !media?.matches)
-    if (!enabled) return
+    const reducedMotion = Boolean(media?.matches)
+
+    const NORMAL_SPEED = 26
+    const SLOW_SPEED = 9
+
+    const isOverCard = (node) => Boolean(node && node.closest && node.closest('.vs-cap-ms-card'))
+
+    const onPointerOver = (event) => {
+      if (isOverCard(event.target)) speedRef.current = SLOW_SPEED
+    }
+
+    const onPointerOut = (event) => {
+      if (!isOverCard(event.target)) return
+      if (isOverCard(event.relatedTarget)) return
+      speedRef.current = NORMAL_SPEED
+    }
 
     const setActive = (next) => {
       const prev = activeRef.current
@@ -73,41 +87,77 @@ function CapabilitiesMouseScale() {
 
     gallery.addEventListener('pointermove', onPointerMove, { passive: true })
     gallery.addEventListener('pointerleave', onPointerLeave)
+    gallery.addEventListener('pointerover', onPointerOver)
+    gallery.addEventListener('pointerout', onPointerOut)
+
+    let rafId = 0
+    let lastTs = performance.now()
+
+    const tick = (ts) => {
+      const dt = Math.min(64, ts - lastTs)
+      lastTs = ts
+
+      const halfWidth = track.scrollWidth / 2
+      if (halfWidth > 0) {
+        track.scrollLeft += (speedRef.current * dt) / 1000
+        if (track.scrollLeft >= halfWidth) track.scrollLeft -= halfWidth
+      }
+
+      rafId = window.requestAnimationFrame(tick)
+    }
+
+    if (!reducedMotion) {
+      rafId = window.requestAnimationFrame(tick)
+    }
 
     return () => {
+      if (rafId) window.cancelAnimationFrame(rafId)
       gallery.removeEventListener('pointermove', onPointerMove)
       gallery.removeEventListener('pointerleave', onPointerLeave)
+      gallery.removeEventListener('pointerover', onPointerOver)
+      gallery.removeEventListener('pointerout', onPointerOut)
       onPointerLeave()
     }
   }, [])
 
   return (
     <div ref={galleryRef} className="vs-cap-ms" aria-label="Capacidades interactivas">
-      {rows.map((item, idx) => (
-        <article key={`${item.key}-${idx}`} className="vs-cap-ms-item">
-          <div className="vs-cap-ms-card" style={{ '--vs-cap-ms-ar': item.ratio }}>
-            <img
-              className="vs-cap-ms-media"
-              src={item.image}
-              alt=""
-              loading="lazy"
-              onLoad={(event) => {
-                const img = event.currentTarget
-                const card = img.closest?.('.vs-cap-ms-card')
-                if (!card) return
-                const w = img.naturalWidth
-                const h = img.naturalHeight
-                if (!w || !h) return
-                card.style.setProperty('--vs-cap-ms-ar', `${w} / ${h}`)
-              }}
-            />
-            <div className="vs-rail-footer" aria-hidden="true">
-              <div className="vs-rail-footer-title">{item.title}</div>
-              <div className="vs-rail-footer-subtitle">{item.subtitle}</div>
-            </div>
-          </div>
-        </article>
-      ))}
+      <div ref={trackRef} className="vs-cap-ms-track" role="list">
+        {items.map((item, idx) => {
+          const isClone = idx >= CAPABILITIES.length
+          return (
+            <article
+              key={`${item.key}-${isClone ? 'clone' : 'base'}-${idx}`}
+              className="vs-cap-ms-item"
+              role="listitem"
+              aria-label={`${item.title}: ${item.subtitle}`}
+              aria-hidden={isClone}
+            >
+              <div className="vs-cap-ms-card" style={{ '--vs-cap-ms-ar': item.ratio }}>
+                <img
+                  className="vs-cap-ms-media"
+                  src={item.image}
+                  alt=""
+                  loading="lazy"
+                  onLoad={(event) => {
+                    const img = event.currentTarget
+                    const card = img.closest?.('.vs-cap-ms-card')
+                    if (!card) return
+                    const w = img.naturalWidth
+                    const h = img.naturalHeight
+                    if (!w || !h) return
+                    card.style.setProperty('--vs-cap-ms-ar', `${w} / ${h}`)
+                  }}
+                />
+                <div className="vs-rail-footer" aria-hidden="true">
+                  <div className="vs-rail-footer-title">{item.title}</div>
+                  <div className="vs-rail-footer-subtitle">{item.subtitle}</div>
+                </div>
+              </div>
+            </article>
+          )
+        })}
+      </div>
     </div>
   )
 }

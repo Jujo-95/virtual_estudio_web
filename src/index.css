@@ -1901,13 +1901,28 @@ input {
   margin-left: calc(50% - 50vw);
   padding-left: calc(18px + env(safe-area-inset-left));
   padding-right: calc(18px + env(safe-area-inset-right));
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  position: relative;
+}
+
+.vs-cap-ms-track {
+  display: flex;
   gap: 18px;
+  padding: 0 0 10px;
+  margin: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.vs-cap-ms-track::-webkit-scrollbar {
+  display: none;
 }
 
 .vs-cap-ms-item {
-  min-width: 0;
+  flex: 0 0 auto;
+  width: clamp(220px, 22vw, 340px);
+  scroll-snap-align: start;
 }
 
 .vs-cap-ms-card {
@@ -1939,8 +1954,8 @@ input {
 }
 
 @media (max-width: 860px) {
-  .vs-cap-ms {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .vs-cap-ms-item {
+    width: clamp(220px, 60vw, 380px);
   }
 
   .vs-cap-ms-card {
@@ -1949,8 +1964,8 @@ input {
 }
 
 @media (max-width: 560px) {
-  .vs-cap-ms {
-    grid-template-columns: minmax(0, 1fr);
+  .vs-cap-ms-item {
+    width: clamp(220px, 78vw, 420px);
   }
 
   .vs-cap-ms-card {
