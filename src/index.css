@@ -315,6 +315,63 @@ input {
     linear-gradient(180deg, rgb(var(--vs-bg-rgb) / 0.45), rgb(var(--vs-bg-rgb) / 0.98));
 }
 
+.vs-hero--pinned {
+  padding: 0;
+  min-height: auto;
+}
+
+.vs-hero-pin {
+  --vs-hero-sticky-top: 84px;
+  height: 165vh;
+  position: relative;
+  --vs-hero-strike: 0;
+}
+
+.vs-hero-sticky {
+  position: sticky;
+  top: var(--vs-hero-sticky-top);
+  height: calc(100vh - var(--vs-hero-sticky-top));
+  display: grid;
+  place-items: center;
+  padding: 92px 0 82px;
+}
+
+.vs-hero-strike {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.vs-hero-strike::after {
+  content: '';
+  position: absolute;
+  left: -0.06em;
+  right: -0.06em;
+  top: 56%;
+  height: 0.1em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--vs-hero-strike, 0));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-hero-pin {
+    height: auto;
+  }
+
+  .vs-hero-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+
+  .vs-hero-strike::after {
+    transform: scaleX(1);
+  }
+}
+
 .vs-hero--ref::after {
   content: '';
   position: absolute;

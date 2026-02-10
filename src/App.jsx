@@ -9,6 +9,7 @@ import { SITE } from './lib/site.js'
 import CalculatorRail from './components/CalculatorRail.jsx'
 import BeforeAfter from './components/BeforeAfter.jsx'
 import FaqAccordion from './components/FaqAccordion.jsx'
+import HeroPinned from './components/HeroPinned.jsx'
 
 const WEEKS_PER_MONTH = 4.3
 
@@ -72,26 +73,7 @@ function App() {
       <NavBar />
 
       <main>
-        <section className="vs-hero vs-hero--ref" id="top">
-          <div className="vs-container">
-            <div className="vs-hero-center">
-              <h1 className="vs-hero-title">De la prenda al catálogo en minutos, no en semanas.</h1>
-              <p className="vs-hero-subtitle">
-                {SITE.name} es la infraestructura de producción visual con IA diseñada para escalar marcas de moda.
-                Produce campañas de alta gama y videos cinematográficos sin los costos ni la logística de un shooting tradicional.
-              </p>
-              <div className="vs-hero-cta">
-                <Button href={SITE.appUrl} variant="primary" className="vs-hero-cta-btn">
-                  Comienza ahora — 5 créditos gratis
-                </Button>
-                <Button href="#demo" variant="secondary" className="vs-hero-cta-btn">
-                  Ver demostración funcional
-                </Button>
-              </div>
-              <p className="vs-microcopy">Tu Brand DNA es innegociable. La producción ya no es el límite, es el multiplicador.</p>
-            </div>
-          </div>
-        </section>
+        <HeroPinned />
 
         <section className="vs-section vs-section--demo" id="demo">
           <div className="vs-container">
