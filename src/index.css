@@ -2951,6 +2951,7 @@ input {
 
 .vs-before-after-media--after {
   clip-path: inset(0 calc(100% - var(--vs-before-after-pos, 50%)) 0 0);
+  object-position: top center;
 }
 
 .vs-before-after-handle {
