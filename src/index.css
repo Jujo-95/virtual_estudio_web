@@ -321,6 +321,23 @@ input {
     linear-gradient(180deg, rgb(var(--vs-bg-rgb) / 0.45), rgb(var(--vs-bg-rgb) / 0.98));
 }
 
+.vs-hero--ref::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  z-index: -2;
+}
+
+.vs-hero--pinned::before {
+  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(34px) saturate(1.15);
+  -webkit-backdrop-filter: blur(34px) saturate(1.15);
+}
+
 .vs-hero--pinned {
   padding: 0;
   min-height: auto;
@@ -398,7 +415,7 @@ input {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: -2;
+  z-index: -3;
 }
 
 .vs-hero-floating {
@@ -659,6 +676,12 @@ input {
   }
 }
 
+@media (max-width: 980px) {
+  .vs-demo-sticky {
+    padding: 64px 0 70px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .vs-hero-side::before {
     animation: none;
@@ -666,6 +689,16 @@ input {
 
   .vs-hero-plane {
     transform: none !important;
+  }
+
+  .vs-demo-pin {
+    height: auto;
+  }
+
+  .vs-demo-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
   }
 }
 
@@ -733,6 +766,64 @@ input {
 
 .vs-section--demo {
   padding: 88px 0 92px;
+}
+
+.vs-section--demo-pinned {
+  padding: 0;
+}
+
+.vs-section--demo-pinned .vs-container {
+  width: min(1320px, 100%);
+}
+
+.vs-demo-pin {
+  --vs-demo-sticky-top: 84px;
+  height: 170vh;
+  position: relative;
+}
+
+.vs-demo-sticky {
+  position: sticky;
+  top: var(--vs-demo-sticky-top);
+  height: calc(100vh - var(--vs-demo-sticky-top));
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.vs-section--demo-pinned .vs-demo-split {
+  align-items: center;
+  min-height: 0;
+}
+
+.vs-section--demo-pinned .vs-demo-split-left {
+  align-items: center;
+}
+
+.vs-section--demo-pinned .vs-before-after {
+  height: auto;
+}
+
+.vs-section--demo-pinned .vs-before-after-frame {
+  height: auto;
+  min-height: clamp(520px, 62vh, 660px);
+  max-height: min(760px, calc(100vh - var(--vs-demo-sticky-top) - 220px));
+}
+
+.vs-section--demo-pinned .vs-section-title-xl {
+  font-size: clamp(56px, 4.8vw, 88px);
+  line-height: 1.06;
+}
+
+.vs-section--demo-pinned .vs-demo-lead {
+  font-size: 20px;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+
+.vs-section--demo-pinned .vs-btn {
+  padding: 14px 22px;
+  font-size: 15px;
 }
 
 /* Unified background: use the same background as the "Por qué Virtual Estudio" section */
@@ -2806,6 +2897,16 @@ input {
   }
 }
 
+.vs-section--demo-pinned .vs-demo-split {
+  min-height: 0;
+}
+
+@media (min-width: 980px) {
+  .vs-section--demo-pinned .vs-demo-split {
+    grid-template-columns: 1.12fr 0.88fr;
+  }
+}
+
 .vs-demo-split-left {
   display: flex;
 }
@@ -2867,6 +2968,7 @@ input {
 
 .vs-before-after-media--after {
   clip-path: inset(0 calc(100% - var(--vs-before-after-pos, 50%)) 0 0);
+  object-position: 50% -200px;
 }
 
 .vs-before-after-handle {
@@ -2918,32 +3020,34 @@ input {
 .vs-before-after-top input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background-color: rgba(255, 255, 255, 0.84);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 50%;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
   height: 24px;
   width: 24px;
   margin-top: -6px;
-  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.14);
-  animation: vsThumbPulse 2.6s ease-in-out infinite;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M10%208l-4%204%204%204M14%208l4%204-4%204%27%20stroke%3D%27%230b0b12%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  box-shadow: none;
+  animation: none;
+  background-image: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 14px 14px;
+  opacity: 0;
 }
 
 .vs-before-after-top input[type='range']::-moz-range-thumb {
-  background-color: rgba(255, 255, 255, 0.84);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 50%;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
   height: 24px;
   width: 24px;
-  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.14);
-  animation: vsThumbPulse 2.6s ease-in-out infinite;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M10%208l-4%204%204%204M14%208l4%204-4%204%27%20stroke%3D%27%230b0b12%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  box-shadow: none;
+  animation: none;
+  background-image: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 14px 14px;
+  opacity: 0;
 }
 
 @keyframes vsThumbPulse {

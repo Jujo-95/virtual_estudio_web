@@ -1,11 +1,13 @@
 import { useId, useState } from 'react'
 
-function BeforeAfter() {
+function BeforeAfter({ externalPosition }) {
   const rangeId = useId()
   const [position, setPosition] = useState(12)
 
+  const displayPosition = externalPosition ?? position
+
   return (
-    <div className="vs-before-after" style={{ '--vs-before-after-pos': `${position}%` }}>
+    <div className="vs-before-after" style={{ '--vs-before-after-pos': `${displayPosition}%` }}>
       <div className="vs-before-after-top">
         <input
           id={rangeId}
@@ -13,8 +15,9 @@ function BeforeAfter() {
           min="0"
           max="100"
           step="1"
-          value={position}
+          value={displayPosition}
           onChange={(event) => setPosition(Number(event.target.value))}
+          disabled={externalPosition != null}
           aria-label="Desliza para comparar antes y después"
         />
       </div>

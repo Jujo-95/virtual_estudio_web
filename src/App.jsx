@@ -7,9 +7,9 @@ import WhyScroller from './components/WhyScroller.jsx'
 import HowScroller from './components/HowScroller.jsx'
 import { SITE } from './lib/site.js'
 import CalculatorRail from './components/CalculatorRail.jsx'
-import BeforeAfter from './components/BeforeAfter.jsx'
 import FaqAccordion from './components/FaqAccordion.jsx'
 import HeroPinned from './components/HeroPinned.jsx'
+import DemoPinned from './components/DemoPinned.jsx'
 
 const WEEKS_PER_MONTH = 4.3
 
@@ -75,33 +75,7 @@ function App() {
       <main>
         <HeroPinned />
 
-        <section className="vs-section vs-section--demo" id="demo">
-          <div className="vs-container">
-            <div className="vs-demo-split">
-              <div className="vs-panel vs-demo-split-left">
-                <BeforeAfter />
-              </div>
-
-              <div className="vs-demo-split-right">
-                <header className="vs-section-header vs-demo-header-right">
-                  <h2 className="vs-section-title-xl">Antes y después, en una sola vista</h2>
-                  <p className="vs-demo-lead">
-                    Una foto base se convierte en un resultado editorial listo para publicar, con consistencia de Brand DNA y fidelidad de prenda.
-                  </p>
-                </header>
-
-                <div className="vs-actions vs-demo-actions">
-                  <Button href={SITE.appUrl} variant="primary">
-                    Comienza ahora — 5 créditos gratis
-                  </Button>
-                  <Button href="#creditos" variant="secondary">
-                    Ver créditos
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <DemoPinned />
 
         <section className="vs-section vs-section--rail" id="servicios">
           <div className="vs-container">
