@@ -684,6 +684,37 @@ input {
   overflow-x: clip;
 }
 
+.vs-section--why-parallax .vs-how-people-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.vs-section--why-parallax .vs-how-card-kicker {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.vs-section--why-parallax .vs-how-card-title {
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.vs-section--why-parallax .vs-how-card-subtitle {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.vs-section--why-parallax .vs-how-card-desc {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.vs-section--why-parallax .vs-how-card-frame {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.vs-section--why-parallax .vs-how-card-image {
+  background-size: contain;
+  transform: none;
+}
+
 .vs-why-parallax {
   display: grid;
   gap: 0;
