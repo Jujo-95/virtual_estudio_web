@@ -732,11 +732,17 @@ input {
 
 .vs-section--why-parallax .vs-how-card-frame {
   background: transparent;
+  border-radius: 26px;
 }
 
 .vs-section--why-parallax .vs-how-card-image {
   background-size: contain;
   transform: none;
+}
+
+.vs-section--why-parallax .vs-how-card-content {
+  text-align: right;
+  align-items: flex-end;
 }
 
 .vs-why-parallax {
