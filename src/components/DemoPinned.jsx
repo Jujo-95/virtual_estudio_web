@@ -61,9 +61,9 @@ function DemoPinned() {
 
               <div className="vs-demo-split-right">
                 <header className="vs-section-header vs-demo-header-right">
-                  <h2 className="vs-section-title-xl">Antes y después, en una sola vista</h2>
+                  <h2 className="vs-section-title-xl">Antes y después</h2>
                   <p className="vs-demo-lead">
-                    Una foto base se convierte en un resultado editorial listo para publicar, con consistencia de Brand DNA y fidelidad de prenda.
+                    Una foto de tu prenda se convierte en un resultado editorial listo para publicar, con consistencia de Brand DNA y fidelidad de prenda.
                   </p>
                 </header>
 

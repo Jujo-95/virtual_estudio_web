@@ -25,13 +25,13 @@ function BeforeAfter({ externalPosition }) {
       <div className="vs-before-after-frame" aria-label="Comparación antes y después">
         <img
           className="vs-before-after-media"
-          src="/web_images/garment_top.jpg"
+          src="/web_images/before.png"
           alt="Foto base de prenda"
           loading="lazy"
         />
         <video
           className="vs-before-after-media vs-before-after-media--after"
-          src="/web_images/campania_106_asset_310.mp4"
+          src="/web_images/campania_108_asset_196.mp4"
           autoPlay
           loop
           muted
@@ -39,10 +39,6 @@ function BeforeAfter({ externalPosition }) {
           aria-label="Resultado generado en video"
         />
         <div className="vs-before-after-handle" aria-hidden="true" />
-
-        <div className="vs-before-after-hint" aria-hidden="true">
-          Desliza para ver el resultado
-        </div>
       </div>
     </div>
   )

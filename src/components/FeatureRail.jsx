@@ -24,6 +24,7 @@ const ITEMS = [
     title: 'Video',
     subtitle: 'Clips cinematográficos para Reels y TikTok',
     variant: 'video',
+    mediaSrc: '/web_images/campania_80_asset_132.mp4',
   },
   {
     key: 'dna',
@@ -115,6 +116,17 @@ function FeatureRail() {
               aria-hidden={isClone}
             >
               <div className="vs-rail-card" data-variant={item.variant} aria-hidden="true">
+                {item.mediaSrc ? (
+                  <video
+                    className="vs-rail-card-media"
+                    src={item.mediaSrc}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                  />
+                ) : null}
                 <div className="vs-rail-footer" aria-hidden="true">
                   <div className="vs-rail-footer-title">{item.title}</div>
                   <div className="vs-rail-footer-subtitle">{item.subtitle}</div>
