@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button from './Button.jsx'
 import { SITE } from '../lib/site.js'
 
@@ -11,6 +11,7 @@ function HeroPinned() {
   const plane2Ref = useRef(null)
   const plane3Ref = useRef(null)
   const floatStateRef = useRef({ rafId: 0, xForce: 0, yForce: 0, x: 0, y: 0, enabled: true })
+  const [isPinned, setIsPinned] = useState(false)
 
   const tick = () => {
     const state = floatStateRef.current
@@ -38,11 +39,34 @@ function HeroPinned() {
   }
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
-    if (prefersReducedMotion) {
-      floatStateRef.current.enabled = false
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')
+    const canPin = window.matchMedia?.('(min-width: 980px)')
+    if (!canPin) {
+      setIsPinned(false)
       return
     }
+
+    const update = () => {
+      const allowed = canPin.matches && !(prefersReducedMotion?.matches)
+      setIsPinned(allowed)
+
+      const container = pinRef.current
+      if (!allowed && container) container.style.setProperty('--vs-hero-strike', '1')
+      floatStateRef.current.enabled = allowed
+    }
+
+    update()
+    canPin.addEventListener?.('change', update)
+    prefersReducedMotion?.addEventListener?.('change', update)
+
+    return () => {
+      canPin.removeEventListener?.('change', update)
+      prefersReducedMotion?.removeEventListener?.('change', update)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isPinned) return
 
     const container = pinRef.current
     if (!container) return
@@ -75,7 +99,7 @@ function HeroPinned() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
-  }, [])
+  }, [isPinned])
 
   const onMouseMove = (event) => {
     const state = floatStateRef.current
@@ -99,7 +123,7 @@ function HeroPinned() {
             <div ref={plane2Ref} className="vs-hero-plane vs-hero-plane--2">
               <img className="vs-hero-float-img vs-hero-float-img--d" src="/web_images/campania_106_asset_302.jpg" alt="" />
               <img className="vs-hero-float-img vs-hero-float-img--e" src="/web_images/editorial_campania_96_asset_174.jpg" alt="" />
-              <img className="vs-hero-float-img vs-hero-float-img--f" src="/web_images/campania_111_asset_208.jpg" alt="" />
+              <img className="vs-hero-float-img vs-hero-float-img--f" src="/web_images/detalle_prenda.jpg" alt="" />
             </div>
             <div ref={plane3Ref} className="vs-hero-plane vs-hero-plane--3">
               <img className="vs-hero-float-img vs-hero-float-img--g" src="/web_images/campania_101_asset_179.jpg" alt="" />

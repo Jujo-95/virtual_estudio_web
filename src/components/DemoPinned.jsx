@@ -9,10 +9,34 @@ function DemoPinned() {
   const pinRef = useRef(null)
   const rafRef = useRef(0)
   const [position, setPosition] = useState(12)
+  const [isPinned, setIsPinned] = useState(false)
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
-    if (prefersReducedMotion) return
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')
+    const canPin = window.matchMedia?.('(min-width: 980px)')
+    if (!canPin) {
+      setIsPinned(false)
+      return
+    }
+
+    const update = () => {
+      const allowed = canPin.matches && !(prefersReducedMotion?.matches)
+      setIsPinned(allowed)
+      if (!allowed) setPosition(50)
+    }
+
+    update()
+    canPin.addEventListener?.('change', update)
+    prefersReducedMotion?.addEventListener?.('change', update)
+
+    return () => {
+      canPin.removeEventListener?.('change', update)
+      prefersReducedMotion?.removeEventListener?.('change', update)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isPinned) return
 
     const container = pinRef.current
     if (!container) return
@@ -47,7 +71,7 @@ function DemoPinned() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
-  }, [])
+  }, [isPinned])
 
   return (
     <section className="vs-section vs-section--demo vs-section--demo-pinned" id="demo">
@@ -56,14 +80,14 @@ function DemoPinned() {
           <div className="vs-container">
             <div className="vs-demo-split">
               <div className="vs-panel vs-demo-split-left">
-                <BeforeAfter externalPosition={position} />
+                <BeforeAfter externalPosition={isPinned ? position : undefined} />
               </div>
 
               <div className="vs-demo-split-right">
                 <header className="vs-section-header vs-demo-header-right">
-                  <h2 className="vs-section-title-xl">Antes y después, en una sola vista</h2>
+                  <h2 className="vs-section-title-xl">Antes y después</h2>
                   <p className="vs-demo-lead">
-                    Una foto base se convierte en un resultado editorial listo para publicar, con consistencia de Brand DNA y fidelidad de prenda.
+                    Una foto de tu prenda se convierte en un resultado editorial listo para publicar, con consistencia de Brand DNA y fidelidad de prenda.
                   </p>
                 </header>
 
