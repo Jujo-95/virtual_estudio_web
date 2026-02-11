@@ -522,7 +522,12 @@ input {
     position: relative;
     top: auto;
     height: auto;
-    padding: 72px 0 62px;
+    min-height: calc(100svh - var(--vs-hero-sticky-top));
+    padding: 92px 0 82px;
+  }
+
+  .vs-hero-floating {
+    display: none;
   }
 }
 
@@ -1020,6 +1025,10 @@ input {
     min-height: clamp(360px, 52vh, 520px);
     max-height: none;
   }
+
+  .vs-before-after {
+    --vs-before-after-after-pos: 100% 20%;
+  }
 }
 
 /* Unified background: use the same background as the "Por qué Virtual Estudio" section */
@@ -1500,30 +1509,28 @@ input {
     padding: 64px 0 70px;
   }
 
+  .vs-section--why-parallax .vs-how-card-kicker {
+    font-size: 14px;
+  }
+
+  .vs-section--why-parallax .vs-how-card-title {
+    font-size: clamp(34px, 7.2vw, 52px);
+  }
+
+  .vs-section--why-parallax .vs-how-card-subtitle {
+    font-size: 16px;
+  }
+
+  .vs-section--why-parallax .vs-how-card-desc {
+    font-size: 15px;
+  }
+
   .vs-why-full {
     padding: 0 18px;
   }
 
   .vs-why-parallax {
-    height: auto;
-    margin-top: 18px;
-  }
-
-  .vs-why-sticky {
-    position: relative;
-    top: auto;
-    height: auto;
-    overflow: visible;
-    display: grid;
-    gap: 18px;
-    place-items: stretch;
-  }
-
-  .vs-why-parallax-card {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
+    height: calc((var(--vs-why-count, 4) + 0.45) * 100vh);
   }
 
   .vs-how-people {
@@ -1531,9 +1538,10 @@ input {
   }
 
   .vs-how-parallax-item {
-    height: 92vh;
-    position: relative;
-    top: auto;
+    --vs-how-sticky-top: 72px;
+    height: calc(100svh - var(--vs-how-sticky-top));
+    position: sticky;
+    top: var(--vs-how-sticky-top);
   }
 }
 
@@ -3260,7 +3268,7 @@ input {
 
 .vs-before-after-media--after {
   clip-path: inset(0 calc(100% - var(--vs-before-after-pos, 50%)) 0 0);
-  object-position: 50% -200px;
+  object-position: var(--vs-before-after-after-pos, 50% -200px);
 }
 
 .vs-before-after-handle {

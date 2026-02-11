@@ -13,24 +13,17 @@ function DemoPinned() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')
-    const canPin = window.matchMedia?.('(min-width: 980px)')
-    if (!canPin) {
-      setIsPinned(false)
-      return
-    }
 
     const update = () => {
-      const allowed = canPin.matches && !(prefersReducedMotion?.matches)
+      const allowed = !(prefersReducedMotion?.matches)
       setIsPinned(allowed)
       if (!allowed) setPosition(50)
     }
 
     update()
-    canPin.addEventListener?.('change', update)
     prefersReducedMotion?.addEventListener?.('change', update)
 
     return () => {
-      canPin.removeEventListener?.('change', update)
       prefersReducedMotion?.removeEventListener?.('change', update)
     }
   }, [])

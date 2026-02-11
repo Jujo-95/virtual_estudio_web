@@ -36,8 +36,7 @@ function WhyScroller() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
-    const canAnimate = window.matchMedia?.('(min-width: 980px)')?.matches
-    if (prefersReducedMotion || !canAnimate) return
+    if (prefersReducedMotion) return
 
     const container = parallaxRef.current
     if (!container) return
